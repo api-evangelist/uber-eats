@@ -1,0 +1,304 @@
+openapi: 3.1.0
+info:
+  title: Uber Eats Marketplace API
+  version: v1
+  description: >-
+    Uber Eats Marketplace APIs let restaurants, marketplace platforms, POS
+    providers, and logistics partners integrate directly with Uber Eats —
+    store onboarding and status, menu management, order ingestion and
+    fulfillment, and reporting. Authentication is via OAuth 2.0 client
+    credentials issued from the Uber Developer Portal.
+  contact:
+    name: Uber Eats Developer Portal
+    url: https://developer.uber.com/docs/eats
+servers:
+  - url: https://api.uber.com
+    description: Uber API production
+components:
+  securitySchemes:
+    oauth2:
+      type: oauth2
+      flows:
+        clientCredentials:
+          tokenUrl: https://auth.uber.com/oauth/v2/token
+          scopes:
+            eats.store: Access to store operations
+            eats.store.status.write: Update store status
+            eats.store.orders.read: Read store orders
+            eats.order: Manage orders
+            eats.menu: Manage menus
+            eats.menu.read: Read menus
+            eats.menu.write: Write menus
+  schemas:
+    Store:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        contact_emails:
+          type: array
+          items:
+            type: string
+        partner_identifiers:
+          type: object
+        timezone:
+          type: string
+        location:
+          type: object
+        web_url:
+          type: string
+    StoreStatus:
+      type: object
+      properties:
+        status:
+          type: string
+          enum:
+            - ONLINE
+            - OFFLINE
+            - PAUSED
+        offline_reason:
+          type: string
+        paused_until:
+          type: string
+          format: date-time
+    Menu:
+      type: object
+      properties:
+        menus:
+          type: array
+          items:
+            type: object
+        categories:
+          type: array
+          items:
+            type: object
+        items:
+          type: array
+          items:
+            type: object
+        modifier_groups:
+          type: array
+          items:
+            type: object
+    MenuItem:
+      type: object
+      properties:
+        id:
+          type: string
+        title:
+          type: object
+        description:
+          type: object
+        price_info:
+          type: object
+        suspension_info:
+          type: object
+    Order:
+      type: object
+      properties:
+        id:
+          type: string
+        display_id:
+          type: string
+        external_reference_id:
+          type: string
+        current_state:
+          type: string
+        store:
+          type: object
+        eater:
+          type: object
+        cart:
+          type: object
+        payment:
+          type: object
+        placed_at:
+          type: string
+          format: date-time
+security:
+  - oauth2: []
+paths:
+  /eats/stores:
+    get:
+      summary: Get stores
+      operationId: getStores
+      responses:
+        '200':
+          description: List of stores
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Store'
+  /eats/stores/{store_id}:
+    parameters:
+      - in: path
+        name: store_id
+        required: true
+        schema:
+          type: string
+    get:
+      summary: Get store details
+      operationId: getStore
+      responses:
+        '200':
+          description: Store details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Store'
+  /eats/store/{store_id}/status:
+    parameters:
+      - in: path
+        name: store_id
+        required: true
+        schema:
+          type: string
+    post:
+      summary: Set store status
+      operationId: setStoreStatus
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/StoreStatus'
+      responses:
+        '204':
+          description: Store status updated
+  /eats/stores/{store_id}/menus:
+    parameters:
+      - in: path
+        name: store_id
+        required: true
+        schema:
+          type: string
+    get:
+      summary: Retrieve menu
+      operationId: getMenu
+      responses:
+        '200':
+          description: Menu
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Menu'
+    put:
+      summary: Upsert menu
+      operationId: upsertMenu
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Menu'
+      responses:
+        '204':
+          description: Menu accepted for processing
+  /eats/stores/{store_id}/menus/items/{item_id}:
+    parameters:
+      - in: path
+        name: store_id
+        required: true
+        schema:
+          type: string
+      - in: path
+        name: item_id
+        required: true
+        schema:
+          type: string
+    post:
+      summary: Update menu item (price, suspension, availability)
+      operationId: updateMenuItem
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MenuItem'
+      responses:
+        '204':
+          description: Menu item updated
+  /eats/stores/{store_id}/created-orders:
+    parameters:
+      - in: path
+        name: store_id
+        required: true
+        schema:
+          type: string
+    get:
+      summary: Get created orders for a store
+      operationId: getCreatedOrders
+      responses:
+        '200':
+          description: A list of created orders
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Order'
+  /eats/order/{order_id}:
+    parameters:
+      - in: path
+        name: order_id
+        required: true
+        schema:
+          type: string
+    get:
+      summary: Get order details
+      operationId: getOrder
+      responses:
+        '200':
+          description: Order details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Order'
+  /eats/orders/{order_id}/accept_pos_order:
+    parameters:
+      - in: path
+        name: order_id
+        required: true
+        schema:
+          type: string
+    post:
+      summary: Accept an order into the POS
+      operationId: acceptPosOrder
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                reason:
+                  type: string
+      responses:
+        '204':
+          description: Order accepted
+  /eats/orders/{order_id}/cancel:
+    parameters:
+      - in: path
+        name: order_id
+        required: true
+        schema:
+          type: string
+    post:
+      summary: Cancel an order
+      operationId: cancelOrder
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                reason:
+                  type: string
+      responses:
+        '204':
+          description: Order canceled
