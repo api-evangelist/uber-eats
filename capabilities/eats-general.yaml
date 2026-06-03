@@ -1,0 +1,481 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: "Uber Eats Marketplace API \u2014 General"
+  description: "Uber Eats Marketplace API \u2014 full surface. 10 operations. Lead operation: Uber Eats Get Stores. Self-contained Naftiko capability covering one Uber business surface."
+  tags:
+  - Uber
+  - Eats
+  - Delivery
+  created: '2026-06-03'
+  modified: '2026-06-03'
+binds:
+- namespace: env
+  keys:
+    UBER_EATS_TOKEN: UBER_EATS_TOKEN
+capability:
+  consumes:
+  - type: http
+    namespace: eats
+    baseUri: https://api.uber.com
+    description: Uber Eats Marketplace API business capability. Self-contained, no shared references.
+    authentication:
+      type: bearer
+      token: '{{env.UBER_EATS_TOKEN}}'
+    resources:
+    - name: eats-stores
+      path: /eats/stores
+      operations:
+      - name: getStores
+        method: GET
+        description: Uber Eats Get Stores
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: eats-stores-store-id
+      path: /eats/stores/{store_id}
+      operations:
+      - name: getStore
+        method: GET
+        description: Uber Eats Get Store Details
+        inputParameters:
+        - name: store_id
+          in: path
+          type: string
+          required: true
+          description: store_id
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: eats-store-store-id-status
+      path: /eats/store/{store_id}/status
+      operations:
+      - name: setStoreStatus
+        method: POST
+        description: Uber Eats Set Store Status
+        inputParameters:
+        - name: store_id
+          in: path
+          type: string
+          required: true
+          description: store_id
+        - name: body
+          in: body
+          type: object
+          required: true
+          description: Request body payload.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: eats-stores-store-id-menus
+      path: /eats/stores/{store_id}/menus
+      operations:
+      - name: getMenu
+        method: GET
+        description: Uber Eats Retrieve Menu
+        inputParameters:
+        - name: store_id
+          in: path
+          type: string
+          required: true
+          description: store_id
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: upsertMenu
+        method: PUT
+        description: Uber Eats Upsert Menu
+        inputParameters:
+        - name: store_id
+          in: path
+          type: string
+          required: true
+          description: store_id
+        - name: body
+          in: body
+          type: object
+          required: true
+          description: Request body payload.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: eats-stores-store-id-menus-items-item-id
+      path: /eats/stores/{store_id}/menus/items/{item_id}
+      operations:
+      - name: updateMenuItem
+        method: POST
+        description: Uber Eats Update Menu Item (price, Suspension, Availability)
+        inputParameters:
+        - name: store_id
+          in: path
+          type: string
+          required: true
+          description: store_id
+        - name: item_id
+          in: path
+          type: string
+          required: true
+          description: item_id
+        - name: body
+          in: body
+          type: object
+          required: true
+          description: Request body payload.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: eats-stores-store-id-created-orders
+      path: /eats/stores/{store_id}/created-orders
+      operations:
+      - name: getCreatedOrders
+        method: GET
+        description: Uber Eats Get Created Orders for a Store
+        inputParameters:
+        - name: store_id
+          in: path
+          type: string
+          required: true
+          description: store_id
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: eats-order-order-id
+      path: /eats/order/{order_id}
+      operations:
+      - name: getOrder
+        method: GET
+        description: Uber Eats Get Order Details
+        inputParameters:
+        - name: order_id
+          in: path
+          type: string
+          required: true
+          description: order_id
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: eats-orders-order-id-accept-pos-order
+      path: /eats/orders/{order_id}/accept_pos_order
+      operations:
+      - name: acceptPosOrder
+        method: POST
+        description: Uber Eats Accept an Order Into the POS
+        inputParameters:
+        - name: order_id
+          in: path
+          type: string
+          required: true
+          description: order_id
+        - name: body
+          in: body
+          type: object
+          required: false
+          description: Request body payload.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: eats-orders-order-id-cancel
+      path: /eats/orders/{order_id}/cancel
+      operations:
+      - name: cancelOrder
+        method: POST
+        description: Uber Eats Cancel an Order
+        inputParameters:
+        - name: order_id
+          in: path
+          type: string
+          required: true
+          description: order_id
+        - name: body
+          in: body
+          type: object
+          required: true
+          description: Request body payload.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+  exposes:
+  - type: rest
+    namespace: eats-rest
+    port: 8080
+    description: REST adapter for Uber Eats Marketplace API. One Spectral-compliant resource per consumed operation, prefixed with /v1.
+    resources:
+    - path: /v1/eats-stores
+      name: eats-stores
+      description: REST surface for /eats/stores.
+      operations:
+      - method: GET
+        name: getStores
+        description: Uber Eats Get Stores
+        call: eats.getStores
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/eats-stores-store-id
+      name: eats-stores-store-id
+      description: REST surface for /eats/stores/{store_id}.
+      operations:
+      - method: GET
+        name: getStore
+        description: Uber Eats Get Store Details
+        call: eats.getStore
+        with:
+          store_id: rest.store_id
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/eats-store-store-id-status
+      name: eats-store-store-id-status
+      description: REST surface for /eats/store/{store_id}/status.
+      operations:
+      - method: POST
+        name: setStoreStatus
+        description: Uber Eats Set Store Status
+        call: eats.setStoreStatus
+        with:
+          store_id: rest.store_id
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/eats-stores-store-id-menus
+      name: eats-stores-store-id-menus
+      description: REST surface for /eats/stores/{store_id}/menus.
+      operations:
+      - method: GET
+        name: getMenu
+        description: Uber Eats Retrieve Menu
+        call: eats.getMenu
+        with:
+          store_id: rest.store_id
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PUT
+        name: upsertMenu
+        description: Uber Eats Upsert Menu
+        call: eats.upsertMenu
+        with:
+          store_id: rest.store_id
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/eats-stores-store-id-menus-items-item-id
+      name: eats-stores-store-id-menus-items-item-id
+      description: REST surface for /eats/stores/{store_id}/menus/items/{item_id}.
+      operations:
+      - method: POST
+        name: updateMenuItem
+        description: Uber Eats Update Menu Item (price, Suspension, Availability)
+        call: eats.updateMenuItem
+        with:
+          store_id: rest.store_id
+          item_id: rest.item_id
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/eats-stores-store-id-created-orders
+      name: eats-stores-store-id-created-orders
+      description: REST surface for /eats/stores/{store_id}/created-orders.
+      operations:
+      - method: GET
+        name: getCreatedOrders
+        description: Uber Eats Get Created Orders for a Store
+        call: eats.getCreatedOrders
+        with:
+          store_id: rest.store_id
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/eats-order-order-id
+      name: eats-order-order-id
+      description: REST surface for /eats/order/{order_id}.
+      operations:
+      - method: GET
+        name: getOrder
+        description: Uber Eats Get Order Details
+        call: eats.getOrder
+        with:
+          order_id: rest.order_id
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/eats-orders-order-id-accept-pos-order
+      name: eats-orders-order-id-accept-pos-order
+      description: REST surface for /eats/orders/{order_id}/accept_pos_order.
+      operations:
+      - method: POST
+        name: acceptPosOrder
+        description: Uber Eats Accept an Order Into the POS
+        call: eats.acceptPosOrder
+        with:
+          order_id: rest.order_id
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/eats-orders-order-id-cancel
+      name: eats-orders-order-id-cancel
+      description: REST surface for /eats/orders/{order_id}/cancel.
+      operations:
+      - method: POST
+        name: cancelOrder
+        description: Uber Eats Cancel an Order
+        call: eats.cancelOrder
+        with:
+          order_id: rest.order_id
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: eats-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Uber Eats Marketplace API. One tool per consumed operation, routed inline through this capability consumes block.
+    tools:
+    - name: uber-eats-get-stores
+      description: Uber Eats Get Stores
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: eats.getStores
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: uber-eats-get-store-details
+      description: Uber Eats Get Store Details
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: eats.getStore
+      with:
+        store_id: tools.store_id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: uber-eats-set-store-status
+      description: Uber Eats Set Store Status
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: eats.setStoreStatus
+      with:
+        store_id: tools.store_id
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: uber-eats-retrieve-menu
+      description: Uber Eats Retrieve Menu
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: eats.getMenu
+      with:
+        store_id: tools.store_id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: uber-eats-upsert-menu
+      description: Uber Eats Upsert Menu
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: eats.upsertMenu
+      with:
+        store_id: tools.store_id
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: uber-eats-update-menu-item
+      description: Uber Eats Update Menu Item (price, Suspension, Availability)
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: eats.updateMenuItem
+      with:
+        store_id: tools.store_id
+        item_id: tools.item_id
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: uber-eats-get-created-orders
+      description: Uber Eats Get Created Orders for a Store
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: eats.getCreatedOrders
+      with:
+        store_id: tools.store_id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: uber-eats-get-order-details
+      description: Uber Eats Get Order Details
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: eats.getOrder
+      with:
+        order_id: tools.order_id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: uber-eats-accept-order-pos
+      description: Uber Eats Accept an Order Into the POS
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: eats.acceptPosOrder
+      with:
+        order_id: tools.order_id
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: uber-eats-cancel-order
+      description: Uber Eats Cancel an Order
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: eats.cancelOrder
+      with:
+        order_id: tools.order_id
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.

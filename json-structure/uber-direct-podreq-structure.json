@@ -1,0 +1,33 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/uber-eats/refs/heads/main/json-structure/uber-direct-podreq-structure.json",
+  "name": "PODReq",
+  "description": "PODReq schema from Uber Direct (DaaS) API",
+  "type": "object",
+  "properties": {
+    "waypoint": {
+      "type": "string",
+      "enum": [
+        "pickup",
+        "dropoff",
+        "return"
+      ],
+      "description": "The waypoint where the verification requirement was taken.",
+      "example": "pickup"
+    },
+    "type": {
+      "type": "string",
+      "enum": [
+        "picture",
+        "signature",
+        "pincode"
+      ],
+      "description": "The type of delivery verification requirement.",
+      "example": "picture"
+    }
+  },
+  "required": [
+    "waypoint",
+    "type"
+  ]
+}

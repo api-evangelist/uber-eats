@@ -1,0 +1,115 @@
+{
+  "@context": {
+    "@version": 1.1,
+    "ue": "https://developer.uber.com/schema/",
+    "schema": "https://schema.org/",
+    "dcterms": "http://purl.org/dc/terms/",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "Store": "ue:Store",
+    "id": {
+      "@id": "ue:id",
+      "@type": "xsd:string"
+    },
+    "name": {
+      "@id": "schema:name"
+    },
+    "contactEmails": {
+      "@id": "ue:contact_emails",
+      "@container": "@set"
+    },
+    "partnerIdentifiers": {
+      "@id": "ue:partner_identifiers",
+      "@type": "xsd:string"
+    },
+    "timezone": {
+      "@id": "ue:timezone",
+      "@type": "xsd:string"
+    },
+    "location": {
+      "@id": "ue:location",
+      "@type": "xsd:string"
+    },
+    "webUrl": {
+      "@id": "ue:web_url",
+      "@type": "xsd:string"
+    },
+    "StoreStatus": "ue:StoreStatus",
+    "status": {
+      "@id": "schema:status"
+    },
+    "offlineReason": {
+      "@id": "ue:offline_reason",
+      "@type": "xsd:string"
+    },
+    "pausedUntil": {
+      "@id": "ue:paused_until",
+      "@type": "xsd:dateTime"
+    },
+    "Menu": "ue:Menu",
+    "menus": {
+      "@id": "ue:menus",
+      "@container": "@set"
+    },
+    "categories": {
+      "@id": "ue:categories",
+      "@container": "@set"
+    },
+    "items": {
+      "@id": "ue:items",
+      "@container": "@set"
+    },
+    "modifierGroups": {
+      "@id": "ue:modifier_groups",
+      "@container": "@set"
+    },
+    "MenuItem": "ue:MenuItem",
+    "title": {
+      "@id": "ue:title",
+      "@type": "xsd:string"
+    },
+    "description": {
+      "@id": "schema:description"
+    },
+    "priceInfo": {
+      "@id": "ue:price_info",
+      "@type": "xsd:string"
+    },
+    "suspensionInfo": {
+      "@id": "ue:suspension_info",
+      "@type": "xsd:string"
+    },
+    "Order": "ue:Order",
+    "displayId": {
+      "@id": "ue:display_id",
+      "@type": "xsd:string"
+    },
+    "externalReferenceId": {
+      "@id": "ue:external_reference_id",
+      "@type": "xsd:string"
+    },
+    "currentState": {
+      "@id": "ue:current_state",
+      "@type": "xsd:string"
+    },
+    "store": {
+      "@id": "ue:store",
+      "@type": "xsd:string"
+    },
+    "eater": {
+      "@id": "ue:eater",
+      "@type": "xsd:string"
+    },
+    "cart": {
+      "@id": "ue:cart",
+      "@type": "xsd:string"
+    },
+    "payment": {
+      "@id": "ue:payment",
+      "@type": "xsd:string"
+    },
+    "placedAt": {
+      "@id": "ue:placed_at",
+      "@type": "xsd:dateTime"
+    }
+  }
+}

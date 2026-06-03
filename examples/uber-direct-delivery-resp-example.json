@@ -1,0 +1,21 @@
+{
+  "id": "del_aBc123XyZ",
+  "quote_id": "del_aBc123XyZ",
+  "status": "pending",
+  "complete": false,
+  "kind": "example",
+  "fee": 600,
+  "currency": "USD",
+  "tracking_url": "https://www.ubereats.com/orders/del_aBc123XyZ",
+  "tip": 600,
+  "live_mode": false,
+  "pickup_eta": "2026-06-01T19:00:00.000Z",
+  "pickup_deadline": "2026-06-01T19:00:00.000Z",
+  "dropoff_eta": "2026-06-01T19:00:00.000Z",
+  "dropoff_deadline": "2026-06-01T19:00:00.000Z",
+  "external_id": "del_aBc123XyZ",
+  "created": "2026-06-01T19:00:00.000Z",
+  "updated": "2026-06-01T19:00:00.000Z",
+  "undeliverable_action": "returned",
+  "undeliverable_reason": "STORE_CLOSED"
+}

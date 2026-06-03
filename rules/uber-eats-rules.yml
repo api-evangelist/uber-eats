@@ -1,0 +1,247 @@
+# Spectral ruleset for the Uber Eats / Uber Direct APIs
+# Derived from the conventions observed across the openapi/ specs:
+#   - OpenAPI 3.1.0
+#   - snake_case path parameters and schema properties
+#   - camelCase operationIds with verb prefixes (get/list/create/set/update/cancel/upsert/accept)
+#   - OAuth 2.0 client-credentials security
+#   - Operation summaries prefixed with "Uber Eats" / "Uber Direct" in Title Case
+extends: []
+rules:
+
+  # ── INFO / METADATA ──────────────────────────────────────────────
+  info-title-required:
+    description: API must declare an info.title.
+    severity: error
+    given: $.info
+    then:
+      field: title
+      function: truthy
+  info-title-uber-prefix:
+    description: Title should reference Uber Eats or Uber Direct.
+    severity: warn
+    given: $.info.title
+    then:
+      function: pattern
+      functionOptions:
+        match: "^Uber (Eats|Direct)"
+  info-description-required:
+    description: API must have a meaningful description.
+    severity: warn
+    given: $.info
+    then:
+      field: description
+      function: truthy
+  info-version-required:
+    description: API must declare a version.
+    severity: error
+    given: $.info
+    then:
+      field: version
+      function: truthy
+  info-contact-required:
+    description: API should declare a contact.
+    severity: info
+    given: $.info
+    then:
+      field: contact
+      function: truthy
+
+  # ── OPENAPI VERSION ──────────────────────────────────────────────
+  openapi-version-3-1:
+    description: Specs should target OpenAPI 3.1.0.
+    severity: warn
+    given: $.openapi
+    then:
+      function: pattern
+      functionOptions:
+        match: "^3\\.1\\."
+
+  # ── SERVERS ──────────────────────────────────────────────────────
+  servers-defined:
+    description: A servers array must be defined.
+    severity: error
+    given: $
+    then:
+      field: servers
+      function: truthy
+  servers-https:
+    description: Server URLs must use HTTPS.
+    severity: error
+    given: $.servers[*].url
+    then:
+      function: pattern
+      functionOptions:
+        match: "^https://"
+  server-is-uber:
+    description: Server should be the Uber API host.
+    severity: warn
+    given: $.servers[*].url
+    then:
+      function: pattern
+      functionOptions:
+        match: "api\\.uber\\.com"
+
+  # ── PATHS — NAMING ───────────────────────────────────────────────
+  path-no-trailing-slash:
+    description: Paths must not end with a trailing slash.
+    severity: warn
+    given: $.paths
+    then:
+      field: "@key"
+      function: pattern
+      functionOptions:
+        notMatch: ".+/$"
+  path-params-snake-case:
+    description: Path parameter placeholders must be snake_case.
+    severity: warn
+    given: $.paths[*]~
+    then:
+      function: pattern
+      functionOptions:
+        match: "^[^{]*(\\{[a-z][a-z0-9_]*\\}[^{]*)*$"
+
+  # ── OPERATIONS ───────────────────────────────────────────────────
+  operation-operationId-required:
+    description: Every operation must declare an operationId.
+    severity: error
+    given: $.paths[*][get,post,put,patch,delete]
+    then:
+      field: operationId
+      function: truthy
+  operation-operationId-camel-case:
+    description: operationId must be camelCase with a verb prefix.
+    severity: warn
+    given: $.paths[*][get,post,put,patch,delete].operationId
+    then:
+      function: pattern
+      functionOptions:
+        match: "^(get|list|create|set|update|cancel|upsert|accept|delete|retrieve)[A-Za-z0-9]*$"
+  operation-summary-required:
+    description: Every operation must have a summary.
+    severity: warn
+    given: $.paths[*][get,post,put,patch,delete]
+    then:
+      field: summary
+      function: truthy
+  operation-summary-uber-prefix:
+    description: Operation summaries should be prefixed with Uber Eats or Uber Direct in Title Case.
+    severity: warn
+    given: $.paths[*][get,post,put,patch,delete].summary
+    then:
+      function: pattern
+      functionOptions:
+        match: "^Uber (Eats|Direct) "
+
+  # ── PARAMETERS ───────────────────────────────────────────────────
+  parameter-snake-case:
+    description: Parameter names must be snake_case.
+    severity: warn
+    given: $.paths[*][*].parameters[*].name
+    then:
+      function: pattern
+      functionOptions:
+        match: "^[a-z][a-z0-9_]*$"
+  parameter-description:
+    description: Path/query parameters should have a description.
+    severity: info
+    given: $.paths[*][*].parameters[?(@.in=='query')]
+    then:
+      field: description
+      function: truthy
+
+  # ── REQUEST BODIES ───────────────────────────────────────────────
+  request-body-json:
+    description: Request bodies should offer application/json.
+    severity: warn
+    given: $.paths[*][post,put,patch].requestBody.content
+    then:
+      field: application/json
+      function: truthy
+
+  # ── RESPONSES ────────────────────────────────────────────────────
+  response-success-defined:
+    description: Operations must define at least one 2xx response.
+    severity: error
+    given: $.paths[*][get,post,put,patch,delete].responses
+    then:
+      function: schema
+      functionOptions:
+        schema:
+          type: object
+          patternProperties:
+            "^2[0-9][0-9]$": {}
+          minProperties: 1
+  response-description-required:
+    description: Every response must have a description.
+    severity: warn
+    given: $.paths[*][*].responses[*]
+    then:
+      field: description
+      function: truthy
+
+  # ── SCHEMAS — PROPERTY NAMING ────────────────────────────────────
+  schema-property-snake-case:
+    description: Schema property names must be snake_case.
+    severity: warn
+    given: $.components.schemas[*].properties[*]~
+    then:
+      function: pattern
+      functionOptions:
+        match: "^[a-z][a-z0-9_]*$"
+  schema-property-typed:
+    description: Schema properties should declare a type or $ref.
+    severity: info
+    given: $.components.schemas[*].properties[*]
+    then:
+      function: schema
+      functionOptions:
+        schema:
+          anyOf:
+            - required: [type]
+            - required: ["$ref"]
+
+  # ── SECURITY ─────────────────────────────────────────────────────
+  global-security-defined:
+    description: A global security requirement must be defined.
+    severity: warn
+    given: $
+    then:
+      field: security
+      function: truthy
+  oauth2-scheme-defined:
+    description: An OAuth 2.0 security scheme must be defined.
+    severity: error
+    given: $.components.securitySchemes
+    then:
+      field: oauth2
+      function: truthy
+  oauth2-uber-token-url:
+    description: OAuth2 token URL should be the Uber OAuth endpoint.
+    severity: warn
+    given: $.components.securitySchemes.oauth2.flows.clientCredentials.tokenUrl
+    then:
+      function: pattern
+      functionOptions:
+        match: "auth\\.uber\\.com/oauth"
+
+  # ── HTTP METHOD CONVENTIONS ──────────────────────────────────────
+  get-no-request-body:
+    description: GET operations must not declare a request body.
+    severity: warn
+    given: $.paths[*].get
+    then:
+      field: requestBody
+      function: falsy
+
+  # ── GENERAL QUALITY ──────────────────────────────────────────────
+  operation-examples-encouraged:
+    description: Operations are encouraged to provide response examples.
+    severity: info
+    given: $.paths[*][get,post,put,patch,delete].responses[*].content.application/json
+    then:
+      function: schema
+      functionOptions:
+        schema:
+          anyOf:
+            - required: [examples]
+            - required: [example]

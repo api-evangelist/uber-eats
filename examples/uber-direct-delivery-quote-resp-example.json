@@ -1,0 +1,12 @@
+{
+  "kind": "delivery_quote",
+  "id": "dqt_6gQ2dt31TjiOPfwux-NCXg",
+  "created": "2026-06-01T19:00:00.000Z",
+  "expires": "2026-06-01T19:00:00.000Z",
+  "fee": 600,
+  "currency_type": "USD",
+  "dropoff_eta": "2026-06-01T19:00:00.000Z",
+  "duration": 33,
+  "pickup_duration": 33,
+  "dropoff_deadline": "2026-06-01T19:00:00.000Z"
+}

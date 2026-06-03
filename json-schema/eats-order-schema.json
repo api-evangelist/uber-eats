@@ -1,0 +1,42 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Order",
+  "description": "Order schema from Uber Eats Marketplace API",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/uber-eats/refs/heads/main/json-schema/eats-order-schema.json",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "example": "del_aBc123XyZ"
+    },
+    "display_id": {
+      "type": "string",
+      "example": "del_aBc123XyZ"
+    },
+    "external_reference_id": {
+      "type": "string",
+      "example": "del_aBc123XyZ"
+    },
+    "current_state": {
+      "type": "string",
+      "example": "example"
+    },
+    "store": {
+      "type": "object"
+    },
+    "eater": {
+      "type": "object"
+    },
+    "cart": {
+      "type": "object"
+    },
+    "payment": {
+      "type": "object"
+    },
+    "placed_at": {
+      "type": "string",
+      "format": "date-time",
+      "example": "2026-06-01T19:00:00.000Z"
+    }
+  }
+}

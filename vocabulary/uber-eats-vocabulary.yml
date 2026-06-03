@@ -1,0 +1,286 @@
+vocabulary: 1.0.0
+info:
+  provider: Uber Eats
+  description: Unified operational + capability vocabulary for the Uber Eats Marketplace and Uber Direct delivery APIs.
+  created: '2026-06-03'
+  modified: '2026-06-03'
+operational:
+  apis:
+  - name: Uber Eats Marketplace API
+    namespace: eats
+    version: v1
+    baseUrl: https://api.uber.com
+    status: active
+  - name: Uber Direct (DaaS) API
+    namespace: uber-direct
+    version: v1
+    baseUrl: https://api.uber.com/v1
+    status: active
+  resources:
+  - name: stores
+    api: eats
+    actions:
+    - get
+  - name: stores
+    api: eats
+    actions:
+    - get
+  - name: status
+    api: eats
+    actions:
+    - set
+  - name: menus
+    api: eats
+    actions:
+    - get
+    - upsert
+  - name: items
+    api: eats
+    actions:
+    - update
+  - name: created-orders
+    api: eats
+    actions:
+    - get
+  - name: order
+    api: eats
+    actions:
+    - get
+  - name: accept_pos_order
+    api: eats
+    actions:
+    - accept
+  - name: cancel
+    api: eats
+    actions:
+    - cancel
+  - name: delivery_quotes
+    api: uber-direct
+    actions:
+    - create
+  - name: deliveries
+    api: uber-direct
+    actions:
+    - create
+    - list
+  - name: deliveries
+    api: uber-direct
+    actions:
+    - get
+    - update
+  - name: cancel
+    api: uber-direct
+    actions:
+    - cancel
+  - name: proof-of-delivery
+    api: uber-direct
+    actions:
+    - get
+  actions:
+  - verb: accept
+    method: POST
+    pattern: write
+  - verb: cancel
+    method: POST
+    pattern: destructive
+  - verb: create
+    method: POST
+    pattern: write
+  - verb: get
+    method: GET
+    pattern: read
+  - verb: get
+    method: POST
+    pattern: read
+  - verb: list
+    method: GET
+    pattern: query
+  - verb: set
+    method: POST
+    pattern: write
+  - verb: update
+    method: POST
+    pattern: write
+  - verb: upsert
+    method: PUT
+    pattern: write
+  schemas:
+    eats:
+    - Store
+    - StoreStatus
+    - Menu
+    - MenuItem
+    - Order
+    uber-direct:
+    - DeliveryQuoteReq
+    - DeliveryQuoteResp
+    - ManifestItem
+    - DeliveryReq
+    - DeliveryResp
+    - UpdateDeliveryReq
+    - PODReq
+    - PODResp
+  parameters:
+    identifiers:
+    - display_id
+    - external_id
+    - external_reference_id
+    - external_store_id
+    - id
+    - quote_id
+    - requires_id
+  enums:
+    StoreStatus:
+    - OFFLINE
+    - ONLINE
+    - PAUSED
+    ManifestItem:
+    - large
+    - medium
+    - small
+    - xlarge
+    DeliveryResp:
+    - canceled
+    - delivered
+    - dropoff
+    - left_at_door
+    - pending
+    - pickup
+    - pickup_complete
+    - returned
+    PODReq:
+    - dropoff
+    - pickup
+    - picture
+    - pincode
+    - return
+    - signature
+  authentication:
+    scheme: OAuth2
+    flows:
+    - clientCredentials
+    - authorizationCode
+    scopes:
+    - eats.deliveries
+    - eats.menu
+    - eats.menu.read
+    - eats.menu.write
+    - eats.order
+    - eats.store
+    - eats.store.orders.read
+    - eats.store.status.write
+capability:
+  workflows:
+  - name: Eats Marketplace
+    file: capabilities/eats-general.yaml
+    apis:
+    - eats
+    personas:
+    - POS Integrator
+    - Marketplace Operator
+    domains:
+    - Stores
+    - Menus
+    - Orders
+  - name: Uber Direct Delivery
+    file: capabilities/uber-direct-general.yaml
+    apis:
+    - uber-direct
+    personas:
+    - Ecommerce Merchant
+    - Logistics Partner
+    domains:
+    - Deliveries
+    - Couriers
+  personas:
+  - id: pos-integrator
+    name: POS Integrator
+    description: Connects a restaurant POS to Uber Eats order and menu flows.
+    workflows:
+    - Eats Marketplace
+  - id: marketplace-operator
+    name: Marketplace Operator
+    description: Manages many Uber Eats storefronts across brands.
+    workflows:
+    - Eats Marketplace
+  - id: ecommerce-merchant
+    name: Ecommerce Merchant
+    description: Offers same-day last-mile delivery via Uber Direct.
+    workflows:
+    - Uber Direct Delivery
+  - id: logistics-partner
+    name: Logistics Partner
+    description: Dispatches and tracks Uber courier deliveries programmatically.
+    workflows:
+    - Uber Direct Delivery
+  domains:
+  - Stores
+  - Menus
+  - Orders
+  - Fulfillment
+  - Deliveries
+  - Couriers
+  namespaces:
+  - consumes: eats
+    rest: eats-rest
+    mcp: eats-mcp
+    ports:
+      rest: 8080
+      mcp: 9090
+  - consumes: uber-direct
+    rest: uber-direct-rest
+    mcp: uber-direct-mcp
+    ports:
+      rest: 8080
+      mcp: 9090
+  binds:
+  - env: UBER_EATS_TOKEN
+    workflows:
+    - Eats Marketplace
+  - env: UBER_DIRECT_TOKEN
+    workflows:
+    - Uber Direct Delivery
+crossReference:
+- resource: stores
+  operations:
+  - getStores
+  - getStore
+  - setStoreStatus
+  workflows:
+  - Eats Marketplace
+  personas:
+  - POS Integrator
+  - Marketplace Operator
+- resource: menus
+  operations:
+  - getMenu
+  - upsertMenu
+  - updateMenuItem
+  workflows:
+  - Eats Marketplace
+  personas:
+  - Marketplace Operator
+- resource: orders
+  operations:
+  - getOrder
+  - getCreatedOrders
+  - acceptPosOrder
+  - cancelOrder
+  workflows:
+  - Eats Marketplace
+  personas:
+  - POS Integrator
+- resource: deliveries
+  operations:
+  - createQuote
+  - createDelivery
+  - getDelivery
+  - listDeliveries
+  - updateDelivery
+  - cancelDelivery
+  - getProofOfDelivery
+  workflows:
+  - Uber Direct Delivery
+  personas:
+  - Ecommerce Merchant
+  - Logistics Partner

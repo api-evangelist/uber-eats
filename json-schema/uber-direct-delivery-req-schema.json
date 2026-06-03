@@ -1,0 +1,95 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "DeliveryReq",
+  "description": "DeliveryReq schema from Uber Direct (DaaS) API",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/uber-eats/refs/heads/main/json-schema/uber-direct-delivery-req-schema.json",
+  "type": "object",
+  "properties": {
+    "quote_id": {
+      "type": "string",
+      "description": "The ID of a previously generated delivery quote.",
+      "example": "del_aBc123XyZ"
+    },
+    "pickup_name": {
+      "type": "string",
+      "example": "Example Store"
+    },
+    "pickup_address": {
+      "type": "string",
+      "example": "{\"street_address\":[\"100 Maiden Ln\"],\"city\":\"New York\",\"state\":\"NY\",\"zip_code\":\"10023\",\"country\":\"US\"}"
+    },
+    "pickup_phone_number": {
+      "type": "string",
+      "example": "+15555555555"
+    },
+    "dropoff_name": {
+      "type": "string",
+      "example": "Example Store"
+    },
+    "dropoff_address": {
+      "type": "string",
+      "example": "{\"street_address\":[\"100 Maiden Ln\"],\"city\":\"New York\",\"state\":\"NY\",\"zip_code\":\"10023\",\"country\":\"US\"}"
+    },
+    "dropoff_phone_number": {
+      "type": "string",
+      "example": "+15555555555"
+    },
+    "manifest_items": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/ManifestItem"
+      }
+    },
+    "pickup_business_name": {
+      "type": "string",
+      "example": "Example Store"
+    },
+    "pickup_latitude": {
+      "type": "number",
+      "example": 40.7066581
+    },
+    "pickup_longitude": {
+      "type": "number",
+      "example": -74.0071868
+    },
+    "pickup_notes": {
+      "type": "string",
+      "example": "Leave at the front desk."
+    },
+    "dropoff_business_name": {
+      "type": "string",
+      "example": "Example Store"
+    },
+    "dropoff_latitude": {
+      "type": "number",
+      "example": 40.7066581
+    },
+    "dropoff_longitude": {
+      "type": "number",
+      "example": -74.0071868
+    },
+    "dropoff_notes": {
+      "type": "string",
+      "example": "Leave at the front desk."
+    },
+    "tip": {
+      "type": "integer",
+      "description": "Amount in cents to tip the courier.",
+      "example": 600
+    },
+    "external_id": {
+      "type": "string",
+      "description": "An ID for an account to facilitate billing.",
+      "example": "del_aBc123XyZ"
+    }
+  },
+  "required": [
+    "pickup_name",
+    "pickup_address",
+    "pickup_phone_number",
+    "dropoff_name",
+    "dropoff_address",
+    "dropoff_phone_number",
+    "manifest_items"
+  ]
+}

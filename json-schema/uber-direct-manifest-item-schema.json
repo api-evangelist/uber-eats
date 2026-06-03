@@ -1,0 +1,47 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "ManifestItem",
+  "description": "ManifestItem schema from Uber Direct (DaaS) API",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/uber-eats/refs/heads/main/json-schema/uber-direct-manifest-item-schema.json",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "Description of item.",
+      "example": "Example Store"
+    },
+    "quantity": {
+      "type": "integer",
+      "description": "Quantity of items.",
+      "example": 1
+    },
+    "size": {
+      "type": "string",
+      "enum": [
+        "small",
+        "medium",
+        "large",
+        "xlarge"
+      ],
+      "example": "small"
+    },
+    "price": {
+      "type": "integer",
+      "description": "Price in cents.",
+      "example": 600
+    },
+    "must_be_upright": {
+      "type": "boolean",
+      "example": false
+    },
+    "weight": {
+      "type": "integer",
+      "description": "Weight in grams.",
+      "example": 300
+    },
+    "vat_percentage": {
+      "type": "integer",
+      "example": 1
+    }
+  }
+}

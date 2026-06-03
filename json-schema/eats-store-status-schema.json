@@ -1,0 +1,27 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "StoreStatus",
+  "description": "StoreStatus schema from Uber Eats Marketplace API",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/uber-eats/refs/heads/main/json-schema/eats-store-status-schema.json",
+  "type": "object",
+  "properties": {
+    "status": {
+      "type": "string",
+      "enum": [
+        "ONLINE",
+        "OFFLINE",
+        "PAUSED"
+      ],
+      "example": "ONLINE"
+    },
+    "offline_reason": {
+      "type": "string",
+      "example": "STORE_CLOSED"
+    },
+    "paused_until": {
+      "type": "string",
+      "format": "date-time",
+      "example": "2026-06-01T19:00:00.000Z"
+    }
+  }
+}

@@ -29,7 +29,7 @@ tags:
   - OAuth2
 url: https://raw.githubusercontent.com/api-evangelist/uber-eats/refs/heads/main/apis.yml
 created: '2026-05-23'
-modified: '2026-05-23'
+modified: '2026-06-03'
 specificationVersion: '0.20'
 apis:
   - aid: uber-eats:integration-activation
@@ -65,6 +65,10 @@ apis:
     properties:
       - type: Documentation
         url: https://developer.uber.com/docs/eats/references/api/store_suite
+      - type: OpenAPI
+        url: https://raw.githubusercontent.com/api-evangelist/uber-eats/refs/heads/main/openapi/uber-eats-openapi.yml
+      - type: NaftikoCapability
+        url: capabilities/eats-general.yaml
   - aid: uber-eats:menu-api
     name: Uber Eats Menu API
     description: |
@@ -180,6 +184,16 @@ apis:
         url: https://developer.uber.com/docs/deliveries/overview
       - type: APIReference
         url: https://developer.uber.com/docs/deliveries/references/api
+      - type: OpenAPI
+        url: https://raw.githubusercontent.com/api-evangelist/uber-eats/refs/heads/main/openapi/uber-direct-openapi.yml
+      - type: SDK
+        title: JavaScript/TypeScript SDK
+        url: https://www.npmjs.com/package/uber-direct
+      - type: CodeExamples
+        title: Uber Direct SDK Samples
+        url: https://github.com/uber/uber-direct-sdk-samples
+      - type: NaftikoCapability
+        url: capabilities/uber-direct-general.yaml
   - aid: uber-eats:uber-direct-organizations
     name: Uber Direct Organizations API
     description: |
@@ -323,6 +337,11 @@ authentication:
 common:
   - type: Website
     url: https://www.uber.com/us/en/business/products/eats/
+  - type: GitHubOrganization
+    url: https://github.com/uber
+  - type: SDK
+    title: Uber Direct JavaScript/TypeScript SDK
+    url: https://github.com/uber/uber-direct-sdk
   - type: DeveloperPortal
     url: https://developer.uber.com/
   - type: Documentation
@@ -343,6 +362,16 @@ common:
     url: https://www.uber.com/newsroom/
   - type: Status
     url: https://status.uber.com/
+  - type: SpectralRules
+    url: rules/uber-eats-rules.yml
+  - type: Vocabulary
+    url: vocabulary/uber-eats-vocabulary.yml
+  - type: Plans
+    url: plans/uber-eats-plans-pricing.yml
+  - type: RateLimits
+    url: rate-limits/uber-eats-rate-limits.yml
+  - type: FinOps
+    url: finops/uber-eats-finops.yml
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com

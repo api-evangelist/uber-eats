@@ -1,0 +1,10 @@
+{
+  "dropoff_notes": "Leave at the front desk.",
+  "manifest_reference": "example",
+  "pickup_notes": "Leave at the front desk.",
+  "requires_dropoff_signature": false,
+  "requires_id": false,
+  "tip_by_customer": 600,
+  "dropoff_latitude": 40.7066581,
+  "dropoff_longitude": -74.0071868
+}

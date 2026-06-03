@@ -1,0 +1,41 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/uber-eats/refs/heads/main/json-structure/uber-direct-update-delivery-req-structure.json",
+  "name": "UpdateDeliveryReq",
+  "description": "UpdateDeliveryReq schema from Uber Direct (DaaS) API",
+  "type": "object",
+  "properties": {
+    "dropoff_notes": {
+      "type": "string",
+      "example": "Leave at the front desk."
+    },
+    "manifest_reference": {
+      "type": "string",
+      "example": "example"
+    },
+    "pickup_notes": {
+      "type": "string",
+      "example": "Leave at the front desk."
+    },
+    "requires_dropoff_signature": {
+      "type": "boolean",
+      "example": false
+    },
+    "requires_id": {
+      "type": "boolean",
+      "example": false
+    },
+    "tip_by_customer": {
+      "type": "int32",
+      "example": 600
+    },
+    "dropoff_latitude": {
+      "type": "double",
+      "example": 40.7066581
+    },
+    "dropoff_longitude": {
+      "type": "double",
+      "example": -74.0071868
+    }
+  }
+}

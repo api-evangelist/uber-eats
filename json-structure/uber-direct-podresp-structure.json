@@ -1,0 +1,14 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/uber-eats/refs/heads/main/json-structure/uber-direct-podresp-structure.json",
+  "name": "PODResp",
+  "description": "PODResp schema from Uber Direct (DaaS) API",
+  "type": "object",
+  "properties": {
+    "document": {
+      "type": "string",
+      "description": "A long Base64 string representing the image.",
+      "example": "example"
+    }
+  }
+}

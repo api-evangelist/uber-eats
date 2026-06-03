@@ -4,7 +4,7 @@ schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main
 provider: Uber Eats
 providerId: uber-eats
 created: '2026-05-22'
-modified: '2026-05-22'
+modified: '2026-06-03'
 tags:
 - Uber Eats
 - Uber Direct
@@ -16,21 +16,24 @@ tags:
 - Fulfillment
 - Courier
 - OAuth2
-description: Machine-readable plans scaffold for the Uber Eats API surface. Conforms to the API Commons Plans schema. Tier
-  limits and prices are scaffold defaults; replace with provider-published values.
+description: Machine-readable plans for the Uber Eats commercial surface. The developer APIs themselves are free to approved
+  partners (OAuth-gated, no published per-call fee); revenue is earned through marketplace commission on Uber Eats orders
+  and a flat per-delivery fee for Uber Direct. Conforms to the API Commons Plans schema. Marketplace rates reflect the US
+  fee structure effective March 11, 2026.
 plans:
-- id: uber-eats-free
-  name: Free
-  type: freemium
-  description: Free entry tier for the Uber Eats API surface. Intended for evaluation, prototyping, and low-volume integrations.
-    Real limits and pricing must be reconciled with the provider's published plan documentation.
+- id: uber-eats-api-access
+  name: Developer API Access
+  type: free
+  description: Programmatic access to the Uber Eats Marketplace and Uber Direct APIs for approved partners. There is no
+    published per-API-call charge; access is gated by partner approval and OAuth 2.0 credentials issued in the Uber
+    Developer Portal. Revenue is realized through the marketplace and delivery plans below, not through API metering.
   entries:
-  - label: API Requests
-    description: Monthly API request quota across all included endpoints
-    name: api_requests
+  - label: API Access
+    description: OAuth-gated access to the Uber Eats and Uber Direct REST APIs for approved partners.
+    name: api_access
     type: quota
     metric: requests
-    limit: 1000
+    limit: 0
     timeFrame: month
     geo: global
     domains:
@@ -38,18 +41,100 @@ plans:
     unit: 1
     price: '0.00'
     userMultiplied: false
-  - label: Rate Limit
-    description: Maximum requests per minute on the free tier
-    name: rate_limit
+- id: uber-eats-marketplace-lite
+  name: Marketplace Lite
+  type: commission
+  description: Lowest-commission Uber Eats marketplace tier. Lower delivery radius and reduced visibility. US marketplace
+    rate effective March 11, 2026.
+  entries:
+  - label: Marketplace Commission
+    description: Commission charged on the order subtotal for delivery orders on the Lite tier.
+    name: marketplace_commission
     type: rate
-    metric: requests_per_minute
-    limit: 10
-    timeFrame: minute
-    geo: global
-    domains:
-    - https://api.uber.com
+    metric: percent_of_order
+    limit: 20
+    geo: us
     unit: 1
-    price: '0.00'
+    price: '20'
+- id: uber-eats-marketplace-plus
+  name: Marketplace Plus
+  type: commission
+  description: Mid Uber Eats marketplace tier with a wider delivery radius. US marketplace rate effective March 11, 2026.
+    Uber One member orders are charged at a higher rate.
+  entries:
+  - label: Marketplace Commission
+    description: Commission charged on the order subtotal for delivery orders on the Plus tier.
+    name: marketplace_commission
+    type: rate
+    metric: percent_of_order
+    limit: 25
+    geo: us
+    unit: 1
+    price: '25'
+  - label: Uber One Member Commission
+    description: Commission rate applied to Uber One member orders on the Plus tier.
+    name: uber_one_commission
+    type: rate
+    metric: percent_of_order
+    limit: 30
+    geo: us
+    unit: 1
+    price: '30'
+- id: uber-eats-marketplace-premium
+  name: Marketplace Premium
+  type: commission
+  description: Highest-visibility Uber Eats marketplace tier with the largest delivery radius. US marketplace rate.
+  entries:
+  - label: Marketplace Commission
+    description: Commission charged on the order subtotal for delivery orders on the Premium tier.
+    name: marketplace_commission
+    type: rate
+    metric: percent_of_order
+    limit: 30
+    geo: us
+    unit: 1
+    price: '30'
+- id: uber-eats-pickup
+  name: Pickup
+  type: commission
+  description: Commission tier for customer-pickup orders. Lower rate when validated in-store pricing is enabled.
+  entries:
+  - label: Pickup Commission (Validated Pricing)
+    description: Commission on pickup orders with validated in-store pricing.
+    name: pickup_commission_validated
+    type: rate
+    metric: percent_of_order
+    limit: 7
+    geo: us
+    unit: 1
+    price: '7'
+  - label: Pickup Commission (Standard)
+    description: Commission on pickup orders without validated in-store pricing.
+    name: pickup_commission_standard
+    type: rate
+    metric: percent_of_order
+    limit: 10
+    geo: us
+    unit: 1
+    price: '10'
+- id: uber-direct
+  name: Uber Direct
+  type: usage
+  description: White-label, commission-free delivery for orders placed on a merchant's own channels and fulfilled by the
+    Uber courier network. Billed as a flat fee per delivery rather than as a percentage of the order.
+  entries:
+  - label: Per-Delivery Fee
+    description: Flat fee charged per completed Uber Direct delivery (starting price; varies by distance and market).
+    name: per_delivery_fee
+    type: usage
+    metric: delivery
+    geo: us
+    unit: 1
+    price: '7.99'
 references:
 - name: Uber Eats API Documentation
   url: https://raw.githubusercontent.com/api-evangelist/uber-eats/refs/heads/main/apis.yml
+- name: Uber Eats Merchant Pricing
+  url: https://merchants.ubereats.com/us/en/pricing/
+- name: Uber Eats Marketplace Fee Changes
+  url: https://help.uber.com/merchants-and-restaurants/article/uber-eats-marketplace-fee-changes--?nodeId=2cec9c6f-a7b8-47b5-8cc8-07c8a2c24569

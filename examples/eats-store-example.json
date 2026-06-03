@@ -1,0 +1,11 @@
+{
+  "id": "del_aBc123XyZ",
+  "name": "Example Store",
+  "contact_emails": [
+    "example"
+  ],
+  "partner_identifiers": {},
+  "timezone": "America/New_York",
+  "location": {},
+  "web_url": "https://www.ubereats.com/orders/del_aBc123XyZ"
+}

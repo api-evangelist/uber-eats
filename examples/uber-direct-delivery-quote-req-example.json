@@ -1,0 +1,16 @@
+{
+  "pickup_address": "{\"street_address\":[\"100 Maiden Ln\"],\"city\":\"New York\",\"state\":\"NY\",\"zip_code\":\"10023\",\"country\":\"US\"}",
+  "dropoff_address": "{\"street_address\":[\"30 Lincoln Center Plaza\"],\"city\":\"New York\",\"state\":\"NY\",\"zip_code\":\"10023\",\"country\":\"US\"}",
+  "pickup_latitude": 40.7066581,
+  "pickup_longitude": -74.0071868,
+  "dropoff_latitude": 40.7066581,
+  "dropoff_longitude": -74.0071868,
+  "pickup_ready_dt": "2026-06-01T19:00:00.000Z",
+  "pickup_deadline_dt": "2026-06-01T19:00:00.000Z",
+  "dropoff_ready_dt": "2026-06-01T19:00:00.000Z",
+  "dropoff_deadline_dt": "2026-06-01T19:00:00.000Z",
+  "pickup_phone_number": "+15555555555",
+  "dropoff_phone_number": "+15555555555",
+  "manifest_total_value": 600,
+  "external_store_id": "del_aBc123XyZ"
+}

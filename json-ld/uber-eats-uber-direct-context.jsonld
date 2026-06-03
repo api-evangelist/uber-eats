@@ -1,0 +1,247 @@
+{
+  "@context": {
+    "@version": 1.1,
+    "ue": "https://developer.uber.com/schema/",
+    "schema": "https://schema.org/",
+    "dcterms": "http://purl.org/dc/terms/",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "DeliveryQuoteReq": "ue:DeliveryQuoteReq",
+    "pickupAddress": {
+      "@id": "ue:pickup_address",
+      "@type": "xsd:string"
+    },
+    "dropoffAddress": {
+      "@id": "ue:dropoff_address",
+      "@type": "xsd:string"
+    },
+    "pickupLatitude": {
+      "@id": "ue:pickup_latitude",
+      "@type": "xsd:double"
+    },
+    "pickupLongitude": {
+      "@id": "ue:pickup_longitude",
+      "@type": "xsd:double"
+    },
+    "dropoffLatitude": {
+      "@id": "ue:dropoff_latitude",
+      "@type": "xsd:double"
+    },
+    "dropoffLongitude": {
+      "@id": "ue:dropoff_longitude",
+      "@type": "xsd:double"
+    },
+    "pickupReadyDt": {
+      "@id": "ue:pickup_ready_dt",
+      "@type": "xsd:dateTime"
+    },
+    "pickupDeadlineDt": {
+      "@id": "ue:pickup_deadline_dt",
+      "@type": "xsd:dateTime"
+    },
+    "dropoffReadyDt": {
+      "@id": "ue:dropoff_ready_dt",
+      "@type": "xsd:dateTime"
+    },
+    "dropoffDeadlineDt": {
+      "@id": "ue:dropoff_deadline_dt",
+      "@type": "xsd:dateTime"
+    },
+    "pickupPhoneNumber": {
+      "@id": "ue:pickup_phone_number",
+      "@type": "xsd:string"
+    },
+    "dropoffPhoneNumber": {
+      "@id": "ue:dropoff_phone_number",
+      "@type": "xsd:string"
+    },
+    "manifestTotalValue": {
+      "@id": "ue:manifest_total_value",
+      "@type": "xsd:integer"
+    },
+    "externalStoreId": {
+      "@id": "ue:external_store_id",
+      "@type": "xsd:string"
+    },
+    "DeliveryQuoteResp": "ue:DeliveryQuoteResp",
+    "kind": {
+      "@id": "ue:kind",
+      "@type": "xsd:string"
+    },
+    "id": {
+      "@id": "ue:id",
+      "@type": "xsd:string"
+    },
+    "created": {
+      "@id": "schema:dateCreated",
+      "@type": "xsd:dateTime"
+    },
+    "expires": {
+      "@id": "ue:expires",
+      "@type": "xsd:dateTime"
+    },
+    "fee": {
+      "@id": "ue:fee",
+      "@type": "xsd:integer"
+    },
+    "currencyType": {
+      "@id": "ue:currency_type",
+      "@type": "xsd:string"
+    },
+    "dropoffEta": {
+      "@id": "ue:dropoff_eta",
+      "@type": "xsd:dateTime"
+    },
+    "duration": {
+      "@id": "ue:duration",
+      "@type": "xsd:integer"
+    },
+    "pickupDuration": {
+      "@id": "ue:pickup_duration",
+      "@type": "xsd:integer"
+    },
+    "dropoffDeadline": {
+      "@id": "ue:dropoff_deadline",
+      "@type": "xsd:dateTime"
+    },
+    "ManifestItem": "ue:ManifestItem",
+    "name": {
+      "@id": "schema:name"
+    },
+    "quantity": {
+      "@id": "ue:quantity",
+      "@type": "xsd:integer"
+    },
+    "size": {
+      "@id": "ue:size",
+      "@type": "xsd:string"
+    },
+    "price": {
+      "@id": "ue:price",
+      "@type": "xsd:integer"
+    },
+    "mustBeUpright": {
+      "@id": "ue:must_be_upright",
+      "@type": "xsd:boolean"
+    },
+    "weight": {
+      "@id": "ue:weight",
+      "@type": "xsd:integer"
+    },
+    "vatPercentage": {
+      "@id": "ue:vat_percentage",
+      "@type": "xsd:integer"
+    },
+    "DeliveryReq": "ue:DeliveryReq",
+    "quoteId": {
+      "@id": "ue:quote_id",
+      "@type": "xsd:string"
+    },
+    "pickupName": {
+      "@id": "ue:pickup_name",
+      "@type": "xsd:string"
+    },
+    "dropoffName": {
+      "@id": "ue:dropoff_name",
+      "@type": "xsd:string"
+    },
+    "manifestItems": {
+      "@id": "ue:manifest_items",
+      "@container": "@set"
+    },
+    "pickupBusinessName": {
+      "@id": "ue:pickup_business_name",
+      "@type": "xsd:string"
+    },
+    "pickupNotes": {
+      "@id": "ue:pickup_notes",
+      "@type": "xsd:string"
+    },
+    "dropoffBusinessName": {
+      "@id": "ue:dropoff_business_name",
+      "@type": "xsd:string"
+    },
+    "dropoffNotes": {
+      "@id": "ue:dropoff_notes",
+      "@type": "xsd:string"
+    },
+    "tip": {
+      "@id": "ue:tip",
+      "@type": "xsd:integer"
+    },
+    "externalId": {
+      "@id": "ue:external_id",
+      "@type": "xsd:string"
+    },
+    "DeliveryResp": "ue:DeliveryResp",
+    "status": {
+      "@id": "schema:status"
+    },
+    "complete": {
+      "@id": "ue:complete",
+      "@type": "xsd:boolean"
+    },
+    "currency": {
+      "@id": "ue:currency",
+      "@type": "xsd:string"
+    },
+    "trackingUrl": {
+      "@id": "ue:tracking_url",
+      "@type": "xsd:string"
+    },
+    "liveMode": {
+      "@id": "ue:live_mode",
+      "@type": "xsd:boolean"
+    },
+    "pickupEta": {
+      "@id": "ue:pickup_eta",
+      "@type": "xsd:dateTime"
+    },
+    "pickupDeadline": {
+      "@id": "ue:pickup_deadline",
+      "@type": "xsd:dateTime"
+    },
+    "updated": {
+      "@id": "schema:dateModified",
+      "@type": "xsd:dateTime"
+    },
+    "undeliverableAction": {
+      "@id": "ue:undeliverable_action",
+      "@type": "xsd:string"
+    },
+    "undeliverableReason": {
+      "@id": "ue:undeliverable_reason",
+      "@type": "xsd:string"
+    },
+    "UpdateDeliveryReq": "ue:UpdateDeliveryReq",
+    "manifestReference": {
+      "@id": "ue:manifest_reference",
+      "@type": "xsd:string"
+    },
+    "requiresDropoffSignature": {
+      "@id": "ue:requires_dropoff_signature",
+      "@type": "xsd:boolean"
+    },
+    "requiresId": {
+      "@id": "ue:requires_id",
+      "@type": "xsd:boolean"
+    },
+    "tipByCustomer": {
+      "@id": "ue:tip_by_customer",
+      "@type": "xsd:integer"
+    },
+    "PODReq": "ue:PODReq",
+    "waypoint": {
+      "@id": "ue:waypoint",
+      "@type": "xsd:string"
+    },
+    "type": {
+      "@id": "ue:type",
+      "@type": "xsd:string"
+    },
+    "PODResp": "ue:PODResp",
+    "document": {
+      "@id": "ue:document",
+      "@type": "xsd:string"
+    }
+  }
+}

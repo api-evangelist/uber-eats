@@ -1,0 +1,25 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/uber-eats/refs/heads/main/json-structure/eats-menu-item-structure.json",
+  "name": "MenuItem",
+  "description": "MenuItem schema from Uber Eats Marketplace API",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "example": "del_aBc123XyZ"
+    },
+    "title": {
+      "type": "object"
+    },
+    "description": {
+      "type": "object"
+    },
+    "price_info": {
+      "type": "object"
+    },
+    "suspension_info": {
+      "type": "object"
+    }
+  }
+}

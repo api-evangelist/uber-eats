@@ -1,0 +1,99 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/uber-eats/refs/heads/main/json-structure/uber-direct-delivery-resp-structure.json",
+  "name": "DeliveryResp",
+  "description": "DeliveryResp schema from Uber Direct (DaaS) API",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "example": "del_aBc123XyZ"
+    },
+    "quote_id": {
+      "type": "string",
+      "example": "del_aBc123XyZ"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "pending",
+        "pickup",
+        "pickup_complete",
+        "dropoff",
+        "delivered",
+        "canceled",
+        "returned"
+      ],
+      "example": "pending"
+    },
+    "complete": {
+      "type": "boolean",
+      "example": false
+    },
+    "kind": {
+      "type": "string",
+      "example": "example"
+    },
+    "fee": {
+      "type": "int32",
+      "example": 600
+    },
+    "currency": {
+      "type": "string",
+      "example": "USD"
+    },
+    "tracking_url": {
+      "type": "string",
+      "example": "https://www.ubereats.com/orders/del_aBc123XyZ"
+    },
+    "tip": {
+      "type": "int32",
+      "example": 600
+    },
+    "live_mode": {
+      "type": "boolean",
+      "example": false
+    },
+    "pickup_eta": {
+      "type": "datetime",
+      "example": "2026-06-01T19:00:00.000Z"
+    },
+    "pickup_deadline": {
+      "type": "datetime",
+      "example": "2026-06-01T19:00:00.000Z"
+    },
+    "dropoff_eta": {
+      "type": "datetime",
+      "example": "2026-06-01T19:00:00.000Z"
+    },
+    "dropoff_deadline": {
+      "type": "datetime",
+      "example": "2026-06-01T19:00:00.000Z"
+    },
+    "external_id": {
+      "type": "string",
+      "example": "del_aBc123XyZ"
+    },
+    "created": {
+      "type": "datetime",
+      "example": "2026-06-01T19:00:00.000Z"
+    },
+    "updated": {
+      "type": "datetime",
+      "example": "2026-06-01T19:00:00.000Z"
+    },
+    "undeliverable_action": {
+      "type": "string",
+      "enum": [
+        "",
+        "returned",
+        "left_at_door"
+      ],
+      "example": "returned"
+    },
+    "undeliverable_reason": {
+      "type": "string",
+      "example": "STORE_CLOSED"
+    }
+  }
+}

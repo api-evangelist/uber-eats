@@ -1,0 +1,774 @@
+openapi: 3.1.0
+info:
+  title: Uber Direct (DaaS) API
+  version: v1
+  description: >-
+    Uber Direct exposes Uber's courier network as a delivery-as-a-service
+    (DaaS) API. Merchants request a delivery quote between two addresses,
+    create a delivery from that quote, track courier progress, cancel,
+    and retrieve proof of delivery. Authentication is via OAuth 2.0 client
+    credentials issued from the Uber Developer Portal. Schemas and paths in
+    this spec are derived from the official `uber/uber-direct-sdk`
+    TypeScript SDK (npm package `uber-direct`).
+  contact:
+    name: Uber Direct Developer Portal
+    url: https://developer.uber.com/docs/deliveries/overview
+servers:
+- url: https://api.uber.com/v1
+  description: Uber API production
+components:
+  securitySchemes:
+    oauth2:
+      type: oauth2
+      flows:
+        clientCredentials:
+          tokenUrl: https://auth.uber.com/oauth/v2/token
+          scopes:
+            eats.deliveries: Create and manage Uber Direct deliveries
+  schemas:
+    DeliveryQuoteReq:
+      type: object
+      required:
+      - pickup_address
+      - dropoff_address
+      properties:
+        pickup_address:
+          type: string
+          description: JSON string containing pickup address details.
+          example: '{"street_address":["100 Maiden Ln"],"city":"New York","state":"NY","zip_code":"10023","country":"US"}'
+        dropoff_address:
+          type: string
+          description: JSON string containing dropoff address details.
+          example: '{"street_address":["30 Lincoln Center Plaza"],"city":"New York","state":"NY","zip_code":"10023","country":"US"}'
+        pickup_latitude:
+          type: number
+          description: Pickup latitude coordinate.
+          example: 40.7066581
+        pickup_longitude:
+          type: number
+          description: Pickup longitude coordinate.
+          example: -74.0071868
+        dropoff_latitude:
+          type: number
+          description: Dropoff latitude coordinate.
+          example: 40.7066581
+        dropoff_longitude:
+          type: number
+          description: Dropoff longitude coordinate.
+          example: -74.0071868
+        pickup_ready_dt:
+          type: string
+          format: date-time
+          description: (RFC 3339) Beginning of the window when an order must be picked up.
+          example: '2026-06-01T19:00:00.000Z'
+        pickup_deadline_dt:
+          type: string
+          format: date-time
+          description: (RFC 3339) End of the window when an order may be picked up.
+          example: '2026-06-01T19:00:00.000Z'
+        dropoff_ready_dt:
+          type: string
+          format: date-time
+          description: (RFC 3339) Beginning of the window when an order must be dropped off.
+          example: '2026-06-01T19:00:00.000Z'
+        dropoff_deadline_dt:
+          type: string
+          format: date-time
+          description: (RFC 3339) End of the window when an order must be dropped off.
+          example: '2026-06-01T19:00:00.000Z'
+        pickup_phone_number:
+          type: string
+          description: Phone number for the pickup location.
+          example: '+15555555555'
+        dropoff_phone_number:
+          type: string
+          description: Phone number for the dropoff location.
+          example: '+15555555555'
+        manifest_total_value:
+          type: integer
+          description: Value in cents of the items in the delivery.
+          example: 600
+        external_store_id:
+          type: string
+          description: Partner reference to a store or location.
+          example: del_aBc123XyZ
+    DeliveryQuoteResp:
+      type: object
+      properties:
+        kind:
+          type: string
+          description: 'The type of object being described. Default: delivery_quote'
+          example: delivery_quote
+        id:
+          type: string
+          description: Unique identifier for the quote (always starts with dqt_).
+          example: dqt_6gQ2dt31TjiOPfwux-NCXg
+        created:
+          type: string
+          format: date-time
+          example: '2026-06-01T19:00:00.000Z'
+        expires:
+          type: string
+          format: date-time
+          example: '2026-06-01T19:00:00.000Z'
+        fee:
+          type: integer
+          description: Amount in cents that will be charged if this delivery is created.
+          example: 600
+        currency_type:
+          type: string
+          description: Three-letter ISO currency code, in uppercase.
+          example: USD
+        dropoff_eta:
+          type: string
+          format: date-time
+          example: '2026-06-01T19:00:00.000Z'
+        duration:
+          type: integer
+          description: Estimated minutes for this delivery to reach dropoff.
+          example: 33
+        pickup_duration:
+          type: integer
+          description: Estimated minutes until a courier will arrive at the pickup.
+          example: 33
+        dropoff_deadline:
+          type: string
+          format: date-time
+          example: '2026-06-01T19:00:00.000Z'
+    ManifestItem:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Description of item.
+          example: Example Store
+        quantity:
+          type: integer
+          description: Quantity of items.
+          example: 1
+        size:
+          type: string
+          enum:
+          - small
+          - medium
+          - large
+          - xlarge
+          example: small
+        price:
+          type: integer
+          description: Price in cents.
+          example: 600
+        must_be_upright:
+          type: boolean
+          example: false
+        weight:
+          type: integer
+          description: Weight in grams.
+          example: 300
+        vat_percentage:
+          type: integer
+          example: 1
+    DeliveryReq:
+      type: object
+      required:
+      - pickup_name
+      - pickup_address
+      - pickup_phone_number
+      - dropoff_name
+      - dropoff_address
+      - dropoff_phone_number
+      - manifest_items
+      properties:
+        quote_id:
+          type: string
+          description: The ID of a previously generated delivery quote.
+          example: del_aBc123XyZ
+        pickup_name:
+          type: string
+          example: Example Store
+        pickup_address:
+          type: string
+          example: '{"street_address":["100 Maiden Ln"],"city":"New York","state":"NY","zip_code":"10023","country":"US"}'
+        pickup_phone_number:
+          type: string
+          example: '+15555555555'
+        dropoff_name:
+          type: string
+          example: Example Store
+        dropoff_address:
+          type: string
+          example: '{"street_address":["100 Maiden Ln"],"city":"New York","state":"NY","zip_code":"10023","country":"US"}'
+        dropoff_phone_number:
+          type: string
+          example: '+15555555555'
+        manifest_items:
+          type: array
+          items:
+            $ref: '#/components/schemas/ManifestItem'
+        pickup_business_name:
+          type: string
+          example: Example Store
+        pickup_latitude:
+          type: number
+          example: 40.7066581
+        pickup_longitude:
+          type: number
+          example: -74.0071868
+        pickup_notes:
+          type: string
+          example: Leave at the front desk.
+        dropoff_business_name:
+          type: string
+          example: Example Store
+        dropoff_latitude:
+          type: number
+          example: 40.7066581
+        dropoff_longitude:
+          type: number
+          example: -74.0071868
+        dropoff_notes:
+          type: string
+          example: Leave at the front desk.
+        tip:
+          type: integer
+          description: Amount in cents to tip the courier.
+          example: 600
+        external_id:
+          type: string
+          description: An ID for an account to facilitate billing.
+          example: del_aBc123XyZ
+    DeliveryResp:
+      type: object
+      properties:
+        id:
+          type: string
+          example: del_aBc123XyZ
+        quote_id:
+          type: string
+          example: del_aBc123XyZ
+        status:
+          type: string
+          enum:
+          - pending
+          - pickup
+          - pickup_complete
+          - dropoff
+          - delivered
+          - canceled
+          - returned
+          example: pending
+        complete:
+          type: boolean
+          example: false
+        kind:
+          type: string
+          example: example
+        fee:
+          type: integer
+          example: 600
+        currency:
+          type: string
+          example: USD
+        tracking_url:
+          type: string
+          example: https://www.ubereats.com/orders/del_aBc123XyZ
+        tip:
+          type: integer
+          example: 600
+        live_mode:
+          type: boolean
+          example: false
+        pickup_eta:
+          type: string
+          format: date-time
+          example: '2026-06-01T19:00:00.000Z'
+        pickup_deadline:
+          type: string
+          format: date-time
+          example: '2026-06-01T19:00:00.000Z'
+        dropoff_eta:
+          type: string
+          format: date-time
+          example: '2026-06-01T19:00:00.000Z'
+        dropoff_deadline:
+          type: string
+          format: date-time
+          example: '2026-06-01T19:00:00.000Z'
+        external_id:
+          type: string
+          example: del_aBc123XyZ
+        created:
+          type: string
+          format: date-time
+          example: '2026-06-01T19:00:00.000Z'
+        updated:
+          type: string
+          format: date-time
+          example: '2026-06-01T19:00:00.000Z'
+        undeliverable_action:
+          type: string
+          enum:
+          - ''
+          - returned
+          - left_at_door
+          example: returned
+        undeliverable_reason:
+          type: string
+          example: STORE_CLOSED
+    UpdateDeliveryReq:
+      type: object
+      properties:
+        dropoff_notes:
+          type: string
+          example: Leave at the front desk.
+        manifest_reference:
+          type: string
+          example: example
+        pickup_notes:
+          type: string
+          example: Leave at the front desk.
+        requires_dropoff_signature:
+          type: boolean
+          example: false
+        requires_id:
+          type: boolean
+          example: false
+        tip_by_customer:
+          type: integer
+          example: 600
+        dropoff_latitude:
+          type: number
+          example: 40.7066581
+        dropoff_longitude:
+          type: number
+          example: -74.0071868
+    PODReq:
+      type: object
+      required:
+      - waypoint
+      - type
+      properties:
+        waypoint:
+          type: string
+          enum:
+          - pickup
+          - dropoff
+          - return
+          description: The waypoint where the verification requirement was taken.
+          example: pickup
+        type:
+          type: string
+          enum:
+          - picture
+          - signature
+          - pincode
+          description: The type of delivery verification requirement.
+          example: picture
+    PODResp:
+      type: object
+      properties:
+        document:
+          type: string
+          description: A long Base64 string representing the image.
+          example: example
+security:
+- oauth2: []
+paths:
+  /customers/{customer_id}/delivery_quotes:
+    parameters:
+    - in: path
+      name: customer_id
+      required: true
+      schema:
+        type: string
+    post:
+      summary: Uber Direct Create Quote
+      operationId: createQuote
+      description: Create a quote to check deliverability, validity, and cost for a delivery between two addresses.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeliveryQuoteReq'
+            examples:
+              CreateQuoteRequestExample:
+                summary: Default createQuote request
+                x-microcks-default: true
+                value:
+                  pickup_address: '{"street_address":["100 Maiden Ln"],"city":"New York","state":"NY","zip_code":"10023","country":"US"}'
+                  dropoff_address: '{"street_address":["30 Lincoln Center Plaza"],"city":"New York","state":"NY","zip_code":"10023","country":"US"}'
+                  pickup_latitude: 40.7066581
+                  pickup_longitude: -74.0071868
+                  dropoff_latitude: 40.7066581
+                  dropoff_longitude: -74.0071868
+                  pickup_ready_dt: '2026-06-01T19:00:00.000Z'
+                  pickup_deadline_dt: '2026-06-01T19:00:00.000Z'
+                  dropoff_ready_dt: '2026-06-01T19:00:00.000Z'
+                  dropoff_deadline_dt: '2026-06-01T19:00:00.000Z'
+                  pickup_phone_number: '+15555555555'
+                  dropoff_phone_number: '+15555555555'
+                  manifest_total_value: 600
+                  external_store_id: del_aBc123XyZ
+      responses:
+        '200':
+          description: A delivery quote.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeliveryQuoteResp'
+              examples:
+                CreateQuote200Example:
+                  summary: Default createQuote 200 response
+                  x-microcks-default: true
+                  value:
+                    kind: example
+                    id: del_aBc123XyZ
+                    created: '2026-06-01T19:00:00.000Z'
+                    expires: '2026-06-01T19:00:00.000Z'
+                    fee: 600
+                    currency_type: USD
+                    dropoff_eta: '2026-06-01T19:00:00.000Z'
+                    duration: 33
+                    pickup_duration: 33
+                    dropoff_deadline: '2026-06-01T19:00:00.000Z'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /customers/{customer_id}/deliveries:
+    parameters:
+    - in: path
+      name: customer_id
+      required: true
+      schema:
+        type: string
+    post:
+      summary: Uber Direct Create Delivery
+      operationId: createDelivery
+      description: Create a delivery between two addresses, optionally using a previously generated quote_id.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeliveryReq'
+            examples:
+              CreateDeliveryRequestExample:
+                summary: Default createDelivery request
+                x-microcks-default: true
+                value:
+                  quote_id: del_aBc123XyZ
+                  pickup_name: Example Store
+                  pickup_address: '{"street_address":["100 Maiden Ln"],"city":"New York","state":"NY","zip_code":"10023","country":"US"}'
+                  pickup_phone_number: '+15555555555'
+                  dropoff_name: Example Store
+                  dropoff_address: '{"street_address":["100 Maiden Ln"],"city":"New York","state":"NY","zip_code":"10023","country":"US"}'
+                  dropoff_phone_number: '+15555555555'
+                  manifest_items:
+                  - name: {}
+                    quantity: {}
+                    size: {}
+                    price: {}
+                    must_be_upright: {}
+                    weight: {}
+                    vat_percentage: {}
+                  pickup_business_name: Example Store
+                  pickup_latitude: 40.7066581
+                  pickup_longitude: -74.0071868
+                  pickup_notes: Leave at the front desk.
+                  dropoff_business_name: Example Store
+                  dropoff_latitude: 40.7066581
+                  dropoff_longitude: -74.0071868
+                  dropoff_notes: Leave at the front desk.
+                  tip: 600
+                  external_id: del_aBc123XyZ
+      responses:
+        '200':
+          description: The created delivery.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeliveryResp'
+              examples:
+                CreateDelivery200Example:
+                  summary: Default createDelivery 200 response
+                  x-microcks-default: true
+                  value:
+                    id: del_aBc123XyZ
+                    quote_id: del_aBc123XyZ
+                    status: pending
+                    complete: false
+                    kind: example
+                    fee: 600
+                    currency: USD
+                    tracking_url: https://www.ubereats.com/orders/del_aBc123XyZ
+                    tip: 600
+                    live_mode: false
+                    pickup_eta: '2026-06-01T19:00:00.000Z'
+                    pickup_deadline: '2026-06-01T19:00:00.000Z'
+                    dropoff_eta: '2026-06-01T19:00:00.000Z'
+                    dropoff_deadline: '2026-06-01T19:00:00.000Z'
+                    external_id: del_aBc123XyZ
+                    created: '2026-06-01T19:00:00.000Z'
+                    updated: '2026-06-01T19:00:00.000Z'
+                    undeliverable_action: value
+                    undeliverable_reason: STORE_CLOSED
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    get:
+      summary: Uber Direct List Deliveries
+      operationId: listDeliveries
+      description: List deliveries for a customer.
+      parameters:
+      - in: query
+        name: filter
+        schema:
+          type: string
+        description: Filter deliveries by status (e.g. ongoing).
+      - in: query
+        name: limit
+        schema:
+          type: integer
+      - in: query
+        name: offset
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: A list of deliveries.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/DeliveryResp'
+              examples:
+                ListDeliveries200Example:
+                  summary: Default listDeliveries 200 response
+                  x-microcks-default: true
+                  value:
+                  - id: del_aBc123XyZ
+                    quote_id: del_aBc123XyZ
+                    status: pending
+                    complete: false
+                    kind: example
+                    fee: 600
+                    currency: USD
+                    tracking_url: https://www.ubereats.com/orders/del_aBc123XyZ
+                    tip: 600
+                    live_mode: false
+                    pickup_eta: '2026-06-01T19:00:00.000Z'
+                    pickup_deadline: '2026-06-01T19:00:00.000Z'
+                    dropoff_eta: '2026-06-01T19:00:00.000Z'
+                    dropoff_deadline: '2026-06-01T19:00:00.000Z'
+                    external_id: del_aBc123XyZ
+                    created: '2026-06-01T19:00:00.000Z'
+                    updated: '2026-06-01T19:00:00.000Z'
+                    undeliverable_action: value
+                    undeliverable_reason: STORE_CLOSED
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /customers/{customer_id}/deliveries/{delivery_id}:
+    parameters:
+    - in: path
+      name: customer_id
+      required: true
+      schema:
+        type: string
+    - in: path
+      name: delivery_id
+      required: true
+      schema:
+        type: string
+    get:
+      summary: Uber Direct Get Delivery
+      operationId: getDelivery
+      description: Retrieve the current status and details of a delivery.
+      responses:
+        '200':
+          description: The delivery.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeliveryResp'
+              examples:
+                GetDelivery200Example:
+                  summary: Default getDelivery 200 response
+                  x-microcks-default: true
+                  value:
+                    id: del_aBc123XyZ
+                    quote_id: del_aBc123XyZ
+                    status: pending
+                    complete: false
+                    kind: example
+                    fee: 600
+                    currency: USD
+                    tracking_url: https://www.ubereats.com/orders/del_aBc123XyZ
+                    tip: 600
+                    live_mode: false
+                    pickup_eta: '2026-06-01T19:00:00.000Z'
+                    pickup_deadline: '2026-06-01T19:00:00.000Z'
+                    dropoff_eta: '2026-06-01T19:00:00.000Z'
+                    dropoff_deadline: '2026-06-01T19:00:00.000Z'
+                    external_id: del_aBc123XyZ
+                    created: '2026-06-01T19:00:00.000Z'
+                    updated: '2026-06-01T19:00:00.000Z'
+                    undeliverable_action: value
+                    undeliverable_reason: STORE_CLOSED
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    post:
+      summary: Uber Direct Update Delivery
+      operationId: updateDelivery
+      description: Modify an ongoing delivery's notes, verification requirements, or tip.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateDeliveryReq'
+            examples:
+              UpdateDeliveryRequestExample:
+                summary: Default updateDelivery request
+                x-microcks-default: true
+                value:
+                  dropoff_notes: Leave at the front desk.
+                  manifest_reference: example
+                  pickup_notes: Leave at the front desk.
+                  requires_dropoff_signature: false
+                  requires_id: false
+                  tip_by_customer: 600
+                  dropoff_latitude: 40.7066581
+                  dropoff_longitude: -74.0071868
+      responses:
+        '200':
+          description: The updated delivery.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeliveryResp'
+              examples:
+                UpdateDelivery200Example:
+                  summary: Default updateDelivery 200 response
+                  x-microcks-default: true
+                  value:
+                    id: del_aBc123XyZ
+                    quote_id: del_aBc123XyZ
+                    status: pending
+                    complete: false
+                    kind: example
+                    fee: 600
+                    currency: USD
+                    tracking_url: https://www.ubereats.com/orders/del_aBc123XyZ
+                    tip: 600
+                    live_mode: false
+                    pickup_eta: '2026-06-01T19:00:00.000Z'
+                    pickup_deadline: '2026-06-01T19:00:00.000Z'
+                    dropoff_eta: '2026-06-01T19:00:00.000Z'
+                    dropoff_deadline: '2026-06-01T19:00:00.000Z'
+                    external_id: del_aBc123XyZ
+                    created: '2026-06-01T19:00:00.000Z'
+                    updated: '2026-06-01T19:00:00.000Z'
+                    undeliverable_action: value
+                    undeliverable_reason: STORE_CLOSED
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /customers/{customer_id}/deliveries/{delivery_id}/cancel:
+    parameters:
+    - in: path
+      name: customer_id
+      required: true
+      schema:
+        type: string
+    - in: path
+      name: delivery_id
+      required: true
+      schema:
+        type: string
+    post:
+      summary: Uber Direct Cancel Delivery
+      operationId: cancelDelivery
+      description: Cancel an ongoing or previously scheduled delivery.
+      responses:
+        '200':
+          description: The canceled delivery.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeliveryResp'
+              examples:
+                CancelDelivery200Example:
+                  summary: Default cancelDelivery 200 response
+                  x-microcks-default: true
+                  value:
+                    id: del_aBc123XyZ
+                    quote_id: del_aBc123XyZ
+                    status: pending
+                    complete: false
+                    kind: example
+                    fee: 600
+                    currency: USD
+                    tracking_url: https://www.ubereats.com/orders/del_aBc123XyZ
+                    tip: 600
+                    live_mode: false
+                    pickup_eta: '2026-06-01T19:00:00.000Z'
+                    pickup_deadline: '2026-06-01T19:00:00.000Z'
+                    dropoff_eta: '2026-06-01T19:00:00.000Z'
+                    dropoff_deadline: '2026-06-01T19:00:00.000Z'
+                    external_id: del_aBc123XyZ
+                    created: '2026-06-01T19:00:00.000Z'
+                    updated: '2026-06-01T19:00:00.000Z'
+                    undeliverable_action: value
+                    undeliverable_reason: STORE_CLOSED
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /customers/{customer_id}/deliveries/{delivery_id}/proof-of-delivery:
+    parameters:
+    - in: path
+      name: customer_id
+      required: true
+      schema:
+        type: string
+    - in: path
+      name: delivery_id
+      required: true
+      schema:
+        type: string
+    post:
+      summary: Uber Direct Get Proof of Delivery
+      operationId: getProofOfDelivery
+      description: Retrieve the proof-of-delivery image (picture, signature, or pincode) for a completed delivery.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PODReq'
+            examples:
+              GetProofOfDeliveryRequestExample:
+                summary: Default getProofOfDelivery request
+                x-microcks-default: true
+                value:
+                  waypoint: pickup
+                  type: picture
+      responses:
+        '200':
+          description: The proof of delivery document.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PODResp'
+              examples:
+                GetProofOfDelivery200Example:
+                  summary: Default getProofOfDelivery 200 response
+                  x-microcks-default: true
+                  value:
+                    document: example
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK

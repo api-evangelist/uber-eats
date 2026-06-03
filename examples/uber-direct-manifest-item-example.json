@@ -1,0 +1,9 @@
+{
+  "name": "Example Store",
+  "quantity": 1,
+  "size": "small",
+  "price": 600,
+  "must_be_upright": false,
+  "weight": 300,
+  "vat_percentage": 1
+}

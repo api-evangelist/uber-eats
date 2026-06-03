@@ -1,0 +1,55 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/uber-eats/refs/heads/main/json-structure/uber-direct-delivery-quote-resp-structure.json",
+  "name": "DeliveryQuoteResp",
+  "description": "DeliveryQuoteResp schema from Uber Direct (DaaS) API",
+  "type": "object",
+  "properties": {
+    "kind": {
+      "type": "string",
+      "description": "The type of object being described. Default: delivery_quote",
+      "example": "delivery_quote"
+    },
+    "id": {
+      "type": "string",
+      "description": "Unique identifier for the quote (always starts with dqt_).",
+      "example": "dqt_6gQ2dt31TjiOPfwux-NCXg"
+    },
+    "created": {
+      "type": "datetime",
+      "example": "2026-06-01T19:00:00.000Z"
+    },
+    "expires": {
+      "type": "datetime",
+      "example": "2026-06-01T19:00:00.000Z"
+    },
+    "fee": {
+      "type": "int32",
+      "description": "Amount in cents that will be charged if this delivery is created.",
+      "example": 600
+    },
+    "currency_type": {
+      "type": "string",
+      "description": "Three-letter ISO currency code, in uppercase.",
+      "example": "USD"
+    },
+    "dropoff_eta": {
+      "type": "datetime",
+      "example": "2026-06-01T19:00:00.000Z"
+    },
+    "duration": {
+      "type": "int32",
+      "description": "Estimated minutes for this delivery to reach dropoff.",
+      "example": 33
+    },
+    "pickup_duration": {
+      "type": "int32",
+      "description": "Estimated minutes until a courier will arrive at the pickup.",
+      "example": 33
+    },
+    "dropoff_deadline": {
+      "type": "datetime",
+      "example": "2026-06-01T19:00:00.000Z"
+    }
+  }
+}
