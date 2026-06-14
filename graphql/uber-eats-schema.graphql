@@ -1,0 +1,913 @@
+# Uber Eats Conceptual GraphQL Schema
+# Derived from: https://developer.uber.com/docs/eats/introduction
+# and https://developer.uber.com/docs/deliveries/overview
+# This is a conceptual schema for design and documentation purposes.
+
+# ─── Scalars ──────────────────────────────────────────────────────────────────
+
+scalar DateTime
+scalar Date
+scalar Time
+scalar JSON
+scalar URL
+scalar Currency
+
+# ─── Enums ────────────────────────────────────────────────────────────────────
+
+enum StoreStatusValue {
+  ONLINE
+  OFFLINE
+  PAUSED
+  SUSPENDED
+}
+
+enum OrderStatusValue {
+  PENDING
+  ACCEPTED
+  DENIED
+  CANCELLED
+  IN_PREPARATION
+  READY_FOR_PICKUP
+  OUT_FOR_DELIVERY
+  DELIVERED
+  FAILED
+}
+
+enum FulfillmentType {
+  DELIVERY
+  PICKUP
+  DINE_IN
+}
+
+enum DeliveryModel {
+  UBER_COURIER
+  BYOC
+  MERCHANT_HANDLED
+}
+
+enum TrackingStatusValue {
+  ASSIGNED
+  EN_ROUTE_TO_PICKUP
+  ARRIVED_AT_PICKUP
+  PICKED_UP
+  EN_ROUTE_TO_DROPOFF
+  ARRIVED_AT_DROPOFF
+  DELIVERED
+  RETURNED
+  CANCELLED
+}
+
+enum PaymentMethodType {
+  CREDIT_CARD
+  DEBIT_CARD
+  PAYPAL
+  APPLE_PAY
+  GOOGLE_PAY
+  UBER_CASH
+  VOUCHER
+}
+
+enum RefundReasonCode {
+  ITEM_UNAVAILABLE
+  WRONG_ITEM
+  MISSING_ITEM
+  QUALITY_ISSUE
+  DELIVERY_FAILURE
+  LATE_DELIVERY
+  CUSTOMER_REQUEST
+  OTHER
+}
+
+enum DietaryFilterType {
+  VEGETARIAN
+  VEGAN
+  GLUTEN_FREE
+  HALAL
+  KOSHER
+  NUT_FREE
+  DAIRY_FREE
+  LOW_CALORIE
+}
+
+enum PromotionType {
+  PERCENTAGE_DISCOUNT
+  FIXED_DISCOUNT
+  FREE_ITEM
+  FREE_DELIVERY
+  BUY_ONE_GET_ONE
+  SPEND_AND_SAVE
+}
+
+enum WebhookEventType {
+  ORDER_CREATED
+  ORDER_ACCEPTED
+  ORDER_DENIED
+  ORDER_CANCELLED
+  ORDER_FULFILLED
+  DELIVERY_ASSIGNED
+  DELIVERY_PICKED_UP
+  DELIVERY_DELIVERED
+  DELIVERY_CANCELLED
+  REFUND_APPROVED
+  REFUND_DENIED
+  MENU_UPDATED
+  STORE_STATUS_CHANGED
+}
+
+enum TokenGrantType {
+  CLIENT_CREDENTIALS
+  AUTHORIZATION_CODE
+}
+
+# ─── Restaurant and Store ──────────────────────────────────────────────────────
+
+type Restaurant {
+  id: ID!
+  name: String!
+  externalStoreId: String
+  details: RestaurantDetails
+  status: StoreStatus!
+  hours: StoreHours
+  menus: [Menu!]
+  promotions: [Promotion!]
+  ratings: Rating
+  cuisines: [Cuisine!]
+  categories: [FoodCategory!]
+  location: GeoLocation
+  imageUrl: URL
+  createdAt: DateTime
+  updatedAt: DateTime
+}
+
+type RestaurantDetails {
+  id: ID!
+  restaurantId: ID!
+  description: String
+  phone: String
+  email: String
+  website: URL
+  address: CustomerAddress
+  timezone: String
+  currency: Currency
+  averagePreparationTime: Int
+  minimumOrderAmount: Price
+  deliveryRadius: Float
+  priceRange: Int
+  isPartner: Boolean
+  features: [String!]
+}
+
+type StoreStatus {
+  storeId: ID!
+  status: StoreStatusValue!
+  pausedUntil: DateTime
+  reason: String
+  updatedAt: DateTime
+}
+
+type StoreHours {
+  storeId: ID!
+  regularHours: [OperatingHours!]!
+  holidays: [Holiday!]
+  specialHours: [OperatingHours!]
+}
+
+type OperatingHours {
+  dayOfWeek: String!
+  openTime: Time!
+  closeTime: Time!
+  isClosed: Boolean!
+}
+
+type Holiday {
+  id: ID!
+  date: Date!
+  name: String
+  isClosed: Boolean!
+  openTime: Time
+  closeTime: Time
+}
+
+# ─── Menu and Catalog ─────────────────────────────────────────────────────────
+
+type Menu {
+  id: ID!
+  storeId: ID!
+  name: String!
+  description: String
+  categories: [MenuCategory!]!
+  isActive: Boolean!
+  validFrom: DateTime
+  validUntil: DateTime
+  createdAt: DateTime
+  updatedAt: DateTime
+}
+
+type MenuCategory {
+  id: ID!
+  menuId: ID!
+  name: String!
+  description: String
+  displayOrder: Int
+  items: [MenuItem!]!
+  isActive: Boolean!
+}
+
+type MenuItem {
+  id: ID!
+  categoryId: ID!
+  externalId: String
+  name: String!
+  details: MenuItemDetails
+  price: Price!
+  photos: [MenuPhoto!]
+  badges: [MenuBadge!]
+  availability: ItemAvailability
+  attributes: [ItemAttribute!]
+  allergens: [Allergen!]
+  nutritional: Nutritional
+  dietaryInfo: [DietaryInfo!]
+  modifierGroups: [ModifierGroup!]
+  isActive: Boolean!
+  isSuspended: Boolean!
+  suspendedUntil: DateTime
+}
+
+type MenuItemDetails {
+  itemId: ID!
+  description: String
+  ingredients: [String!]
+  servingSize: String
+  preparationTime: Int
+  spiceLevel: Int
+  isPopular: Boolean
+  isFeatured: Boolean
+  isNew: Boolean
+  ageRestricted: Boolean
+}
+
+type MenuPhoto {
+  id: ID!
+  itemId: ID!
+  url: URL!
+  altText: String
+  isPrimary: Boolean!
+  width: Int
+  height: Int
+}
+
+type MenuBadge {
+  id: ID!
+  label: String!
+  type: String!
+  color: String
+  iconUrl: URL
+}
+
+type ItemAvailability {
+  itemId: ID!
+  isAvailable: Boolean!
+  availableFrom: Time
+  availableUntil: Time
+  daysAvailable: [String!]
+  stockCount: Int
+}
+
+type ItemAttribute {
+  key: String!
+  value: String!
+}
+
+type Allergen {
+  id: ID!
+  name: String!
+  code: String
+  severity: String
+  description: String
+}
+
+type Nutritional {
+  itemId: ID!
+  calories: Float
+  protein: Float
+  carbohydrates: Float
+  fat: Float
+  saturatedFat: Float
+  transFat: Float
+  cholesterol: Float
+  sodium: Float
+  fiber: Float
+  sugar: Float
+  servingSize: String
+  servingsPerContainer: Int
+}
+
+type DietaryInfo {
+  type: DietaryFilterType!
+  certified: Boolean!
+  certificationBody: String
+}
+
+type Price {
+  amount: Float!
+  currency: Currency!
+  formattedAmount: String
+}
+
+# ─── Modifiers ────────────────────────────────────────────────────────────────
+
+type MenuItemModifier {
+  itemId: ID!
+  modifierGroups: [ModifierGroup!]!
+}
+
+type ModifierGroup {
+  id: ID!
+  name: String!
+  description: String
+  minPermitted: Int!
+  maxPermitted: Int!
+  modifiers: [Modifier!]!
+  displayOrder: Int
+}
+
+type Modifier {
+  id: ID!
+  groupId: ID!
+  externalId: String
+  name: String!
+  price: ModifierPrice!
+  isDefault: Boolean
+  isSuspended: Boolean
+  maxPermitted: Int
+  minPermitted: Int
+  allergens: [Allergen!]
+  nutritional: Nutritional
+}
+
+type ModifierPrice {
+  basePrice: Price!
+  overridePrice: Price
+  isDiscounted: Boolean
+}
+
+# ─── Cart and Checkout ────────────────────────────────────────────────────────
+
+type Cart {
+  id: ID!
+  customerId: ID!
+  restaurantId: ID!
+  items: [CartItem!]!
+  summary: CartSummary!
+  deliveryAddress: DeliveryAddress
+  estimatedDeliveryTime: DeliveryEstimate
+  deliveryFee: DeliveryFee
+  appliedPromotion: Promotion
+  createdAt: DateTime
+  updatedAt: DateTime
+  expiresAt: DateTime
+}
+
+type CartItem {
+  id: ID!
+  cartId: ID!
+  menuItemId: ID!
+  name: String!
+  quantity: Int!
+  unitPrice: Price!
+  totalPrice: Price!
+  modifiers: [CartModifier!]
+  specialInstructions: String
+}
+
+type CartModifier {
+  modifierId: ID!
+  name: String!
+  quantity: Int!
+  unitPrice: Price!
+  totalPrice: Price!
+}
+
+type CartSummary {
+  subtotal: Price!
+  deliveryFee: Price!
+  serviceFee: Price!
+  taxes: Price!
+  discount: Price
+  total: Price!
+  itemCount: Int!
+  estimatedTime: Int
+}
+
+type Checkout {
+  id: ID!
+  cartId: ID!
+  orderId: ID
+  paymentMethod: PaymentMethod!
+  deliveryAddress: DeliveryAddress!
+  specialInstructions: String
+  tip: Price
+  status: String!
+  createdAt: DateTime
+  completedAt: DateTime
+}
+
+# ─── Order ────────────────────────────────────────────────────────────────────
+
+type Order {
+  id: ID!
+  externalOrderId: String
+  restaurantId: ID!
+  customerId: ID!
+  items: [CartItem!]!
+  summary: CartSummary!
+  status: OrderStatus!
+  fulfillmentType: FulfillmentType!
+  fulfillment: OrderFulfillment
+  deliveryAddress: DeliveryAddress
+  history: [OrderHistory!]
+  refunds: [OrderRefund!]
+  placedAt: DateTime!
+  estimatedReadyAt: DateTime
+  completedAt: DateTime
+  cancelledAt: DateTime
+  cancellationReason: String
+}
+
+type OrderStatus {
+  orderId: ID!
+  status: OrderStatusValue!
+  description: String
+  updatedAt: DateTime!
+}
+
+type OrderHistory {
+  orderId: ID!
+  status: OrderStatusValue!
+  timestamp: DateTime!
+  actor: String
+  note: String
+}
+
+type OrderFulfillment {
+  orderId: ID!
+  fulfillmentType: FulfillmentType!
+  deliveryModel: DeliveryModel
+  driver: DeliveryDriver
+  tracking: DeliveryTracking
+  pickupCode: String
+  estimatedPickupTime: DateTime
+  estimatedDeliveryTime: DateTime
+  actualDeliveryTime: DateTime
+}
+
+# ─── Delivery and Tracking ────────────────────────────────────────────────────
+
+type DeliveryEstimate {
+  restaurantId: ID!
+  deliveryAddress: DeliveryAddress!
+  estimatedMinutes: Int!
+  estimatedMinutesMin: Int
+  estimatedMinutesMax: Int
+  estimatedArrival: DateTime
+}
+
+type DeliveryFee {
+  baseAmount: Price!
+  surcharge: Price
+  totalAmount: Price!
+  isFree: Boolean!
+  freeDeliveryThreshold: Price
+  promotionApplied: Boolean
+}
+
+type PickupEstimate {
+  restaurantId: ID!
+  estimatedMinutes: Int!
+  readyAt: DateTime
+}
+
+type DeliveryDriver {
+  id: ID!
+  name: String!
+  phone: String
+  photoUrl: URL
+  vehicleType: String
+  vehicleMake: String
+  vehicleModel: String
+  vehicleColor: String
+  licensePlate: String
+  rating: Float
+}
+
+type DriverLocation {
+  driverId: ID!
+  latitude: Float!
+  longitude: Float!
+  heading: Float
+  speed: Float
+  updatedAt: DateTime!
+}
+
+type DeliveryTracking {
+  orderId: ID!
+  driver: DeliveryDriver
+  location: DriverLocation
+  status: TrackingStatus!
+  pickupEta: DateTime
+  deliveryEta: DateTime
+  trackingUrl: URL
+}
+
+type TrackingStatus {
+  status: TrackingStatusValue!
+  description: String
+  updatedAt: DateTime!
+}
+
+# ─── Refunds ──────────────────────────────────────────────────────────────────
+
+type OrderRefund {
+  id: ID!
+  orderId: ID!
+  refundAmount: RefundAmount!
+  reason: RefundReason!
+  status: String!
+  requestedAt: DateTime!
+  resolvedAt: DateTime
+  resolvedBy: String
+}
+
+type RefundAmount {
+  requested: Price!
+  approved: Price
+  currency: Currency!
+  breakdown: [RefundLineItem!]
+}
+
+type RefundLineItem {
+  description: String!
+  amount: Price!
+}
+
+type RefundReason {
+  code: RefundReasonCode!
+  description: String!
+  itemIds: [ID!]
+  additionalDetails: String
+}
+
+# ─── Customer ─────────────────────────────────────────────────────────────────
+
+type Customer {
+  id: ID!
+  firstName: String!
+  lastName: String!
+  email: String!
+  phone: String
+  photoUrl: URL
+  savedAddresses: [CustomerAddress!]
+  defaultAddress: CustomerAddress
+  paymentMethods: [PaymentMethod!]
+  eatsPass: EatsPass
+  loyaltyPoints: LoyaltyPoint
+  orderHistory: [Order!]
+  createdAt: DateTime!
+  updatedAt: DateTime
+}
+
+type CustomerAddress {
+  id: ID!
+  label: String
+  street: String!
+  street2: String
+  city: String!
+  state: String!
+  postalCode: String!
+  country: String!
+  location: GeoLocation
+  isDefault: Boolean!
+}
+
+type DeliveryAddress {
+  street: String!
+  street2: String
+  city: String!
+  state: String!
+  postalCode: String!
+  country: String!
+  location: GeoLocation!
+  deliveryInstructions: String
+  accessCode: String
+}
+
+type GeoLocation {
+  latitude: Float!
+  longitude: Float!
+  accuracy: Float
+}
+
+type PaymentMethod {
+  id: ID!
+  type: PaymentMethodType!
+  last4: String
+  expiryMonth: Int
+  expiryYear: Int
+  brand: String
+  isDefault: Boolean!
+  billingAddress: CustomerAddress
+}
+
+# ─── Promotions and Loyalty ───────────────────────────────────────────────────
+
+type Promotion {
+  id: ID!
+  restaurantId: ID
+  name: String!
+  description: String
+  type: PromotionType!
+  discountOffer: DiscountOffer!
+  coupon: Coupon
+  validFrom: DateTime!
+  validUntil: DateTime!
+  minimumOrderAmount: Price
+  maximumDiscountAmount: Price
+  usageLimit: Int
+  usageCount: Int
+  isActive: Boolean!
+  targetCuisines: [Cuisine!]
+  targetCategories: [FoodCategory!]
+}
+
+type MenuPromotion {
+  itemId: ID!
+  promotionId: ID!
+  promotion: Promotion!
+  originalPrice: Price!
+  discountedPrice: Price!
+}
+
+type DiscountOffer {
+  promotionId: ID!
+  discountType: PromotionType!
+  discountValue: Float!
+  discountCurrency: Currency
+  freeItemId: ID
+  maxDiscountAmount: Price
+}
+
+type Coupon {
+  code: String!
+  promotionId: ID!
+  description: String
+  isActive: Boolean!
+  usageLimit: Int
+  usageCount: Int
+  expiresAt: DateTime!
+}
+
+type LoyaltyPoint {
+  customerId: ID!
+  balance: Int!
+  lifetimeEarned: Int!
+  lifetimeRedeemed: Int!
+  tier: String
+  nextTierThreshold: Int
+  updatedAt: DateTime!
+}
+
+type EatsPass {
+  customerId: ID!
+  subscriptionId: String!
+  plan: String!
+  status: String!
+  benefits: [String!]!
+  renewalDate: DateTime
+  startedAt: DateTime!
+}
+
+# ─── Ratings and Reviews ──────────────────────────────────────────────────────
+
+type Rating {
+  restaurantId: ID!
+  averageRating: Float!
+  totalRatings: Int!
+  breakdown: [RatingBreakdown!]
+  recentReviews: [Review!]
+}
+
+type RatingBreakdown {
+  stars: Int!
+  count: Int!
+  percentage: Float!
+}
+
+type Review {
+  id: ID!
+  orderId: ID!
+  restaurantId: ID!
+  customerId: ID!
+  rating: Int!
+  comment: String
+  tags: [String!]
+  response: ReviewResponse
+  createdAt: DateTime!
+  isVerified: Boolean!
+}
+
+type ReviewResponse {
+  reviewId: ID!
+  restaurantId: ID!
+  respondedBy: String!
+  comment: String!
+  respondedAt: DateTime!
+}
+
+# ─── Discovery and Filtering ──────────────────────────────────────────────────
+
+type Cuisine {
+  id: ID!
+  name: String!
+  slug: String!
+  iconUrl: URL
+  description: String
+}
+
+type FoodCategory {
+  id: ID!
+  name: String!
+  slug: String!
+  description: String
+  parentCategoryId: ID
+  iconUrl: URL
+}
+
+type DietaryFilter {
+  type: DietaryFilterType!
+  label: String!
+  description: String
+  iconUrl: URL
+}
+
+# ─── Authentication and Webhooks ──────────────────────────────────────────────
+
+type APIKey {
+  id: ID!
+  clientId: String!
+  name: String!
+  scopes: [String!]!
+  environment: String!
+  createdAt: DateTime!
+  lastUsedAt: DateTime
+  expiresAt: DateTime
+}
+
+type Token {
+  accessToken: String!
+  tokenType: String!
+  expiresIn: Int!
+  scope: String!
+  grantType: TokenGrantType!
+  issuedAt: DateTime!
+}
+
+type Webhook {
+  id: ID!
+  url: URL!
+  events: [WebhookEventType!]!
+  storeId: ID
+  isActive: Boolean!
+  secret: String
+  signingAlgorithm: String
+  createdAt: DateTime!
+  updatedAt: DateTime
+  lastDeliveredAt: DateTime
+  failureCount: Int
+}
+
+# ─── Queries ──────────────────────────────────────────────────────────────────
+
+type Query {
+  # Restaurant and Store
+  restaurant(id: ID!): Restaurant
+  restaurants(storeIds: [ID!], limit: Int, offset: Int): [Restaurant!]!
+  restaurantDetails(id: ID!): RestaurantDetails
+  storeStatus(storeId: ID!): StoreStatus
+  storeHours(storeId: ID!): StoreHours
+
+  # Menu
+  menu(storeId: ID!, menuId: ID): Menu
+  menuItem(storeId: ID!, itemId: ID!): MenuItem
+  menuCategory(categoryId: ID!): MenuCategory
+
+  # Order
+  order(orderId: ID!): Order
+  orderHistory(customerId: ID!, limit: Int, offset: Int): [Order!]!
+  orderStatus(orderId: ID!): OrderStatus
+
+  # Cart
+  cart(cartId: ID!): Cart
+
+  # Delivery
+  deliveryEstimate(restaurantId: ID!, address: DeliveryAddressInput!): DeliveryEstimate
+  deliveryFee(restaurantId: ID!, address: DeliveryAddressInput!): DeliveryFee
+  pickupEstimate(restaurantId: ID!): PickupEstimate
+  deliveryTracking(orderId: ID!): DeliveryTracking
+  driverLocation(driverId: ID!): DriverLocation
+
+  # Customer
+  customer(customerId: ID!): Customer
+
+  # Promotions
+  promotions(storeId: ID!, limit: Int): [Promotion!]!
+  promotion(promotionId: ID!): Promotion
+  validateCoupon(code: String!, storeId: ID!): Coupon
+
+  # Ratings and Reviews
+  restaurantRating(restaurantId: ID!): Rating
+  reviews(restaurantId: ID!, limit: Int, offset: Int): [Review!]!
+
+  # Discovery
+  cuisines: [Cuisine!]!
+  foodCategories(parentId: ID): [FoodCategory!]!
+  dietaryFilters: [DietaryFilter!]!
+
+  # Webhooks
+  webhooks(storeId: ID): [Webhook!]!
+  webhook(webhookId: ID!): Webhook
+}
+
+# ─── Mutations ────────────────────────────────────────────────────────────────
+
+input DeliveryAddressInput {
+  street: String!
+  street2: String
+  city: String!
+  state: String!
+  postalCode: String!
+  country: String!
+  latitude: Float
+  longitude: Float
+  deliveryInstructions: String
+}
+
+input MenuItemInput {
+  externalId: String
+  name: String!
+  description: String
+  price: Float!
+  currency: String!
+  categoryId: ID!
+}
+
+input WebhookInput {
+  url: String!
+  events: [WebhookEventType!]!
+  storeId: ID
+  secret: String
+}
+
+type Mutation {
+  # Store Management
+  updateStoreStatus(storeId: ID!, status: StoreStatusValue!, reason: String, pausedUntil: DateTime): StoreStatus
+  updateStoreHours(storeId: ID!, hours: [OperatingHoursInput!]!): StoreHours
+
+  # Menu Management
+  upsertMenu(storeId: ID!, menu: JSON!): Menu
+  updateMenuItem(storeId: ID!, itemId: ID!, item: MenuItemInput!): MenuItem
+  suspendMenuItem(storeId: ID!, itemId: ID!, until: DateTime): MenuItem
+
+  # Order Management
+  acceptOrder(orderId: ID!): Order
+  denyOrder(orderId: ID!, reason: String!): Order
+  updateOrderStatus(orderId: ID!, status: OrderStatusValue!, note: String): Order
+  cancelOrder(orderId: ID!, reason: String!): Order
+
+  # Refunds
+  requestRefund(orderId: ID!, reason: RefundReasonCode!, itemIds: [ID!], amount: Float): OrderRefund
+
+  # Webhooks
+  registerWebhook(webhook: WebhookInput!): Webhook
+  updateWebhook(webhookId: ID!, webhook: WebhookInput!): Webhook
+  deleteWebhook(webhookId: ID!): Boolean!
+
+  # Promotions
+  createPromotion(storeId: ID!, promotion: JSON!): Promotion
+  deactivatePromotion(promotionId: ID!): Promotion
+}
+
+# ─── Subscriptions ────────────────────────────────────────────────────────────
+
+type Subscription {
+  orderStatusUpdated(storeId: ID!): Order
+  driverLocationUpdated(orderId: ID!): DriverLocation
+  deliveryStatusUpdated(orderId: ID!): DeliveryTracking
+  newOrder(storeId: ID!): Order
+}
+
+input OperatingHoursInput {
+  dayOfWeek: String!
+  openTime: String!
+  closeTime: String!
+  isClosed: Boolean!
+}
