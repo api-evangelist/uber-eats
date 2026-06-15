@@ -1,0 +1,1067 @@
+{
+  "item": [
+    {
+      "id": "4269dd93-0d08-457f-8c0d-5ac5aa5d3494",
+      "name": "Uber Eats Get Stores",
+      "request": {
+        "name": "Uber Eats Get Stores",
+        "description": {},
+        "url": {
+          "path": [
+            "eats",
+            "stores"
+          ],
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "query": [],
+          "variable": []
+        },
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json"
+          }
+        ],
+        "method": "GET",
+        "auth": null
+      },
+      "response": [
+        {
+          "id": "3e6fcd46-ab42-4f9c-8562-ad4541a4bafc",
+          "name": "List of stores",
+          "originalRequest": {
+            "url": {
+              "path": [
+                "eats",
+                "stores"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "description": {
+                  "content": "Added as a part of security scheme: oauth2",
+                  "type": "text/plain"
+                },
+                "key": "Authorization",
+                "value": "<token>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "body": {}
+          },
+          "status": "OK",
+          "code": 200,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": "[\n  {\n    \"id\": \"del_aBc123XyZ\",\n    \"name\": \"Example Store\",\n    \"contact_emails\": [\n      \"example\"\n    ],\n    \"partner_identifiers\": {},\n    \"timezone\": \"America/New_York\",\n    \"location\": {},\n    \"web_url\": \"https://www.ubereats.com/orders/del_aBc123XyZ\"\n  }\n]",
+          "cookie": [],
+          "_postman_previewlanguage": "json"
+        }
+      ],
+      "event": [],
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      }
+    },
+    {
+      "id": "b774a812-5c6a-4d24-92c6-434426cd6ab9",
+      "name": "Uber Eats Get Store Details",
+      "request": {
+        "name": "Uber Eats Get Store Details",
+        "description": {},
+        "url": {
+          "path": [
+            "eats",
+            "stores",
+            ":store_id"
+          ],
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "query": [],
+          "variable": [
+            {
+              "disabled": false,
+              "type": "any",
+              "value": "<string>",
+              "key": "store_id",
+              "description": "(Required) "
+            }
+          ]
+        },
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json"
+          }
+        ],
+        "method": "GET",
+        "auth": null
+      },
+      "response": [
+        {
+          "id": "4f0fb20b-57d0-4d0a-a3e7-69d2d6b7f558",
+          "name": "Store details",
+          "originalRequest": {
+            "url": {
+              "path": [
+                "eats",
+                "stores",
+                ":store_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "store_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "description": {
+                  "content": "Added as a part of security scheme: oauth2",
+                  "type": "text/plain"
+                },
+                "key": "Authorization",
+                "value": "<token>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "body": {}
+          },
+          "status": "OK",
+          "code": 200,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": "{\n  \"id\": \"del_aBc123XyZ\",\n  \"name\": \"Example Store\",\n  \"contact_emails\": [\n    \"example\"\n  ],\n  \"partner_identifiers\": {},\n  \"timezone\": \"America/New_York\",\n  \"location\": {},\n  \"web_url\": \"https://www.ubereats.com/orders/del_aBc123XyZ\"\n}",
+          "cookie": [],
+          "_postman_previewlanguage": "json"
+        }
+      ],
+      "event": [],
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      }
+    },
+    {
+      "id": "370c5c36-4ca3-4edb-b944-b58628fd1435",
+      "name": "Uber Eats Set Store Status",
+      "request": {
+        "name": "Uber Eats Set Store Status",
+        "description": {},
+        "url": {
+          "path": [
+            "eats",
+            "store",
+            ":store_id",
+            "status"
+          ],
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "query": [],
+          "variable": [
+            {
+              "disabled": false,
+              "type": "any",
+              "value": "<string>",
+              "key": "store_id",
+              "description": "(Required) "
+            }
+          ]
+        },
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "method": "POST",
+        "auth": null,
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"status\": \"<string>\",\n  \"offline_reason\": \"<string>\",\n  \"paused_until\": \"<dateTime>\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      },
+      "response": [
+        {
+          "id": "2578cca1-ce02-41d2-b408-fbcf24d7e555",
+          "name": "Store status updated",
+          "originalRequest": {
+            "url": {
+              "path": [
+                "eats",
+                "store",
+                ":store_id",
+                "status"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "store_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "description": {
+                  "content": "Added as a part of security scheme: oauth2",
+                  "type": "text/plain"
+                },
+                "key": "Authorization",
+                "value": "<token>"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"status\": \"ONLINE\",\n  \"offline_reason\": \"STORE_CLOSED\",\n  \"paused_until\": \"2026-06-01T19:00:00.000Z\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "status": "No Content",
+          "code": 204,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "text/plain"
+            }
+          ],
+          "body": "",
+          "cookie": [],
+          "_postman_previewlanguage": "text"
+        }
+      ],
+      "event": [],
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      }
+    },
+    {
+      "id": "c93e44d6-3a58-4b24-b7a4-a5f9363617e4",
+      "name": "Uber Eats Retrieve Menu",
+      "request": {
+        "name": "Uber Eats Retrieve Menu",
+        "description": {},
+        "url": {
+          "path": [
+            "eats",
+            "stores",
+            ":store_id",
+            "menus"
+          ],
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "query": [],
+          "variable": [
+            {
+              "disabled": false,
+              "type": "any",
+              "value": "<string>",
+              "key": "store_id",
+              "description": "(Required) "
+            }
+          ]
+        },
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json"
+          }
+        ],
+        "method": "GET",
+        "auth": null
+      },
+      "response": [
+        {
+          "id": "193760bb-ba61-4a96-8ace-c8bb23dae0bc",
+          "name": "Menu",
+          "originalRequest": {
+            "url": {
+              "path": [
+                "eats",
+                "stores",
+                ":store_id",
+                "menus"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "store_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "description": {
+                  "content": "Added as a part of security scheme: oauth2",
+                  "type": "text/plain"
+                },
+                "key": "Authorization",
+                "value": "<token>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "body": {}
+          },
+          "status": "OK",
+          "code": 200,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": "{\n  \"menus\": [\n    {}\n  ],\n  \"categories\": [\n    {}\n  ],\n  \"items\": [\n    {}\n  ],\n  \"modifier_groups\": [\n    {}\n  ]\n}",
+          "cookie": [],
+          "_postman_previewlanguage": "json"
+        }
+      ],
+      "event": [],
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      }
+    },
+    {
+      "id": "7ebc4e70-94d0-433e-9752-364ae11051e2",
+      "name": "Uber Eats Upsert Menu",
+      "request": {
+        "name": "Uber Eats Upsert Menu",
+        "description": {},
+        "url": {
+          "path": [
+            "eats",
+            "stores",
+            ":store_id",
+            "menus"
+          ],
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "query": [],
+          "variable": [
+            {
+              "disabled": false,
+              "type": "any",
+              "value": "<string>",
+              "key": "store_id",
+              "description": "(Required) "
+            }
+          ]
+        },
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "method": "PUT",
+        "auth": null,
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"menus\": [\n    \"<object>\",\n    \"<object>\"\n  ],\n  \"categories\": [\n    \"<object>\",\n    \"<object>\"\n  ],\n  \"items\": [\n    \"<object>\",\n    \"<object>\"\n  ],\n  \"modifier_groups\": [\n    \"<object>\",\n    \"<object>\"\n  ]\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      },
+      "response": [
+        {
+          "id": "7c9fb3ed-b737-4c17-8120-9fe423ccf732",
+          "name": "Menu accepted for processing",
+          "originalRequest": {
+            "url": {
+              "path": [
+                "eats",
+                "stores",
+                ":store_id",
+                "menus"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "store_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "description": {
+                  "content": "Added as a part of security scheme: oauth2",
+                  "type": "text/plain"
+                },
+                "key": "Authorization",
+                "value": "<token>"
+              }
+            ],
+            "method": "PUT",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"menus\": [\n    {}\n  ],\n  \"categories\": [\n    {}\n  ],\n  \"items\": [\n    {}\n  ],\n  \"modifier_groups\": [\n    {}\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "status": "No Content",
+          "code": 204,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "text/plain"
+            }
+          ],
+          "body": "",
+          "cookie": [],
+          "_postman_previewlanguage": "text"
+        }
+      ],
+      "event": [],
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      }
+    },
+    {
+      "id": "16095880-76e2-4f35-a8a4-6f82b55f1bb9",
+      "name": "Uber Eats Update Menu Item (price, Suspension, Availability)",
+      "request": {
+        "name": "Uber Eats Update Menu Item (price, Suspension, Availability)",
+        "description": {},
+        "url": {
+          "path": [
+            "eats",
+            "stores",
+            ":store_id",
+            "menus",
+            "items",
+            ":item_id"
+          ],
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "query": [],
+          "variable": [
+            {
+              "disabled": false,
+              "type": "any",
+              "value": "<string>",
+              "key": "store_id",
+              "description": "(Required) "
+            },
+            {
+              "disabled": false,
+              "type": "any",
+              "value": "<string>",
+              "key": "item_id",
+              "description": "(Required) "
+            }
+          ]
+        },
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "method": "POST",
+        "auth": null,
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"id\": \"<string>\",\n  \"title\": \"<object>\",\n  \"description\": \"<object>\",\n  \"price_info\": \"<object>\",\n  \"suspension_info\": \"<object>\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      },
+      "response": [
+        {
+          "id": "d593512e-d172-4ce0-8d11-f6b2182d9651",
+          "name": "Menu item updated",
+          "originalRequest": {
+            "url": {
+              "path": [
+                "eats",
+                "stores",
+                ":store_id",
+                "menus",
+                "items",
+                ":item_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "store_id",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "item_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "description": {
+                  "content": "Added as a part of security scheme: oauth2",
+                  "type": "text/plain"
+                },
+                "key": "Authorization",
+                "value": "<token>"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"id\": \"del_aBc123XyZ\",\n  \"title\": {},\n  \"description\": {},\n  \"price_info\": {},\n  \"suspension_info\": {}\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "status": "No Content",
+          "code": 204,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "text/plain"
+            }
+          ],
+          "body": "",
+          "cookie": [],
+          "_postman_previewlanguage": "text"
+        }
+      ],
+      "event": [],
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      }
+    },
+    {
+      "id": "cd9447f3-22c5-4e05-919d-220f208e1ab4",
+      "name": "Uber Eats Get Created Orders for a Store",
+      "request": {
+        "name": "Uber Eats Get Created Orders for a Store",
+        "description": {},
+        "url": {
+          "path": [
+            "eats",
+            "stores",
+            ":store_id",
+            "created-orders"
+          ],
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "query": [],
+          "variable": [
+            {
+              "disabled": false,
+              "type": "any",
+              "value": "<string>",
+              "key": "store_id",
+              "description": "(Required) "
+            }
+          ]
+        },
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json"
+          }
+        ],
+        "method": "GET",
+        "auth": null
+      },
+      "response": [
+        {
+          "id": "d60eef67-f085-43a8-85d2-d55734596b35",
+          "name": "A list of created orders",
+          "originalRequest": {
+            "url": {
+              "path": [
+                "eats",
+                "stores",
+                ":store_id",
+                "created-orders"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "store_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "description": {
+                  "content": "Added as a part of security scheme: oauth2",
+                  "type": "text/plain"
+                },
+                "key": "Authorization",
+                "value": "<token>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "body": {}
+          },
+          "status": "OK",
+          "code": 200,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": "[\n  {\n    \"id\": \"del_aBc123XyZ\",\n    \"display_id\": \"del_aBc123XyZ\",\n    \"external_reference_id\": \"del_aBc123XyZ\",\n    \"current_state\": \"example\",\n    \"store\": {},\n    \"eater\": {},\n    \"cart\": {},\n    \"payment\": {},\n    \"placed_at\": \"2026-06-01T19:00:00.000Z\"\n  }\n]",
+          "cookie": [],
+          "_postman_previewlanguage": "json"
+        }
+      ],
+      "event": [],
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      }
+    },
+    {
+      "id": "e5133a53-00ec-4ffd-ad5c-b0f2a7542934",
+      "name": "Uber Eats Get Order Details",
+      "request": {
+        "name": "Uber Eats Get Order Details",
+        "description": {},
+        "url": {
+          "path": [
+            "eats",
+            "order",
+            ":order_id"
+          ],
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "query": [],
+          "variable": [
+            {
+              "disabled": false,
+              "type": "any",
+              "value": "<string>",
+              "key": "order_id",
+              "description": "(Required) "
+            }
+          ]
+        },
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json"
+          }
+        ],
+        "method": "GET",
+        "auth": null
+      },
+      "response": [
+        {
+          "id": "d8b82d31-c0a2-43a1-8b4f-e82863d9dc66",
+          "name": "Order details",
+          "originalRequest": {
+            "url": {
+              "path": [
+                "eats",
+                "order",
+                ":order_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "order_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "description": {
+                  "content": "Added as a part of security scheme: oauth2",
+                  "type": "text/plain"
+                },
+                "key": "Authorization",
+                "value": "<token>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "body": {}
+          },
+          "status": "OK",
+          "code": 200,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": "{\n  \"id\": \"del_aBc123XyZ\",\n  \"display_id\": \"del_aBc123XyZ\",\n  \"external_reference_id\": \"del_aBc123XyZ\",\n  \"current_state\": \"example\",\n  \"store\": {},\n  \"eater\": {},\n  \"cart\": {},\n  \"payment\": {},\n  \"placed_at\": \"2026-06-01T19:00:00.000Z\"\n}",
+          "cookie": [],
+          "_postman_previewlanguage": "json"
+        }
+      ],
+      "event": [],
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      }
+    },
+    {
+      "id": "db5baef2-c5b1-4444-9607-4d1fcffbeb5f",
+      "name": "Uber Eats Accept an Order Into the POS",
+      "request": {
+        "name": "Uber Eats Accept an Order Into the POS",
+        "description": {},
+        "url": {
+          "path": [
+            "eats",
+            "orders",
+            ":order_id",
+            "accept_pos_order"
+          ],
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "query": [],
+          "variable": [
+            {
+              "disabled": false,
+              "type": "any",
+              "value": "<string>",
+              "key": "order_id",
+              "description": "(Required) "
+            }
+          ]
+        },
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "method": "POST",
+        "auth": null,
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"reason\": \"<string>\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      },
+      "response": [
+        {
+          "id": "5ebf3a35-b2d0-4213-bb4e-a794a476a23c",
+          "name": "Order accepted",
+          "originalRequest": {
+            "url": {
+              "path": [
+                "eats",
+                "orders",
+                ":order_id",
+                "accept_pos_order"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "order_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "description": {
+                  "content": "Added as a part of security scheme: oauth2",
+                  "type": "text/plain"
+                },
+                "key": "Authorization",
+                "value": "<token>"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"reason\": \"example\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "status": "No Content",
+          "code": 204,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "text/plain"
+            }
+          ],
+          "body": "",
+          "cookie": [],
+          "_postman_previewlanguage": "text"
+        }
+      ],
+      "event": [],
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      }
+    },
+    {
+      "id": "dbdc0a6a-e31b-481b-b666-dc271c983c6c",
+      "name": "Uber Eats Cancel an Order",
+      "request": {
+        "name": "Uber Eats Cancel an Order",
+        "description": {},
+        "url": {
+          "path": [
+            "eats",
+            "orders",
+            ":order_id",
+            "cancel"
+          ],
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "query": [],
+          "variable": [
+            {
+              "disabled": false,
+              "type": "any",
+              "value": "<string>",
+              "key": "order_id",
+              "description": "(Required) "
+            }
+          ]
+        },
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "method": "POST",
+        "auth": null,
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"reason\": \"<string>\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      },
+      "response": [
+        {
+          "id": "3d046a96-6ea7-4a92-9421-e26b689fa8fc",
+          "name": "Order canceled",
+          "originalRequest": {
+            "url": {
+              "path": [
+                "eats",
+                "orders",
+                ":order_id",
+                "cancel"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "order_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "description": {
+                  "content": "Added as a part of security scheme: oauth2",
+                  "type": "text/plain"
+                },
+                "key": "Authorization",
+                "value": "<token>"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"reason\": \"example\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "status": "No Content",
+          "code": 204,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "text/plain"
+            }
+          ],
+          "body": "",
+          "cookie": [],
+          "_postman_previewlanguage": "text"
+        }
+      ],
+      "event": [],
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      }
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.uber.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "oauth2",
+    "oauth2": [
+      {
+        "key": "scope",
+        "value": "eats.store eats.store.status.write eats.store.orders.read eats.order eats.menu eats.menu.read eats.menu.write"
+      },
+      {
+        "key": "accessTokenUrl",
+        "value": "https://auth.uber.com/oauth/v2/token"
+      },
+      {
+        "key": "grant_type",
+        "value": "client_credentials"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "2799d559-e0f6-4117-8b71-7bde0e219654",
+    "name": "Uber Eats Marketplace API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Uber Eats Marketplace APIs let restaurants, marketplace platforms, POS providers, and logistics partners integrate directly with Uber Eats — store onboarding and status, menu management, order ingestion and fulfillment, and reporting. Authentication is via OAuth 2.0 client credentials issued from the Uber Developer Portal.\n\nContact Support:\n Name: Uber Eats Developer Portal",
+      "type": "text/plain"
+    }
+  }
+}

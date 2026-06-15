@@ -1,0 +1,219 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Uber Eats Marketplace API",
+    "version": "v1"
+  },
+  "request": {
+    "auth": {
+      "type": "oauth2",
+      "flow": "client_credentials",
+      "accessTokenUrl": "https://auth.uber.com/oauth/v2/token",
+      "credentials": {
+        "clientId": "{{clientId}}",
+        "clientSecret": "{{clientSecret}}"
+      }
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Uber Eats Get Stores",
+        "type": "http"
+      },
+      "http": {
+        "method": "GET",
+        "url": "https://api.uber.com/eats/stores"
+      },
+      "docs": "Uber Eats Get Stores"
+    },
+    {
+      "info": {
+        "name": "Uber Eats Get Store Details",
+        "type": "http"
+      },
+      "http": {
+        "method": "GET",
+        "url": "https://api.uber.com/eats/stores/:store_id",
+        "params": [
+          {
+            "name": "store_id",
+            "value": "",
+            "type": "path"
+          }
+        ]
+      },
+      "docs": "Uber Eats Get Store Details"
+    },
+    {
+      "info": {
+        "name": "Uber Eats Set Store Status",
+        "type": "http"
+      },
+      "http": {
+        "method": "POST",
+        "url": "https://api.uber.com/eats/store/:store_id/status",
+        "params": [
+          {
+            "name": "store_id",
+            "value": "",
+            "type": "path"
+          }
+        ],
+        "body": {
+          "type": "json",
+          "data": "{}"
+        }
+      },
+      "docs": "Uber Eats Set Store Status"
+    },
+    {
+      "info": {
+        "name": "Uber Eats Retrieve Menu",
+        "type": "http"
+      },
+      "http": {
+        "method": "GET",
+        "url": "https://api.uber.com/eats/stores/:store_id/menus",
+        "params": [
+          {
+            "name": "store_id",
+            "value": "",
+            "type": "path"
+          }
+        ]
+      },
+      "docs": "Uber Eats Retrieve Menu"
+    },
+    {
+      "info": {
+        "name": "Uber Eats Upsert Menu",
+        "type": "http"
+      },
+      "http": {
+        "method": "PUT",
+        "url": "https://api.uber.com/eats/stores/:store_id/menus",
+        "params": [
+          {
+            "name": "store_id",
+            "value": "",
+            "type": "path"
+          }
+        ],
+        "body": {
+          "type": "json",
+          "data": "{}"
+        }
+      },
+      "docs": "Uber Eats Upsert Menu"
+    },
+    {
+      "info": {
+        "name": "Uber Eats Update Menu Item (price, Suspension, Availability)",
+        "type": "http"
+      },
+      "http": {
+        "method": "POST",
+        "url": "https://api.uber.com/eats/stores/:store_id/menus/items/:item_id",
+        "params": [
+          {
+            "name": "store_id",
+            "value": "",
+            "type": "path"
+          },
+          {
+            "name": "item_id",
+            "value": "",
+            "type": "path"
+          }
+        ],
+        "body": {
+          "type": "json",
+          "data": "{}"
+        }
+      },
+      "docs": "Uber Eats Update Menu Item (price, Suspension, Availability)"
+    },
+    {
+      "info": {
+        "name": "Uber Eats Get Created Orders for a Store",
+        "type": "http"
+      },
+      "http": {
+        "method": "GET",
+        "url": "https://api.uber.com/eats/stores/:store_id/created-orders",
+        "params": [
+          {
+            "name": "store_id",
+            "value": "",
+            "type": "path"
+          }
+        ]
+      },
+      "docs": "Uber Eats Get Created Orders for a Store"
+    },
+    {
+      "info": {
+        "name": "Uber Eats Get Order Details",
+        "type": "http"
+      },
+      "http": {
+        "method": "GET",
+        "url": "https://api.uber.com/eats/order/:order_id",
+        "params": [
+          {
+            "name": "order_id",
+            "value": "",
+            "type": "path"
+          }
+        ]
+      },
+      "docs": "Uber Eats Get Order Details"
+    },
+    {
+      "info": {
+        "name": "Uber Eats Accept an Order Into the POS",
+        "type": "http"
+      },
+      "http": {
+        "method": "POST",
+        "url": "https://api.uber.com/eats/orders/:order_id/accept_pos_order",
+        "params": [
+          {
+            "name": "order_id",
+            "value": "",
+            "type": "path"
+          }
+        ],
+        "body": {
+          "type": "json",
+          "data": "{}"
+        }
+      },
+      "docs": "Uber Eats Accept an Order Into the POS"
+    },
+    {
+      "info": {
+        "name": "Uber Eats Cancel an Order",
+        "type": "http"
+      },
+      "http": {
+        "method": "POST",
+        "url": "https://api.uber.com/eats/orders/:order_id/cancel",
+        "params": [
+          {
+            "name": "order_id",
+            "value": "",
+            "type": "path"
+          }
+        ],
+        "body": {
+          "type": "json",
+          "data": "{}"
+        }
+      },
+      "docs": "Uber Eats Cancel an Order"
+    }
+  ],
+  "bundled": true
+}

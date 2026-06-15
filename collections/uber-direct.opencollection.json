@@ -1,0 +1,199 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Uber Direct (DaaS) API",
+    "version": "v1"
+  },
+  "request": {
+    "auth": {
+      "type": "oauth2",
+      "flow": "client_credentials",
+      "accessTokenUrl": "https://auth.uber.com/oauth/v2/token",
+      "credentials": {
+        "clientId": "{{clientId}}",
+        "clientSecret": "{{clientSecret}}"
+      }
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Uber Direct Create Quote",
+        "type": "http"
+      },
+      "http": {
+        "method": "POST",
+        "url": "https://api.uber.com/v1/customers/:customer_id/delivery_quotes",
+        "params": [
+          {
+            "name": "customer_id",
+            "value": "",
+            "type": "path"
+          }
+        ],
+        "body": {
+          "type": "json",
+          "data": "{}"
+        }
+      },
+      "docs": "Create a quote to check deliverability, validity, and cost for a delivery between two addresses."
+    },
+    {
+      "info": {
+        "name": "Uber Direct List Deliveries",
+        "type": "http"
+      },
+      "http": {
+        "method": "GET",
+        "url": "https://api.uber.com/v1/customers/:customer_id/deliveries",
+        "params": [
+          {
+            "name": "customer_id",
+            "value": "",
+            "type": "path"
+          },
+          {
+            "name": "filter",
+            "value": "",
+            "type": "query",
+            "description": "Filter deliveries by status (e.g. ongoing)."
+          },
+          {
+            "name": "limit",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "offset",
+            "value": "",
+            "type": "query"
+          }
+        ]
+      },
+      "docs": "List deliveries for a customer."
+    },
+    {
+      "info": {
+        "name": "Uber Direct Create Delivery",
+        "type": "http"
+      },
+      "http": {
+        "method": "POST",
+        "url": "https://api.uber.com/v1/customers/:customer_id/deliveries",
+        "params": [
+          {
+            "name": "customer_id",
+            "value": "",
+            "type": "path"
+          }
+        ],
+        "body": {
+          "type": "json",
+          "data": "{}"
+        }
+      },
+      "docs": "Create a delivery between two addresses, optionally using a previously generated quote_id."
+    },
+    {
+      "info": {
+        "name": "Uber Direct Get Delivery",
+        "type": "http"
+      },
+      "http": {
+        "method": "GET",
+        "url": "https://api.uber.com/v1/customers/:customer_id/deliveries/:delivery_id",
+        "params": [
+          {
+            "name": "customer_id",
+            "value": "",
+            "type": "path"
+          },
+          {
+            "name": "delivery_id",
+            "value": "",
+            "type": "path"
+          }
+        ]
+      },
+      "docs": "Retrieve the current status and details of a delivery."
+    },
+    {
+      "info": {
+        "name": "Uber Direct Update Delivery",
+        "type": "http"
+      },
+      "http": {
+        "method": "POST",
+        "url": "https://api.uber.com/v1/customers/:customer_id/deliveries/:delivery_id",
+        "params": [
+          {
+            "name": "customer_id",
+            "value": "",
+            "type": "path"
+          },
+          {
+            "name": "delivery_id",
+            "value": "",
+            "type": "path"
+          }
+        ],
+        "body": {
+          "type": "json",
+          "data": "{}"
+        }
+      },
+      "docs": "Modify an ongoing delivery's notes, verification requirements, or tip."
+    },
+    {
+      "info": {
+        "name": "Uber Direct Cancel Delivery",
+        "type": "http"
+      },
+      "http": {
+        "method": "POST",
+        "url": "https://api.uber.com/v1/customers/:customer_id/deliveries/:delivery_id/cancel",
+        "params": [
+          {
+            "name": "customer_id",
+            "value": "",
+            "type": "path"
+          },
+          {
+            "name": "delivery_id",
+            "value": "",
+            "type": "path"
+          }
+        ]
+      },
+      "docs": "Cancel an ongoing or previously scheduled delivery."
+    },
+    {
+      "info": {
+        "name": "Uber Direct Get Proof of Delivery",
+        "type": "http"
+      },
+      "http": {
+        "method": "POST",
+        "url": "https://api.uber.com/v1/customers/:customer_id/deliveries/:delivery_id/proof-of-delivery",
+        "params": [
+          {
+            "name": "customer_id",
+            "value": "",
+            "type": "path"
+          },
+          {
+            "name": "delivery_id",
+            "value": "",
+            "type": "path"
+          }
+        ],
+        "body": {
+          "type": "json",
+          "data": "{}"
+        }
+      },
+      "docs": "Retrieve the proof-of-delivery image (picture, signature, or pincode) for a completed delivery."
+    }
+  ],
+  "bundled": true
+}
