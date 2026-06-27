@@ -231,7 +231,7 @@ apis:
     url: https://developer.uber.com/docs/deliveries/references/api
   - type: OpenAPI
     url: https://raw.githubusercontent.com/api-evangelist/uber-eats/refs/heads/main/openapi/uber-direct-openapi.yml
-  - type: SDK
+  - type: SDKs
     title: JavaScript/TypeScript SDK
     url: https://www.npmjs.com/package/uber-direct
   - type: CodeExamples
@@ -416,7 +416,7 @@ common:
   url: https://www.uber.com/us/en/business/products/eats/
 - type: GitHubOrganization
   url: https://github.com/uber
-- type: SDK
+- type: SDKs
   title: Uber Direct JavaScript/TypeScript SDK
   url: https://github.com/uber/uber-direct-sdk
 - type: DeveloperPortal
