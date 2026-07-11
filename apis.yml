@@ -412,6 +412,10 @@ authentication:
   description: Webhook deliveries are signed; partners verify signatures before processing
     events.
 common:
+- type: Authentication
+  url: authentication/uber-eats-authentication.yml
+- type: OAuthScopes
+  url: scopes/uber-eats-scopes.yml
 - type: Website
   url: https://www.uber.com/us/en/business/products/eats/
 - type: GitHubOrganization

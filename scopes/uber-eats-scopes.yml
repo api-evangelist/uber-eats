@@ -1,0 +1,63 @@
+generated: '2026-07-11'
+method: derived
+source: openapi/uber-direct-openapi.yml, openapi/uber-eats-openapi.yml
+schemes:
+- name: oauth2
+  source: openapi/uber-direct-openapi.yml
+  flows:
+  - flow: clientCredentials
+    tokenUrl: https://auth.uber.com/oauth/v2/token
+- name: oauth2
+  source: openapi/uber-eats-openapi.yml
+  flows:
+  - flow: clientCredentials
+    tokenUrl: https://auth.uber.com/oauth/v2/token
+scopes:
+- scope: eats.deliveries
+  description: Create and manage Uber Direct deliveries
+  flows:
+  - clientCredentials
+  sources:
+  - openapi/uber-direct-openapi.yml
+- scope: eats.menu
+  description: Manage menus
+  flows:
+  - clientCredentials
+  sources:
+  - openapi/uber-eats-openapi.yml
+- scope: eats.menu.read
+  description: Read menus
+  flows:
+  - clientCredentials
+  sources:
+  - openapi/uber-eats-openapi.yml
+- scope: eats.menu.write
+  description: Write menus
+  flows:
+  - clientCredentials
+  sources:
+  - openapi/uber-eats-openapi.yml
+- scope: eats.order
+  description: Manage orders
+  flows:
+  - clientCredentials
+  sources:
+  - openapi/uber-eats-openapi.yml
+- scope: eats.store
+  description: Access to store operations
+  flows:
+  - clientCredentials
+  sources:
+  - openapi/uber-eats-openapi.yml
+- scope: eats.store.orders.read
+  description: Read store orders
+  flows:
+  - clientCredentials
+  sources:
+  - openapi/uber-eats-openapi.yml
+- scope: eats.store.status.write
+  description: Update store status
+  flows:
+  - clientCredentials
+  sources:
+  - openapi/uber-eats-openapi.yml
