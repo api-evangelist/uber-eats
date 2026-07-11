@@ -412,6 +412,8 @@ authentication:
   description: Webhook deliveries are signed; partners verify signatures before processing
     events.
 common:
+- type: DomainSecurity
+  url: security/uber-eats-domain-security.yml
 - type: Authentication
   url: authentication/uber-eats-authentication.yml
 - type: OAuthScopes
