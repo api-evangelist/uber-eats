@@ -2,13 +2,14 @@
   "repo": "uber-eats",
   "feeds": [
     {
-      "source": "https://www.uber.com/newsroom/",
-      "feed_url": "",
-      "saved": 1,
-      "method": "agent-scrape"
+      "source": "https://developer.uber.com/docs/riders/policies/legal",
+      "feed_url": "https://developer.uber.com/docs/riders/policies/legal",
+      "title": "",
+      "saved": 0,
+      "method": "none"
     }
   ],
-  "post_count": 4,
-  "fetched": "2026-06-27T13:18:05Z",
-  "agent_pulled": "2026-06-27"
+  "post_count": 5,
+  "fetched": "2026-07-11T11:50:51Z",
+  "agent_pulled": "2026-07-04"
 }
