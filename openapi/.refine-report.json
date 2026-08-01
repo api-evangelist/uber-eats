@@ -1,0 +1,16 @@
+{
+  "provider": "uber-eats",
+  "sources": [
+    "uber-eats-customers-api-openapi.yml",
+    "uber-eats-eats-api-openapi.yml"
+  ],
+  "outputs": [
+    "uber-eats-customers-api-openapi.yml",
+    "uber-eats-eats-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}

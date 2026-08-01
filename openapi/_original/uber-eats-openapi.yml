@@ -1,0 +1,457 @@
+openapi: 3.1.0
+info:
+  title: Uber Eats Marketplace API
+  version: v1
+  description: >-
+    Uber Eats Marketplace APIs let restaurants, marketplace platforms, POS
+    providers, and logistics partners integrate directly with Uber Eats —
+    store onboarding and status, menu management, order ingestion and
+    fulfillment, and reporting. Authentication is via OAuth 2.0 client
+    credentials issued from the Uber Developer Portal.
+  contact:
+    name: Uber Eats Developer Portal
+    url: https://developer.uber.com/docs/eats
+servers:
+- url: https://api.uber.com
+  description: Uber API production
+components:
+  securitySchemes:
+    oauth2:
+      type: oauth2
+      flows:
+        clientCredentials:
+          tokenUrl: https://auth.uber.com/oauth/v2/token
+          scopes:
+            eats.store: Access to store operations
+            eats.store.status.write: Update store status
+            eats.store.orders.read: Read store orders
+            eats.order: Manage orders
+            eats.menu: Manage menus
+            eats.menu.read: Read menus
+            eats.menu.write: Write menus
+  schemas:
+    Store:
+      type: object
+      properties:
+        id:
+          type: string
+          example: del_aBc123XyZ
+        name:
+          type: string
+          example: Example Store
+        contact_emails:
+          type: array
+          items:
+            type: string
+        partner_identifiers:
+          type: object
+        timezone:
+          type: string
+          example: America/New_York
+        location:
+          type: object
+        web_url:
+          type: string
+          example: https://www.ubereats.com/orders/del_aBc123XyZ
+    StoreStatus:
+      type: object
+      properties:
+        status:
+          type: string
+          enum:
+          - ONLINE
+          - OFFLINE
+          - PAUSED
+          example: ONLINE
+        offline_reason:
+          type: string
+          example: STORE_CLOSED
+        paused_until:
+          type: string
+          format: date-time
+          example: '2026-06-01T19:00:00.000Z'
+    Menu:
+      type: object
+      properties:
+        menus:
+          type: array
+          items:
+            type: object
+        categories:
+          type: array
+          items:
+            type: object
+        items:
+          type: array
+          items:
+            type: object
+        modifier_groups:
+          type: array
+          items:
+            type: object
+    MenuItem:
+      type: object
+      properties:
+        id:
+          type: string
+          example: del_aBc123XyZ
+        title:
+          type: object
+        description:
+          type: object
+        price_info:
+          type: object
+        suspension_info:
+          type: object
+    Order:
+      type: object
+      properties:
+        id:
+          type: string
+          example: del_aBc123XyZ
+        display_id:
+          type: string
+          example: del_aBc123XyZ
+        external_reference_id:
+          type: string
+          example: del_aBc123XyZ
+        current_state:
+          type: string
+          example: example
+        store:
+          type: object
+        eater:
+          type: object
+        cart:
+          type: object
+        payment:
+          type: object
+        placed_at:
+          type: string
+          format: date-time
+          example: '2026-06-01T19:00:00.000Z'
+security:
+- oauth2: []
+paths:
+  /eats/stores:
+    get:
+      summary: Uber Eats Get Stores
+      operationId: getStores
+      responses:
+        '200':
+          description: List of stores
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Store'
+              examples:
+                GetStores200Example:
+                  summary: Default getStores 200 response
+                  x-microcks-default: true
+                  value:
+                  - id: del_aBc123XyZ
+                    name: Example Store
+                    contact_emails:
+                    - example
+                    partner_identifiers: {}
+                    timezone: America/New_York
+                    location: {}
+                    web_url: https://www.ubereats.com/orders/del_aBc123XyZ
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /eats/stores/{store_id}:
+    parameters:
+    - in: path
+      name: store_id
+      required: true
+      schema:
+        type: string
+    get:
+      summary: Uber Eats Get Store Details
+      operationId: getStore
+      responses:
+        '200':
+          description: Store details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Store'
+              examples:
+                GetStore200Example:
+                  summary: Default getStore 200 response
+                  x-microcks-default: true
+                  value:
+                    id: del_aBc123XyZ
+                    name: Example Store
+                    contact_emails:
+                    - example
+                    partner_identifiers: {}
+                    timezone: America/New_York
+                    location: {}
+                    web_url: https://www.ubereats.com/orders/del_aBc123XyZ
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /eats/store/{store_id}/status:
+    parameters:
+    - in: path
+      name: store_id
+      required: true
+      schema:
+        type: string
+    post:
+      summary: Uber Eats Set Store Status
+      operationId: setStoreStatus
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/StoreStatus'
+            examples:
+              SetStoreStatusRequestExample:
+                summary: Default setStoreStatus request
+                x-microcks-default: true
+                value:
+                  status: ONLINE
+                  offline_reason: STORE_CLOSED
+                  paused_until: '2026-06-01T19:00:00.000Z'
+      responses:
+        '204':
+          description: Store status updated
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /eats/stores/{store_id}/menus:
+    parameters:
+    - in: path
+      name: store_id
+      required: true
+      schema:
+        type: string
+    get:
+      summary: Uber Eats Retrieve Menu
+      operationId: getMenu
+      responses:
+        '200':
+          description: Menu
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Menu'
+              examples:
+                GetMenu200Example:
+                  summary: Default getMenu 200 response
+                  x-microcks-default: true
+                  value:
+                    menus:
+                    - {}
+                    categories:
+                    - {}
+                    items:
+                    - {}
+                    modifier_groups:
+                    - {}
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    put:
+      summary: Uber Eats Upsert Menu
+      operationId: upsertMenu
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Menu'
+            examples:
+              UpsertMenuRequestExample:
+                summary: Default upsertMenu request
+                x-microcks-default: true
+                value:
+                  menus:
+                  - {}
+                  categories:
+                  - {}
+                  items:
+                  - {}
+                  modifier_groups:
+                  - {}
+      responses:
+        '204':
+          description: Menu accepted for processing
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /eats/stores/{store_id}/menus/items/{item_id}:
+    parameters:
+    - in: path
+      name: store_id
+      required: true
+      schema:
+        type: string
+    - in: path
+      name: item_id
+      required: true
+      schema:
+        type: string
+    post:
+      summary: Uber Eats Update Menu Item (price, Suspension, Availability)
+      operationId: updateMenuItem
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MenuItem'
+            examples:
+              UpdateMenuItemRequestExample:
+                summary: Default updateMenuItem request
+                x-microcks-default: true
+                value:
+                  id: del_aBc123XyZ
+                  title: {}
+                  description: {}
+                  price_info: {}
+                  suspension_info: {}
+      responses:
+        '204':
+          description: Menu item updated
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /eats/stores/{store_id}/created-orders:
+    parameters:
+    - in: path
+      name: store_id
+      required: true
+      schema:
+        type: string
+    get:
+      summary: Uber Eats Get Created Orders for a Store
+      operationId: getCreatedOrders
+      responses:
+        '200':
+          description: A list of created orders
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Order'
+              examples:
+                GetCreatedOrders200Example:
+                  summary: Default getCreatedOrders 200 response
+                  x-microcks-default: true
+                  value:
+                  - id: del_aBc123XyZ
+                    display_id: del_aBc123XyZ
+                    external_reference_id: del_aBc123XyZ
+                    current_state: example
+                    store: {}
+                    eater: {}
+                    cart: {}
+                    payment: {}
+                    placed_at: '2026-06-01T19:00:00.000Z'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /eats/order/{order_id}:
+    parameters:
+    - in: path
+      name: order_id
+      required: true
+      schema:
+        type: string
+    get:
+      summary: Uber Eats Get Order Details
+      operationId: getOrder
+      responses:
+        '200':
+          description: Order details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Order'
+              examples:
+                GetOrder200Example:
+                  summary: Default getOrder 200 response
+                  x-microcks-default: true
+                  value:
+                    id: del_aBc123XyZ
+                    display_id: del_aBc123XyZ
+                    external_reference_id: del_aBc123XyZ
+                    current_state: example
+                    store: {}
+                    eater: {}
+                    cart: {}
+                    payment: {}
+                    placed_at: '2026-06-01T19:00:00.000Z'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /eats/orders/{order_id}/accept_pos_order:
+    parameters:
+    - in: path
+      name: order_id
+      required: true
+      schema:
+        type: string
+    post:
+      summary: Uber Eats Accept an Order Into the POS
+      operationId: acceptPosOrder
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                reason:
+                  type: string
+            examples:
+              AcceptPosOrderRequestExample:
+                summary: Default acceptPosOrder request
+                x-microcks-default: true
+                value:
+                  reason: example
+      responses:
+        '204':
+          description: Order accepted
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /eats/orders/{order_id}/cancel:
+    parameters:
+    - in: path
+      name: order_id
+      required: true
+      schema:
+        type: string
+    post:
+      summary: Uber Eats Cancel an Order
+      operationId: cancelOrder
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                reason:
+                  type: string
+            examples:
+              CancelOrderRequestExample:
+                summary: Default cancelOrder request
+                x-microcks-default: true
+                value:
+                  reason: example
+      responses:
+        '204':
+          description: Order canceled
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
