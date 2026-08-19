@@ -54,7 +54,7 @@ tags:
 url: https://raw.githubusercontent.com/api-evangelist/uber-eats/refs/heads/main/apis.yml
 created: '2026-05-23'
 modified: '2026-06-03'
-specificationVersion: '0.20'
+specificationVersion: '0.23'
 apis:
 - aid: uber-eats:integration-activation
   name: Uber Eats Integration Activation API
