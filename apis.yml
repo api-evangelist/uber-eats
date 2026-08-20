@@ -45,6 +45,17 @@ tags:
 - Uber Direct
 - Food Delivery
 - Last-Mile Logistics
+- Restaurant
+- Menus
+- Order
+- Fulfillment
+- Couriers
+- Authentication
+tags_raw:
+- Uber Eats
+- Uber Direct
+- Food Delivery
+- Last-Mile Logistics
 - Restaurants
 - Menus
 - Orders
@@ -89,6 +100,11 @@ apis:
   baseURL: https://api.uber.com
   tags:
   - Menus
+  - Item
+  - Modifiers
+  - Pricing
+  tags_raw:
+  - Menus
   - Items
   - Modifiers
   - Pricing
@@ -108,6 +124,11 @@ apis:
   humanURL: https://developer.uber.com/docs/eats/references/api/order_suite
   baseURL: https://api.uber.com
   tags:
+  - Order
+  - Fulfillment
+  - Webhook
+  - Point-of-Sale
+  tags_raw:
   - Orders
   - Fulfillment
   - Webhooks
@@ -198,6 +219,10 @@ apis:
   humanURL: https://developer.uber.com/docs/deliveries/references/api/organizations
   baseURL: https://api.uber.com
   tags:
+  - Organization
+  - Multi-Tenant
+  - Provisioning
+  tags_raw:
   - Organizations
   - Multi-Tenant
   - Provisioning
@@ -267,6 +292,10 @@ apis:
   humanURL: https://developer.uber.com/docs/eats/guides/webhooks
   baseURL: https://api.uber.com
   tags:
+  - Webhook
+  - Event
+  - Notification
+  tags_raw:
   - Webhooks
   - Events
   - Notifications
@@ -290,6 +319,9 @@ apis:
   humanURL: https://developer.uber.com/docs/eats/guides/authentication
   baseURL: https://auth.uber.com/oauth/v2
   tags:
+  - Authentication
+  - Client Credentials
+  tags_raw:
   - OAuth2
   - Authentication
   - Client Credentials
