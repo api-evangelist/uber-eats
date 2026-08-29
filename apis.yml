@@ -440,6 +440,9 @@ authentication:
   description: Webhook deliveries are signed; partners verify signatures before processing
     events.
 common:
+- type: CapabilityMap
+  url: capabilities/uber-eats-capability-edges.yml
+  name: Uber Eats Business Capability Map
 - type: AgenticAccess
   url: agentic-access/uber-eats-agentic-access.yml
 - type: DomainSecurity
