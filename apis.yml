@@ -61,7 +61,7 @@ tags:
 - Menus
 - Order
 - Fulfillment
-- Couriers
+- Courier
 - Authentication
 tags_raw:
 - Uber Eats
@@ -139,7 +139,7 @@ apis:
   - Order
   - Fulfillment
   - Webhook
-  - Point-of-Sale
+  - POS
   tags_raw:
   - Orders
   - Fulfillment
