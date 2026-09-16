@@ -76,19 +76,20 @@ tags_raw:
 - OAuth2
 url: https://raw.githubusercontent.com/api-evangelist/uber-eats/refs/heads/main/apis.yml
 created: '2026-05-23'
-modified: '2026-06-03'
+modified: '2026-09-16'
 specificationVersion: '0.23'
 apis:
 - aid: uber-eats:integration-activation
   name: Uber Eats Integration Activation API
-  description: >
-    The Integration Activation API suite onboards merchant stores onto
+  description: 'The Integration Activation API suite onboards merchant stores onto
 
-    a partner's Uber Eats integration, connecting Uber store identifiers
+    a partner''s Uber Eats integration, connecting Uber store identifiers
 
     to a partner platform and enabling subsequent menu, order, and
 
     store API access.
+
+    '
   humanURL: https://developer.uber.com/docs/eats/references/api/integration_activation_suite
   baseURL: https://api.uber.com
   tags:
@@ -102,12 +103,13 @@ apis:
     type: GraphQL
 - aid: uber-eats:menu-api
   name: Uber Eats Menu API
-  description: >
-    The Menu API suite lets integrations retrieve and upsert full menus
+  description: 'The Menu API suite lets integrations retrieve and upsert full menus
 
     for a store and update individual menu items, modifier groups,
 
     prices, suspensions, and availability windows.
+
+    '
   humanURL: https://developer.uber.com/docs/eats/references/api/v2/
   baseURL: https://api.uber.com
   tags:
@@ -125,14 +127,15 @@ apis:
     url: https://developer.uber.com/docs/eats/references/api/v2/
 - aid: uber-eats:order-api
   name: Uber Eats Order API
-  description: >
-    The Order API suite handles inbound Uber Eats orders, including
+  description: 'The Order API suite handles inbound Uber Eats orders, including
 
     order accept/deny, status updates, item-level adjustments, and
 
     cancellation flows. Orders are typically delivered to integrations
 
     via webhooks and acknowledged/fulfilled through this API.
+
+    '
   humanURL: https://developer.uber.com/docs/eats/references/api/order_suite
   baseURL: https://api.uber.com
   tags:
@@ -150,14 +153,15 @@ apis:
     url: https://developer.uber.com/docs/eats/references/api/order_suite
 - aid: uber-eats:delivery-partner
   name: Uber Eats Delivery Partner API
-  description: >
-    The Delivery Partner API suite handles delivery fulfillment by
+  description: 'The Delivery Partner API suite handles delivery fulfillment by
 
     Uber couriers for Uber Eats orders, including courier assignment,
 
     tracking, and status updates surfaced back to the merchant
 
     integration.
+
+    '
   humanURL: https://developer.uber.com/docs/eats/references/api/delivery_partner_suite
   baseURL: https://api.uber.com
   tags:
@@ -169,14 +173,15 @@ apis:
     url: https://developer.uber.com/docs/eats/references/api/delivery_partner_suite
 - aid: uber-eats:delivery-byoc
   name: Uber Eats Delivery BYOC API
-  description: >
-    The Delivery BYOC ("Bring Your Own Courier") API suite supports
+  description: 'The Delivery BYOC ("Bring Your Own Courier") API suite supports
 
     merchants and marketplace partners that use their own delivery
 
     fleet, exchanging assignment, status, and proof-of-delivery
 
     information with Uber Eats.
+
+    '
   humanURL: https://developer.uber.com/docs/eats/references/api/delivery_byoc_suite
   baseURL: https://api.uber.com
   tags:
@@ -188,12 +193,13 @@ apis:
     url: https://developer.uber.com/docs/eats/references/api/delivery_byoc_suite
 - aid: uber-eats:promotions
   name: Uber Eats Promotions API
-  description: >
-    The Promotions API suite creates and manages marketing campaigns
+  description: 'The Promotions API suite creates and manages marketing campaigns
 
     and discounts on Uber Eats stores, including campaign lifecycle,
 
     targeting, and reporting.
+
+    '
   humanURL: https://developer.uber.com/docs/eats/references/api/promotions_suite
   baseURL: https://api.uber.com
   tags:
@@ -205,12 +211,13 @@ apis:
     url: https://developer.uber.com/docs/eats/references/api/promotions_suite
 - aid: uber-eats:reporting
   name: Uber Eats Reporting API
-  description: >
-    The Reporting API suite returns transactional, financial, and
+  description: 'The Reporting API suite returns transactional, financial, and
 
     performance reports for Uber Eats stores, used by merchants and
 
     marketplace partners for reconciliation and analytics.
+
+    '
   humanURL: https://developer.uber.com/docs/eats/references/api/reporting_suite
   baseURL: https://api.uber.com
   tags:
@@ -222,12 +229,13 @@ apis:
     url: https://developer.uber.com/docs/eats/references/api/reporting_suite
 - aid: uber-eats:uber-direct-organizations
   name: Uber Direct Organizations API
-  description: >
-    The Organizations API lets Uber Direct partners manage parent
+  description: 'The Organizations API lets Uber Direct partners manage parent
 
     organizations and child accounts (e.g. multi-tenant merchants),
 
     including provisioning of API credentials and store-level access.
+
+    '
   humanURL: https://developer.uber.com/docs/deliveries/references/api/organizations
   baseURL: https://api.uber.com
   tags:
@@ -243,12 +251,13 @@ apis:
     url: https://developer.uber.com/docs/deliveries/references/api/organizations
 - aid: uber-eats:uber-direct-pick-and-pack
   name: Uber Direct Courier Pick & Pack API
-  description: >
-    The Courier Pick & Pack API supports shop-and-pay style deliveries
+  description: 'The Courier Pick & Pack API supports shop-and-pay style deliveries
 
     where the courier shops on behalf of the customer, including item
 
     lists, substitutions, and shopping progress events.
+
+    '
   humanURL: https://developer.uber.com/docs/deliveries/references/api/pick-and-pack
   baseURL: https://api.uber.com
   tags:
@@ -260,12 +269,13 @@ apis:
     url: https://developer.uber.com/docs/deliveries/references/api/pick-and-pack
 - aid: uber-eats:uber-direct-refund
   name: Uber Direct Refund API
-  description: >
-    The Refund API supports refund requests on completed Uber Direct
+  description: 'The Refund API supports refund requests on completed Uber Direct
 
     deliveries, including the corresponding webhook events that notify
 
     merchants of refund outcomes.
+
+    '
   humanURL: https://developer.uber.com/docs/deliveries/references/api/refunds
   baseURL: https://api.uber.com
   tags:
@@ -276,12 +286,13 @@ apis:
     url: https://developer.uber.com/docs/deliveries/references/api/refunds
 - aid: uber-eats:uber-direct-business-locations
   name: Uber Direct Business Location Management API
-  description: >
-    The Business Location Management API administers physical pickup
+  description: 'The Business Location Management API administers physical pickup
 
     locations associated with Uber Direct accounts, used for routing
 
     and dispatch.
+
+    '
   humanURL: https://developer.uber.com/docs/deliveries/references/api/locations
   baseURL: https://api.uber.com
   tags:
@@ -293,14 +304,15 @@ apis:
     url: https://developer.uber.com/docs/deliveries/references/api/locations
 - aid: uber-eats:webhooks
   name: Uber Eats & Direct Webhooks
-  description: >
-    Both Uber Eats and Uber Direct send webhook events for order
+  description: 'Both Uber Eats and Uber Direct send webhook events for order
 
     lifecycle, courier updates, refunds, shopping progress, and
 
     delivery status. Partners register webhook URLs in the Uber
 
     Developer Portal and verify signatures on each delivery.
+
+    '
   humanURL: https://developer.uber.com/docs/eats/guides/webhooks
   baseURL: https://api.uber.com
   tags:
@@ -318,8 +330,7 @@ apis:
     url: https://developer.uber.com/docs/deliveries/guides/webhooks
 - aid: uber-eats:oauth
   name: Uber OAuth 2.0
-  description: >
-    Uber APIs are authenticated using OAuth 2.0. Server-to-server
+  description: 'Uber APIs are authenticated using OAuth 2.0. Server-to-server
 
     integrations use the client_credentials grant; user-facing
 
@@ -328,6 +339,8 @@ apis:
     are obtained from the Uber OAuth token endpoint and scoped per
 
     product (Eats, Direct, Riders, etc.).
+
+    '
   humanURL: https://developer.uber.com/docs/eats/guides/authentication
   baseURL: https://auth.uber.com/oauth/v2
   tags:
@@ -363,7 +376,7 @@ apis:
   - type: CodeExamples
     url: https://github.com/uber/uber-direct-sdk-samples
 - aid: uber-eats:uber-eats-eats-api
-  name: Uber Eats Eats API
+  name: Uber Eats API
   description: The Eats API from Uber Eats — 9 operation(s) for eats.
   humanURL: https://developer.uber.com/docs/eats/references/api/integration_activation_suite
   baseURL: https://api.uber.com
@@ -384,41 +397,34 @@ apis:
     url: https://github.com/uber/uber-direct-sdk-samples
 features:
 - name: Full Marketplace Coverage
-  description: Onboarding, stores, menus, orders, fulfillment, promotions, and reporting
-    all available as APIs.
+  description: Onboarding, stores, menus, orders, fulfillment, promotions, and reporting all available
+    as APIs.
 - name: Multiple Fulfillment Models
-  description: Supports Uber-courier delivery, partner-courier (BYOC), and merchant-handled
-    pickup flows.
+  description: Supports Uber-courier delivery, partner-courier (BYOC), and merchant-handled pickup flows.
 - name: Uber Direct Logistics
-  description: Same API platform exposes Uber's courier network for delivery-as-a-service
-    outside of Uber Eats.
+  description: Same API platform exposes Uber's courier network for delivery-as-a-service outside of Uber
+    Eats.
 - name: Webhooks
-  description: Real-time event notifications for orders, deliveries, courier updates,
-    and refunds.
+  description: Real-time event notifications for orders, deliveries, courier updates, and refunds.
 - name: OAuth 2.0
   description: Standard OAuth 2.0 client-credentials and authorization-code flows.
 - name: Partner Portal
-  description: Centralized Developer Portal for app creation, credentials, scopes,
-    sandbox keys, and analytics.
+  description: Centralized Developer Portal for app creation, credentials, scopes, sandbox keys, and analytics.
 useCases:
 - name: POS Integration
-  description: Pipe Uber Eats orders into a restaurant's POS system and stream status
-    updates back to Uber.
+  description: Pipe Uber Eats orders into a restaurant's POS system and stream status updates back to
+    Uber.
 - name: Menu Management
-  description: Sync menu changes from a merchant's master catalog to all Uber Eats
-    stores.
+  description: Sync menu changes from a merchant's master catalog to all Uber Eats stores.
 - name: Marketplace Aggregation
-  description: Multi-brand operators centrally manage many Uber Eats stores via a
-    single integration.
+  description: Multi-brand operators centrally manage many Uber Eats stores via a single integration.
 - name: Same-Day Delivery
-  description: Use Uber Direct to offer on-demand last-mile delivery for ecommerce,
-    grocery, retail, and pharmacy.
+  description: Use Uber Direct to offer on-demand last-mile delivery for ecommerce, grocery, retail, and
+    pharmacy.
 - name: Multi-Brand Operations
-  description: Manage shared kitchens, virtual brands, and cloud kitchens across many
-    storefronts.
+  description: Manage shared kitchens, virtual brands, and cloud kitchens across many storefronts.
 - name: Financial Reconciliation
-  description: Pull reporting data to reconcile Uber Eats settlements with internal
-    financial systems.
+  description: Pull reporting data to reconcile Uber Eats settlements with internal financial systems.
 integrations:
 - name: Toast POS
 - name: Square
@@ -432,13 +438,12 @@ integrations:
 - name: WooCommerce
 authentication:
 - type: OAuth2ClientCredentials
-  description: Server-to-server integrations exchange a client_id and client_secret
-    for scoped bearer tokens.
+  description: Server-to-server integrations exchange a client_id and client_secret for scoped bearer
+    tokens.
 - type: OAuth2AuthorizationCode
   description: User-facing integrations use the authorization_code grant with PKCE.
 - type: WebhookSignature
-  description: Webhook deliveries are signed; partners verify signatures before processing
-    events.
+  description: Webhook deliveries are signed; partners verify signatures before processing events.
 common:
 - type: CapabilityMap
   url: capabilities/uber-eats-capability-edges.yml
