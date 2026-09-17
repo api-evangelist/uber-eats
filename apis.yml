@@ -95,6 +95,10 @@ apis:
   tags:
   - Onboarding
   - Activation
+  - Merchants
+  tags_raw:
+  - Onboarding
+  - Activation
   - Merchant
   properties:
   - type: Documentation
@@ -223,6 +227,10 @@ apis:
   tags:
   - Reporting
   - Analytics
+  - Financial
+  tags_raw:
+  - Reporting
+  - Analytics
   - Financials
   properties:
   - type: Documentation
@@ -296,6 +304,10 @@ apis:
   humanURL: https://developer.uber.com/docs/deliveries/references/api/locations
   baseURL: https://api.uber.com
   tags:
+  - Location
+  - Pickup
+  - Stores
+  tags_raw:
   - Locations
   - Pickup
   - Stores
@@ -496,3 +508,5 @@ common:
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
+x-parent: uber
+x-relationship: product

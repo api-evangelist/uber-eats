@@ -1,8 +1,8 @@
 {
   "provider": "uber-eats",
   "sources": [
-    "uber-eats-customers-api-openapi.yml",
-    "uber-eats-eats-api-openapi.yml"
+    "_original/uber-direct-openapi.yml",
+    "_original/uber-eats-openapi.yml"
   ],
   "outputs": [
     "uber-eats-customers-api-openapi.yml",
@@ -11,6 +11,33 @@
   "archived": [],
   "errors": [],
   "warnings": [],
-  "notes": [],
-  "skipped": []
+  "notes": [
+    "sourced from openapi/_original/ (2 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "uber-direct-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "uber-direct-openapi.yml: tagged paths POST /customers/{customer_id}/delivery_quotes -> Customers",
+    "uber-direct-openapi.yml: tagged paths POST /customers/{customer_id}/deliveries -> Customers",
+    "uber-direct-openapi.yml: tagged paths GET /customers/{customer_id}/deliveries -> Customers",
+    "uber-direct-openapi.yml: tagged paths GET /customers/{customer_id}/deliveries/{delivery_id} -> Customers",
+    "uber-direct-openapi.yml: tagged paths POST /customers/{customer_id}/deliveries/{delivery_id} -> Customers",
+    "uber-direct-openapi.yml: tagged paths POST /customers/{customer_id}/deliveries/{delivery_id}/cancel -> Customers",
+    "uber-direct-openapi.yml: tagged paths POST /customers/{customer_id}/deliveries/{delivery_id}/proof-of-delivery -> Customers",
+    "uber-direct-openapi.yml: declared missing tag: Customers",
+    "uber-eats-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "uber-eats-openapi.yml: tagged paths GET /eats/stores -> Eats",
+    "uber-eats-openapi.yml: tagged paths GET /eats/stores/{store_id} -> Eats",
+    "uber-eats-openapi.yml: tagged paths POST /eats/store/{store_id}/status -> Eats",
+    "uber-eats-openapi.yml: tagged paths GET /eats/stores/{store_id}/menus -> Eats",
+    "uber-eats-openapi.yml: tagged paths PUT /eats/stores/{store_id}/menus -> Eats",
+    "uber-eats-openapi.yml: tagged paths POST /eats/stores/{store_id}/menus/items/{item_id} -> Eats",
+    "uber-eats-openapi.yml: tagged paths GET /eats/stores/{store_id}/created-orders -> Eats",
+    "uber-eats-openapi.yml: tagged paths GET /eats/order/{order_id} -> Eats",
+    "uber-eats-openapi.yml: tagged paths POST /eats/orders/{order_id}/accept_pos_order -> Eats",
+    "uber-eats-openapi.yml: tagged paths POST /eats/orders/{order_id}/cancel -> Eats",
+    "uber-eats-openapi.yml: declared missing tag: Eats",
+    "apis.yml register: already-registered"
+  ],
+  "skipped": [
+    "uber-eats-customers-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "uber-eats-eats-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
 }

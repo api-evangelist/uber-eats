@@ -1,13 +1,13 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: Uber Direct (DaaS) Customers Eats API
+  title: Uber Marketplace Eats API
   version: v1
-  description: Uber Direct exposes Uber's courier network as a delivery-as-a-service (DaaS) API. Merchants request a delivery quote between two addresses, create a delivery from that quote, track courier progress, cancel, and retrieve proof of delivery. Authentication is via OAuth 2.0 client credentials issued from the Uber Developer Portal. Schemas and paths in this spec are derived from the official `uber/uber-direct-sdk` TypeScript SDK (npm package `uber-direct`).
+  description: Uber Eats Marketplace APIs let restaurants, marketplace platforms, POS providers, and logistics partners integrate directly with Uber Eats — store onboarding and status, menu management, order ingestion and fulfillment, and reporting. Authentication is via OAuth 2.0 client credentials issued from the Uber Developer Portal.
   contact:
-    name: Uber Direct Developer Portal
-    url: https://developer.uber.com/docs/deliveries/overview
+    name: Uber Eats Developer Portal
+    url: https://developer.uber.com/docs/eats
 servers:
-- url: https://api.uber.com/v1
+- url: https://api.uber.com
   description: Uber API production
 security:
 - oauth2: []
@@ -358,43 +358,6 @@ paths:
       - Eats
 components:
   schemas:
-    MenuItem:
-      type: object
-      properties:
-        id:
-          type: string
-          example: del_aBc123XyZ
-        title:
-          type: object
-        description:
-          type: object
-        price_info:
-          type: object
-        suspension_info:
-          type: object
-    Store:
-      type: object
-      properties:
-        id:
-          type: string
-          example: del_aBc123XyZ
-        name:
-          type: string
-          example: Example Store
-        contact_emails:
-          type: array
-          items:
-            type: string
-        partner_identifiers:
-          type: object
-        timezone:
-          type: string
-          example: America/New_York
-        location:
-          type: object
-        web_url:
-          type: string
-          example: https://www.ubereats.com/orders/del_aBc123XyZ
     Order:
       type: object
       properties:
@@ -422,6 +385,29 @@ components:
           type: string
           format: date-time
           example: '2026-06-01T19:00:00.000Z'
+    Store:
+      type: object
+      properties:
+        id:
+          type: string
+          example: del_aBc123XyZ
+        name:
+          type: string
+          example: Example Store
+        contact_emails:
+          type: array
+          items:
+            type: string
+        partner_identifiers:
+          type: object
+        timezone:
+          type: string
+          example: America/New_York
+        location:
+          type: object
+        web_url:
+          type: string
+          example: https://www.ubereats.com/orders/del_aBc123XyZ
     Menu:
       type: object
       properties:
@@ -441,6 +427,20 @@ components:
           type: array
           items:
             type: object
+    MenuItem:
+      type: object
+      properties:
+        id:
+          type: string
+          example: del_aBc123XyZ
+        title:
+          type: object
+        description:
+          type: object
+        price_info:
+          type: object
+        suspension_info:
+          type: object
     StoreStatus:
       type: object
       properties:
@@ -465,4 +465,10 @@ components:
         clientCredentials:
           tokenUrl: https://auth.uber.com/oauth/v2/token
           scopes:
-            eats.deliveries: Create and manage Uber Direct deliveries
+            eats.store: Access to store operations
+            eats.store.status.write: Update store status
+            eats.store.orders.read: Read store orders
+            eats.order: Manage orders
+            eats.menu: Manage menus
+            eats.menu.read: Read menus
+            eats.menu.write: Write menus
