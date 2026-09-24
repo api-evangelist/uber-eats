@@ -103,8 +103,6 @@ apis:
   properties:
   - type: Documentation
     url: https://developer.uber.com/docs/eats/references/api/integration_activation_suite
-  - url: graphql/uber-eats-graphql.md
-    type: GraphQL
 - aid: uber-eats:menu-api
   name: Uber Eats Menu API
   description: 'The Menu API suite lets integrations retrieve and upsert full menus
@@ -227,11 +225,12 @@ apis:
   tags:
   - Reporting
   - Analytics
-  - Financial
+  - Finance
   tags_raw:
   - Reporting
   - Analytics
   - Financials
+  - Financial
   properties:
   - type: Documentation
     url: https://developer.uber.com/docs/eats/references/api/reporting_suite
