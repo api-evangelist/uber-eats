@@ -358,6 +358,65 @@ paths:
       - Eats
 components:
   schemas:
+    Store:
+      type: object
+      properties:
+        id:
+          type: string
+          example: del_aBc123XyZ
+        name:
+          type: string
+          example: Example Store
+        contact_emails:
+          type: array
+          items:
+            type: string
+        partner_identifiers:
+          type: object
+        timezone:
+          type: string
+          example: America/New_York
+        location:
+          type: object
+        web_url:
+          type: string
+          example: https://www.ubereats.com/orders/del_aBc123XyZ
+    StoreStatus:
+      type: object
+      properties:
+        status:
+          type: string
+          enum:
+          - ONLINE
+          - OFFLINE
+          - PAUSED
+          example: ONLINE
+        offline_reason:
+          type: string
+          example: STORE_CLOSED
+        paused_until:
+          type: string
+          format: date-time
+          example: '2026-06-01T19:00:00.000Z'
+    Menu:
+      type: object
+      properties:
+        menus:
+          type: array
+          items:
+            type: object
+        categories:
+          type: array
+          items:
+            type: object
+        items:
+          type: array
+          items:
+            type: object
+        modifier_groups:
+          type: array
+          items:
+            type: object
     Order:
       type: object
       properties:
@@ -385,48 +444,6 @@ components:
           type: string
           format: date-time
           example: '2026-06-01T19:00:00.000Z'
-    Store:
-      type: object
-      properties:
-        id:
-          type: string
-          example: del_aBc123XyZ
-        name:
-          type: string
-          example: Example Store
-        contact_emails:
-          type: array
-          items:
-            type: string
-        partner_identifiers:
-          type: object
-        timezone:
-          type: string
-          example: America/New_York
-        location:
-          type: object
-        web_url:
-          type: string
-          example: https://www.ubereats.com/orders/del_aBc123XyZ
-    Menu:
-      type: object
-      properties:
-        menus:
-          type: array
-          items:
-            type: object
-        categories:
-          type: array
-          items:
-            type: object
-        items:
-          type: array
-          items:
-            type: object
-        modifier_groups:
-          type: array
-          items:
-            type: object
     MenuItem:
       type: object
       properties:
@@ -441,23 +458,6 @@ components:
           type: object
         suspension_info:
           type: object
-    StoreStatus:
-      type: object
-      properties:
-        status:
-          type: string
-          enum:
-          - ONLINE
-          - OFFLINE
-          - PAUSED
-          example: ONLINE
-        offline_reason:
-          type: string
-          example: STORE_CLOSED
-        paused_until:
-          type: string
-          format: date-time
-          example: '2026-06-01T19:00:00.000Z'
   securitySchemes:
     oauth2:
       type: oauth2

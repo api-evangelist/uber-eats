@@ -56,13 +56,14 @@ tags:
 - Uber Eats
 - Uber Direct
 - Food Delivery
-- Last-Mile Logistics
+- Last Mile Delivery
 - Restaurant
 - Menus
 - Order
 - Fulfillment
 - Couriers
 - Authentication
+- Delivery
 tags_raw:
 - Uber Eats
 - Uber Direct
@@ -74,6 +75,7 @@ tags_raw:
 - Fulfillment
 - Courier
 - OAuth2
+- Delivery
 url: https://raw.githubusercontent.com/api-evangelist/uber-eats/refs/heads/main/apis.yml
 created: '2026-05-23'
 modified: '2026-09-16'
