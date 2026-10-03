@@ -497,6 +497,83 @@ components:
           type: string
           description: An ID for an account to facilitate billing.
           example: del_aBc123XyZ
+    UpdateDeliveryReq:
+      type: object
+      properties:
+        dropoff_notes:
+          type: string
+          example: Leave at the front desk.
+        manifest_reference:
+          type: string
+          example: example
+        pickup_notes:
+          type: string
+          example: Leave at the front desk.
+        requires_dropoff_signature:
+          type: boolean
+          example: false
+        requires_id:
+          type: boolean
+          example: false
+        tip_by_customer:
+          type: integer
+          example: 600
+        dropoff_latitude:
+          type: number
+          example: 40.7066581
+        dropoff_longitude:
+          type: number
+          example: -74.0071868
+    PODResp:
+      type: object
+      properties:
+        document:
+          type: string
+          description: A long Base64 string representing the image.
+          example: example
+    DeliveryQuoteResp:
+      type: object
+      properties:
+        kind:
+          type: string
+          description: 'The type of object being described. Default: delivery_quote'
+          example: delivery_quote
+        id:
+          type: string
+          description: Unique identifier for the quote (always starts with dqt_).
+          example: dqt_6gQ2dt31TjiOPfwux-NCXg
+        created:
+          type: string
+          format: date-time
+          example: '2026-06-01T19:00:00.000Z'
+        expires:
+          type: string
+          format: date-time
+          example: '2026-06-01T19:00:00.000Z'
+        fee:
+          type: integer
+          description: Amount in cents that will be charged if this delivery is created.
+          example: 600
+        currency_type:
+          type: string
+          description: Three-letter ISO currency code, in uppercase.
+          example: USD
+        dropoff_eta:
+          type: string
+          format: date-time
+          example: '2026-06-01T19:00:00.000Z'
+        duration:
+          type: integer
+          description: Estimated minutes for this delivery to reach dropoff.
+          example: 33
+        pickup_duration:
+          type: integer
+          description: Estimated minutes until a courier will arrive at the pickup.
+          example: 33
+        dropoff_deadline:
+          type: string
+          format: date-time
+          example: '2026-06-01T19:00:00.000Z'
     ManifestItem:
       type: object
       properties:
@@ -530,13 +607,6 @@ components:
         vat_percentage:
           type: integer
           example: 1
-    PODResp:
-      type: object
-      properties:
-        document:
-          type: string
-          description: A long Base64 string representing the image.
-          example: example
     DeliveryResp:
       type: object
       properties:
@@ -681,76 +751,6 @@ components:
           type: string
           description: Partner reference to a store or location.
           example: del_aBc123XyZ
-    DeliveryQuoteResp:
-      type: object
-      properties:
-        kind:
-          type: string
-          description: 'The type of object being described. Default: delivery_quote'
-          example: delivery_quote
-        id:
-          type: string
-          description: Unique identifier for the quote (always starts with dqt_).
-          example: dqt_6gQ2dt31TjiOPfwux-NCXg
-        created:
-          type: string
-          format: date-time
-          example: '2026-06-01T19:00:00.000Z'
-        expires:
-          type: string
-          format: date-time
-          example: '2026-06-01T19:00:00.000Z'
-        fee:
-          type: integer
-          description: Amount in cents that will be charged if this delivery is created.
-          example: 600
-        currency_type:
-          type: string
-          description: Three-letter ISO currency code, in uppercase.
-          example: USD
-        dropoff_eta:
-          type: string
-          format: date-time
-          example: '2026-06-01T19:00:00.000Z'
-        duration:
-          type: integer
-          description: Estimated minutes for this delivery to reach dropoff.
-          example: 33
-        pickup_duration:
-          type: integer
-          description: Estimated minutes until a courier will arrive at the pickup.
-          example: 33
-        dropoff_deadline:
-          type: string
-          format: date-time
-          example: '2026-06-01T19:00:00.000Z'
-    UpdateDeliveryReq:
-      type: object
-      properties:
-        dropoff_notes:
-          type: string
-          example: Leave at the front desk.
-        manifest_reference:
-          type: string
-          example: example
-        pickup_notes:
-          type: string
-          example: Leave at the front desk.
-        requires_dropoff_signature:
-          type: boolean
-          example: false
-        requires_id:
-          type: boolean
-          example: false
-        tip_by_customer:
-          type: integer
-          example: 600
-        dropoff_latitude:
-          type: number
-          example: 40.7066581
-        dropoff_longitude:
-          type: number
-          example: -74.0071868
     PODReq:
       type: object
       required:

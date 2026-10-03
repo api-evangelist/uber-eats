@@ -358,29 +358,6 @@ paths:
       - Eats
 components:
   schemas:
-    Store:
-      type: object
-      properties:
-        id:
-          type: string
-          example: del_aBc123XyZ
-        name:
-          type: string
-          example: Example Store
-        contact_emails:
-          type: array
-          items:
-            type: string
-        partner_identifiers:
-          type: object
-        timezone:
-          type: string
-          example: America/New_York
-        location:
-          type: object
-        web_url:
-          type: string
-          example: https://www.ubereats.com/orders/del_aBc123XyZ
     StoreStatus:
       type: object
       properties:
@@ -417,6 +394,43 @@ components:
           type: array
           items:
             type: object
+    Store:
+      type: object
+      properties:
+        id:
+          type: string
+          example: del_aBc123XyZ
+        name:
+          type: string
+          example: Example Store
+        contact_emails:
+          type: array
+          items:
+            type: string
+        partner_identifiers:
+          type: object
+        timezone:
+          type: string
+          example: America/New_York
+        location:
+          type: object
+        web_url:
+          type: string
+          example: https://www.ubereats.com/orders/del_aBc123XyZ
+    MenuItem:
+      type: object
+      properties:
+        id:
+          type: string
+          example: del_aBc123XyZ
+        title:
+          type: object
+        description:
+          type: object
+        price_info:
+          type: object
+        suspension_info:
+          type: object
     Order:
       type: object
       properties:
@@ -444,20 +458,6 @@ components:
           type: string
           format: date-time
           example: '2026-06-01T19:00:00.000Z'
-    MenuItem:
-      type: object
-      properties:
-        id:
-          type: string
-          example: del_aBc123XyZ
-        title:
-          type: object
-        description:
-          type: object
-        price_info:
-          type: object
-        suspension_info:
-          type: object
   securitySchemes:
     oauth2:
       type: oauth2
