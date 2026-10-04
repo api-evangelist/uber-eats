@@ -358,6 +358,20 @@ paths:
       - Eats
 components:
   schemas:
+    MenuItem:
+      type: object
+      properties:
+        id:
+          type: string
+          example: del_aBc123XyZ
+        title:
+          type: object
+        description:
+          type: object
+        price_info:
+          type: object
+        suspension_info:
+          type: object
     StoreStatus:
       type: object
       properties:
@@ -417,20 +431,6 @@ components:
         web_url:
           type: string
           example: https://www.ubereats.com/orders/del_aBc123XyZ
-    MenuItem:
-      type: object
-      properties:
-        id:
-          type: string
-          example: del_aBc123XyZ
-        title:
-          type: object
-        description:
-          type: object
-        price_info:
-          type: object
-        suspension_info:
-          type: object
     Order:
       type: object
       properties:

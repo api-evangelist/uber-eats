@@ -428,6 +428,13 @@ paths:
       - Customers
 components:
   schemas:
+    PODResp:
+      type: object
+      properties:
+        document:
+          type: string
+          description: A long Base64 string representing the image.
+          example: example
     DeliveryReq:
       type: object
       required:
@@ -497,40 +504,6 @@ components:
           type: string
           description: An ID for an account to facilitate billing.
           example: del_aBc123XyZ
-    UpdateDeliveryReq:
-      type: object
-      properties:
-        dropoff_notes:
-          type: string
-          example: Leave at the front desk.
-        manifest_reference:
-          type: string
-          example: example
-        pickup_notes:
-          type: string
-          example: Leave at the front desk.
-        requires_dropoff_signature:
-          type: boolean
-          example: false
-        requires_id:
-          type: boolean
-          example: false
-        tip_by_customer:
-          type: integer
-          example: 600
-        dropoff_latitude:
-          type: number
-          example: 40.7066581
-        dropoff_longitude:
-          type: number
-          example: -74.0071868
-    PODResp:
-      type: object
-      properties:
-        document:
-          type: string
-          description: A long Base64 string representing the image.
-          example: example
     DeliveryQuoteResp:
       type: object
       properties:
@@ -574,6 +547,72 @@ components:
           type: string
           format: date-time
           example: '2026-06-01T19:00:00.000Z'
+    DeliveryQuoteReq:
+      type: object
+      required:
+      - pickup_address
+      - dropoff_address
+      properties:
+        pickup_address:
+          type: string
+          description: JSON string containing pickup address details.
+          example: '{"street_address":["100 Maiden Ln"],"city":"New York","state":"NY","zip_code":"10023","country":"US"}'
+        dropoff_address:
+          type: string
+          description: JSON string containing dropoff address details.
+          example: '{"street_address":["30 Lincoln Center Plaza"],"city":"New York","state":"NY","zip_code":"10023","country":"US"}'
+        pickup_latitude:
+          type: number
+          description: Pickup latitude coordinate.
+          example: 40.7066581
+        pickup_longitude:
+          type: number
+          description: Pickup longitude coordinate.
+          example: -74.0071868
+        dropoff_latitude:
+          type: number
+          description: Dropoff latitude coordinate.
+          example: 40.7066581
+        dropoff_longitude:
+          type: number
+          description: Dropoff longitude coordinate.
+          example: -74.0071868
+        pickup_ready_dt:
+          type: string
+          format: date-time
+          description: (RFC 3339) Beginning of the window when an order must be picked up.
+          example: '2026-06-01T19:00:00.000Z'
+        pickup_deadline_dt:
+          type: string
+          format: date-time
+          description: (RFC 3339) End of the window when an order may be picked up.
+          example: '2026-06-01T19:00:00.000Z'
+        dropoff_ready_dt:
+          type: string
+          format: date-time
+          description: (RFC 3339) Beginning of the window when an order must be dropped off.
+          example: '2026-06-01T19:00:00.000Z'
+        dropoff_deadline_dt:
+          type: string
+          format: date-time
+          description: (RFC 3339) End of the window when an order must be dropped off.
+          example: '2026-06-01T19:00:00.000Z'
+        pickup_phone_number:
+          type: string
+          description: Phone number for the pickup location.
+          example: '+15555555555'
+        dropoff_phone_number:
+          type: string
+          description: Phone number for the dropoff location.
+          example: '+15555555555'
+        manifest_total_value:
+          type: integer
+          description: Value in cents of the items in the delivery.
+          example: 600
+        external_store_id:
+          type: string
+          description: Partner reference to a store or location.
+          example: del_aBc123XyZ
     ManifestItem:
       type: object
       properties:
@@ -607,6 +646,33 @@ components:
         vat_percentage:
           type: integer
           example: 1
+    UpdateDeliveryReq:
+      type: object
+      properties:
+        dropoff_notes:
+          type: string
+          example: Leave at the front desk.
+        manifest_reference:
+          type: string
+          example: example
+        pickup_notes:
+          type: string
+          example: Leave at the front desk.
+        requires_dropoff_signature:
+          type: boolean
+          example: false
+        requires_id:
+          type: boolean
+          example: false
+        tip_by_customer:
+          type: integer
+          example: 600
+        dropoff_latitude:
+          type: number
+          example: 40.7066581
+        dropoff_longitude:
+          type: number
+          example: -74.0071868
     DeliveryResp:
       type: object
       properties:
@@ -685,72 +751,6 @@ components:
         undeliverable_reason:
           type: string
           example: STORE_CLOSED
-    DeliveryQuoteReq:
-      type: object
-      required:
-      - pickup_address
-      - dropoff_address
-      properties:
-        pickup_address:
-          type: string
-          description: JSON string containing pickup address details.
-          example: '{"street_address":["100 Maiden Ln"],"city":"New York","state":"NY","zip_code":"10023","country":"US"}'
-        dropoff_address:
-          type: string
-          description: JSON string containing dropoff address details.
-          example: '{"street_address":["30 Lincoln Center Plaza"],"city":"New York","state":"NY","zip_code":"10023","country":"US"}'
-        pickup_latitude:
-          type: number
-          description: Pickup latitude coordinate.
-          example: 40.7066581
-        pickup_longitude:
-          type: number
-          description: Pickup longitude coordinate.
-          example: -74.0071868
-        dropoff_latitude:
-          type: number
-          description: Dropoff latitude coordinate.
-          example: 40.7066581
-        dropoff_longitude:
-          type: number
-          description: Dropoff longitude coordinate.
-          example: -74.0071868
-        pickup_ready_dt:
-          type: string
-          format: date-time
-          description: (RFC 3339) Beginning of the window when an order must be picked up.
-          example: '2026-06-01T19:00:00.000Z'
-        pickup_deadline_dt:
-          type: string
-          format: date-time
-          description: (RFC 3339) End of the window when an order may be picked up.
-          example: '2026-06-01T19:00:00.000Z'
-        dropoff_ready_dt:
-          type: string
-          format: date-time
-          description: (RFC 3339) Beginning of the window when an order must be dropped off.
-          example: '2026-06-01T19:00:00.000Z'
-        dropoff_deadline_dt:
-          type: string
-          format: date-time
-          description: (RFC 3339) End of the window when an order must be dropped off.
-          example: '2026-06-01T19:00:00.000Z'
-        pickup_phone_number:
-          type: string
-          description: Phone number for the pickup location.
-          example: '+15555555555'
-        dropoff_phone_number:
-          type: string
-          description: Phone number for the dropoff location.
-          example: '+15555555555'
-        manifest_total_value:
-          type: integer
-          description: Value in cents of the items in the delivery.
-          example: 600
-        external_store_id:
-          type: string
-          description: Partner reference to a store or location.
-          example: del_aBc123XyZ
     PODReq:
       type: object
       required:
