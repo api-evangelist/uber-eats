@@ -1,3 +1,8 @@
+# Provenance stamped 2026-10-07 (roadmap#943): written by an API Evangelist sweep (dated 2026-05-22 by the file itself), not
+# harvested from the provider. `method: generated` so the economics campaign may replace it with a
+# dated, verbatim transcription; every figure below is unverified until it does.
+method: generated
+generated: '2026-05-22'
 specification: API Commons Plans
 specificationVersion: '0.1'
 schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/Plans
@@ -138,3 +143,56 @@ references:
   url: https://merchants.ubereats.com/us/en/pricing/
 - name: Uber Eats Marketplace Fee Changes
   url: https://help.uber.com/merchants-and-restaurants/article/uber-eats-marketplace-fee-changes--?nodeId=2cec9c6f-a7b8-47b5-8cc8-07c8a2c24569
+x-canonical:
+  generated: '2026-10-08'
+  vocabulary: all/0-working/economics/plans-canonical.yml
+  models:
+  - free
+  - metered
+  - revenue-share
+  units:
+  - request
+  plans:
+  - name: Developer API Access
+    access: free
+    model: free
+    model_how: derived
+    units:
+    - request
+    periods:
+    - month
+  - name: Marketplace Lite
+    access: partner
+    model: revenue-share
+    model_how: stated
+    units:
+    - other
+    periods: []
+  - name: Marketplace Plus
+    access: partner
+    model: revenue-share
+    model_how: stated
+    units:
+    - other
+    periods: []
+  - name: Marketplace Premium
+    access: partner
+    model: revenue-share
+    model_how: stated
+    units:
+    - other
+    periods: []
+  - name: Pickup
+    access: partner
+    model: revenue-share
+    model_how: stated
+    units:
+    - other
+    periods: []
+  - name: Uber Direct
+    access: other
+    model: metered
+    model_how: stated
+    units:
+    - other
+    periods: []
