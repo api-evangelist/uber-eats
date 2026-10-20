@@ -1,8 +1,16 @@
-generated: '2026-10-14'
+generated: '2026-10-20'
 method: searched
+source:
+- olo/integrations/olo-integration-edges.yml
+- https://merchants.ubereats.com/us/en/technology/integrations/
 checked:
 - https://merchants.ubereats.com/us/en/technology/integrations/
 - olo/integrations/olo-integration-edges.yml
+- https://composio.dev/toolkits/uber-eats
+- https://monid.ai/tools/uber-eats
+- https://n8n.io/integrations/uber-eats/
+- https://zapier.com/apps/uber-eats/integrations
+summary: null
 marketplace_apps:
 - marketplace: own
   channel: partner-built
@@ -30,5 +38,4 @@ edges:
   detected: '2026-10-14'
   detected_by: mirror-platform-listings.py
   category: Rails Marketplace
-source:
-- olo/integrations/olo-integration-edges.yml
+templates: []
