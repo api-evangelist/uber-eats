@@ -458,6 +458,8 @@ authentication:
 - type: WebhookSignature
   description: Webhook deliveries are signed; partners verify signatures before processing events.
 common:
+- type: PostmanWorkspace
+  url: https://www.postman.com/kinlaneapi/uber-eats/overview
 - type: CapabilityMap
   url: capabilities/uber-eats-capability-edges.yml
   name: Uber Eats Business Capability Map
