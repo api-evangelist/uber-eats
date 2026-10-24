@@ -1,891 +1,897 @@
 {
+  "info": {
+    "_postman_id": "50466314-bec7-4d19-880d-22b97fb5313c",
+    "name": "Uber Direct (DaaS) Customers API",
+    "description": "Uber Direct exposes Uber's courier network as a delivery-as-a-service (DaaS) API. Merchants request a delivery quote between two addresses, create a delivery from that quote, track courier progress, cancel, and retrieve proof of delivery. Authentication is via OAuth 2.0 client credentials issued from the Uber Developer Portal. Schemas and paths in this spec are derived from the official `uber/uber-direct-sdk` TypeScript SDK (npm package `uber-direct`).\n\nContact Support:\n Name: Uber Direct Developer Portal",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-10-21T20:37:29.000Z",
+    "updatedAt": "2026-10-21T20:37:29.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-50466314-bec7-4d19-880d-22b97fb5313c"
+  },
   "item": [
     {
-      "id": "adec0f12-5f83-49af-9766-b495a579f452",
-      "name": "Customers",
-      "description": {
-        "content": "",
-        "type": "text/plain"
-      },
+      "name": "customers",
       "item": [
         {
-          "id": "2032163d-473c-4a52-bb3b-33a4342b9c50",
-          "name": "Uber Direct Create Quote",
-          "request": {
-            "name": "Uber Direct Create Quote",
-            "description": {
-              "content": "Create a quote to check deliverability, validity, and cost for a delivery between two addresses.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "customers",
-                ":customer_id",
-                "delivery_quotes"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<string>",
-                  "key": "customer_id",
-                  "description": "(Required) "
-                }
-              ]
-            },
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/json"
-              },
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "POST",
-            "auth": null,
-            "body": {
-              "mode": "raw",
-              "raw": "{\n  \"pickup_address\": \"<string>\",\n  \"dropoff_address\": \"<string>\",\n  \"pickup_latitude\": \"<number>\",\n  \"pickup_longitude\": \"<number>\",\n  \"dropoff_latitude\": \"<number>\",\n  \"dropoff_longitude\": \"<number>\",\n  \"pickup_ready_dt\": \"<dateTime>\",\n  \"pickup_deadline_dt\": \"<dateTime>\",\n  \"dropoff_ready_dt\": \"<dateTime>\",\n  \"dropoff_deadline_dt\": \"<dateTime>\",\n  \"pickup_phone_number\": \"<string>\",\n  \"dropoff_phone_number\": \"<string>\",\n  \"manifest_total_value\": \"<integer>\",\n  \"external_store_id\": \"<string>\"\n}",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
-            }
-          },
-          "response": [
+          "name": "{customer_id}",
+          "item": [
             {
-              "id": "98da25dd-5df6-4c43-91c0-ccc4b4b82f9d",
-              "name": "A delivery quote.",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "customers",
-                    ":customer_id",
-                    "delivery_quotes"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "customer_id",
-                      "description": "(Required) "
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: oauth2",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "<token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "POST",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"pickup_address\": \"{\\\"street_address\\\":[\\\"100 Maiden Ln\\\"],\\\"city\\\":\\\"New York\\\",\\\"state\\\":\\\"NY\\\",\\\"zip_code\\\":\\\"10023\\\",\\\"country\\\":\\\"US\\\"}\",\n  \"dropoff_address\": \"{\\\"street_address\\\":[\\\"30 Lincoln Center Plaza\\\"],\\\"city\\\":\\\"New York\\\",\\\"state\\\":\\\"NY\\\",\\\"zip_code\\\":\\\"10023\\\",\\\"country\\\":\\\"US\\\"}\",\n  \"pickup_latitude\": 40.7066581,\n  \"pickup_longitude\": -74.0071868,\n  \"dropoff_latitude\": 40.7066581,\n  \"dropoff_longitude\": -74.0071868,\n  \"pickup_ready_dt\": \"2026-06-01T19:00:00.000Z\",\n  \"pickup_deadline_dt\": \"2026-06-01T19:00:00.000Z\",\n  \"dropoff_ready_dt\": \"2026-06-01T19:00:00.000Z\",\n  \"dropoff_deadline_dt\": \"2026-06-01T19:00:00.000Z\",\n  \"pickup_phone_number\": \"+15555555555\",\n  \"dropoff_phone_number\": \"+15555555555\",\n  \"manifest_total_value\": 600,\n  \"external_store_id\": \"del_aBc123XyZ\"\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
+              "name": "delivery_quotes",
+              "item": [
                 {
-                  "key": "Content-Type",
-                  "value": "application/json"
+                  "name": "Uber Direct Create Quote",
+                  "id": "c6ec2acb-703f-46c3-b203-ee752f062aa1",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"pickup_address\": \"<string>\",\n  \"dropoff_address\": \"<string>\",\n  \"pickup_latitude\": \"<number>\",\n  \"pickup_longitude\": \"<number>\",\n  \"dropoff_latitude\": \"<number>\",\n  \"dropoff_longitude\": \"<number>\",\n  \"pickup_ready_dt\": \"<dateTime>\",\n  \"pickup_deadline_dt\": \"<dateTime>\",\n  \"dropoff_ready_dt\": \"<dateTime>\",\n  \"dropoff_deadline_dt\": \"<dateTime>\",\n  \"pickup_phone_number\": \"<string>\",\n  \"dropoff_phone_number\": \"<string>\",\n  \"manifest_total_value\": \"<integer>\",\n  \"external_store_id\": \"<string>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/customers/:customer_id/delivery_quotes",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "customers",
+                        ":customer_id",
+                        "delivery_quotes"
+                      ],
+                      "variable": [
+                        {
+                          "id": "05474e53-26a2-4d47-bd5b-8a9ae24b2083",
+                          "key": "customer_id",
+                          "value": "<string>",
+                          "description": "(Required) "
+                        }
+                      ]
+                    },
+                    "description": "Create a quote to check deliverability, validity, and cost for a delivery between two addresses."
+                  },
+                  "response": [
+                    {
+                      "id": "bf7a6e72-87e1-4346-a216-5aff8a536fc7",
+                      "name": "A delivery quote.",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: oauth2",
+                            "key": "Authorization",
+                            "value": "<token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"pickup_address\": \"<string>\",\n  \"dropoff_address\": \"<string>\",\n  \"pickup_latitude\": \"<number>\",\n  \"pickup_longitude\": \"<number>\",\n  \"dropoff_latitude\": \"<number>\",\n  \"dropoff_longitude\": \"<number>\",\n  \"pickup_ready_dt\": \"<dateTime>\",\n  \"pickup_deadline_dt\": \"<dateTime>\",\n  \"dropoff_ready_dt\": \"<dateTime>\",\n  \"dropoff_deadline_dt\": \"<dateTime>\",\n  \"pickup_phone_number\": \"<string>\",\n  \"dropoff_phone_number\": \"<string>\",\n  \"manifest_total_value\": \"<integer>\",\n  \"external_store_id\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/customers/:customer_id/delivery_quotes",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "customers",
+                            ":customer_id",
+                            "delivery_quotes"
+                          ],
+                          "variable": [
+                            {
+                              "key": "customer_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"kind\": \"<string>\",\n  \"id\": \"<string>\",\n  \"created\": \"<dateTime>\",\n  \"expires\": \"<dateTime>\",\n  \"fee\": \"<integer>\",\n  \"currency_type\": \"<string>\",\n  \"dropoff_eta\": \"<dateTime>\",\n  \"duration\": \"<integer>\",\n  \"pickup_duration\": \"<integer>\",\n  \"dropoff_deadline\": \"<dateTime>\"\n}",
+                      "createdAt": "2026-10-21T20:37:30.000Z",
+                      "updatedAt": "2026-10-21T20:37:30.000Z",
+                      "uid": "35240-bf7a6e72-87e1-4346-a216-5aff8a536fc7"
+                    }
+                  ],
+                  "createdAt": "2026-10-21T20:37:30.000Z",
+                  "updatedAt": "2026-10-21T20:37:30.000Z",
+                  "uid": "35240-c6ec2acb-703f-46c3-b203-ee752f062aa1"
                 }
               ],
-              "body": "{\n  \"kind\": \"example\",\n  \"id\": \"del_aBc123XyZ\",\n  \"created\": \"2026-06-01T19:00:00.000Z\",\n  \"expires\": \"2026-06-01T19:00:00.000Z\",\n  \"fee\": 600,\n  \"currency_type\": \"USD\",\n  \"dropoff_eta\": \"2026-06-01T19:00:00.000Z\",\n  \"duration\": 33,\n  \"pickup_duration\": 33,\n  \"dropoff_deadline\": \"2026-06-01T19:00:00.000Z\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
+              "id": "88448b8f-9ad3-4bc8-b3fe-b7db6359d1e3",
+              "createdAt": "2026-10-21T20:37:30.000Z",
+              "updatedAt": "2026-10-21T20:37:30.000Z",
+              "uid": "35240-88448b8f-9ad3-4bc8-b3fe-b7db6359d1e3"
+            },
+            {
+              "name": "deliveries",
+              "item": [
+                {
+                  "name": "{delivery_id}",
+                  "item": [
+                    {
+                      "name": "cancel",
+                      "item": [
+                        {
+                          "name": "Uber Direct Cancel Delivery",
+                          "id": "723fb9c9-3458-4267-a404-efcb9fd33e27",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/customers/:customer_id/deliveries/:delivery_id/cancel",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "customers",
+                                ":customer_id",
+                                "deliveries",
+                                ":delivery_id",
+                                "cancel"
+                              ],
+                              "variable": [
+                                {
+                                  "id": "debea8d3-bd55-459c-ba4a-257d3235a472",
+                                  "key": "customer_id",
+                                  "value": "<string>",
+                                  "description": "(Required) "
+                                },
+                                {
+                                  "id": "3b5c7ea0-0a42-4543-8e56-ca3e1ad3066c",
+                                  "key": "delivery_id",
+                                  "value": "<string>",
+                                  "description": "(Required) "
+                                }
+                              ]
+                            },
+                            "description": "Cancel an ongoing or previously scheduled delivery."
+                          },
+                          "response": [
+                            {
+                              "id": "c2d95e81-2b28-4bf7-9aeb-a571bbb6f2e5",
+                              "name": "The canceled delivery.",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: oauth2",
+                                    "key": "Authorization",
+                                    "value": "<token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/customers/:customer_id/deliveries/:delivery_id/cancel",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "customers",
+                                    ":customer_id",
+                                    "deliveries",
+                                    ":delivery_id",
+                                    "cancel"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "customer_id"
+                                    },
+                                    {
+                                      "key": "delivery_id"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"id\": \"<string>\",\n  \"quote_id\": \"<string>\",\n  \"status\": \"delivered\",\n  \"complete\": \"<boolean>\",\n  \"kind\": \"<string>\",\n  \"fee\": \"<integer>\",\n  \"currency\": \"<string>\",\n  \"tracking_url\": \"<string>\",\n  \"tip\": \"<integer>\",\n  \"live_mode\": \"<boolean>\",\n  \"pickup_eta\": \"<dateTime>\",\n  \"pickup_deadline\": \"<dateTime>\",\n  \"dropoff_eta\": \"<dateTime>\",\n  \"dropoff_deadline\": \"<dateTime>\",\n  \"external_id\": \"<string>\",\n  \"created\": \"<dateTime>\",\n  \"updated\": \"<dateTime>\",\n  \"undeliverable_action\": \"\",\n  \"undeliverable_reason\": \"<string>\"\n}",
+                              "createdAt": "2026-10-21T20:37:30.000Z",
+                              "updatedAt": "2026-10-21T20:37:30.000Z",
+                              "uid": "35240-c2d95e81-2b28-4bf7-9aeb-a571bbb6f2e5"
+                            }
+                          ],
+                          "createdAt": "2026-10-21T20:37:30.000Z",
+                          "updatedAt": "2026-10-21T20:37:30.000Z",
+                          "uid": "35240-723fb9c9-3458-4267-a404-efcb9fd33e27"
+                        }
+                      ],
+                      "id": "cd38fd77-2dc6-4e69-afdb-7ea27f9e88bf",
+                      "createdAt": "2026-10-21T20:37:30.000Z",
+                      "updatedAt": "2026-10-21T20:37:30.000Z",
+                      "uid": "35240-cd38fd77-2dc6-4e69-afdb-7ea27f9e88bf"
+                    },
+                    {
+                      "name": "proof-of-delivery",
+                      "item": [
+                        {
+                          "name": "Uber Direct Get Proof of Delivery",
+                          "id": "cbcf0232-616f-498d-96c9-103ec6d0407c",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"waypoint\": \"pickup\",\n  \"type\": \"pincode\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/customers/:customer_id/deliveries/:delivery_id/proof-of-delivery",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "customers",
+                                ":customer_id",
+                                "deliveries",
+                                ":delivery_id",
+                                "proof-of-delivery"
+                              ],
+                              "variable": [
+                                {
+                                  "id": "d5542317-9bc8-4001-9163-603c44ce6881",
+                                  "key": "customer_id",
+                                  "value": "<string>",
+                                  "description": "(Required) "
+                                },
+                                {
+                                  "id": "8e6a8841-17ec-4443-9711-cd93bae1f12a",
+                                  "key": "delivery_id",
+                                  "value": "<string>",
+                                  "description": "(Required) "
+                                }
+                              ]
+                            },
+                            "description": "Retrieve the proof-of-delivery image (picture, signature, or pincode) for a completed delivery."
+                          },
+                          "response": [
+                            {
+                              "id": "0f17161b-3a08-458c-8dc7-e29a2186f9c3",
+                              "name": "The proof of delivery document.",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: oauth2",
+                                    "key": "Authorization",
+                                    "value": "<token>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"waypoint\": \"pickup\",\n  \"type\": \"pincode\"\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/customers/:customer_id/deliveries/:delivery_id/proof-of-delivery",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "customers",
+                                    ":customer_id",
+                                    "deliveries",
+                                    ":delivery_id",
+                                    "proof-of-delivery"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "customer_id"
+                                    },
+                                    {
+                                      "key": "delivery_id"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"document\": \"<string>\"\n}",
+                              "createdAt": "2026-10-21T20:37:30.000Z",
+                              "updatedAt": "2026-10-21T20:37:30.000Z",
+                              "uid": "35240-0f17161b-3a08-458c-8dc7-e29a2186f9c3"
+                            }
+                          ],
+                          "createdAt": "2026-10-21T20:37:30.000Z",
+                          "updatedAt": "2026-10-21T20:37:30.000Z",
+                          "uid": "35240-cbcf0232-616f-498d-96c9-103ec6d0407c"
+                        }
+                      ],
+                      "id": "837572f1-5195-414f-8fac-f2cca54a3029",
+                      "createdAt": "2026-10-21T20:37:30.000Z",
+                      "updatedAt": "2026-10-21T20:37:30.000Z",
+                      "uid": "35240-837572f1-5195-414f-8fac-f2cca54a3029"
+                    },
+                    {
+                      "name": "Uber Direct Get Delivery",
+                      "id": "084f996e-eeda-48f6-b930-ed0480f643fa",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/customers/:customer_id/deliveries/:delivery_id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "customers",
+                            ":customer_id",
+                            "deliveries",
+                            ":delivery_id"
+                          ],
+                          "variable": [
+                            {
+                              "id": "b1635c7f-003f-40a3-bf8f-e4209ae8c343",
+                              "key": "customer_id",
+                              "value": "<string>",
+                              "description": "(Required) "
+                            },
+                            {
+                              "id": "1e1674bc-ceac-442b-986f-b698ebd8453a",
+                              "key": "delivery_id",
+                              "value": "<string>",
+                              "description": "(Required) "
+                            }
+                          ]
+                        },
+                        "description": "Retrieve the current status and details of a delivery."
+                      },
+                      "response": [
+                        {
+                          "id": "82dbbf75-f58a-44d8-93ca-3896a62b7075",
+                          "name": "The delivery.",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: oauth2",
+                                "key": "Authorization",
+                                "value": "<token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/customers/:customer_id/deliveries/:delivery_id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "customers",
+                                ":customer_id",
+                                "deliveries",
+                                ":delivery_id"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "customer_id"
+                                },
+                                {
+                                  "key": "delivery_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"id\": \"<string>\",\n  \"quote_id\": \"<string>\",\n  \"status\": \"delivered\",\n  \"complete\": \"<boolean>\",\n  \"kind\": \"<string>\",\n  \"fee\": \"<integer>\",\n  \"currency\": \"<string>\",\n  \"tracking_url\": \"<string>\",\n  \"tip\": \"<integer>\",\n  \"live_mode\": \"<boolean>\",\n  \"pickup_eta\": \"<dateTime>\",\n  \"pickup_deadline\": \"<dateTime>\",\n  \"dropoff_eta\": \"<dateTime>\",\n  \"dropoff_deadline\": \"<dateTime>\",\n  \"external_id\": \"<string>\",\n  \"created\": \"<dateTime>\",\n  \"updated\": \"<dateTime>\",\n  \"undeliverable_action\": \"\",\n  \"undeliverable_reason\": \"<string>\"\n}",
+                          "createdAt": "2026-10-21T20:37:30.000Z",
+                          "updatedAt": "2026-10-21T20:37:30.000Z",
+                          "uid": "35240-82dbbf75-f58a-44d8-93ca-3896a62b7075"
+                        }
+                      ],
+                      "createdAt": "2026-10-21T20:37:30.000Z",
+                      "updatedAt": "2026-10-21T20:37:30.000Z",
+                      "uid": "35240-084f996e-eeda-48f6-b930-ed0480f643fa"
+                    },
+                    {
+                      "name": "Uber Direct Update Delivery",
+                      "id": "2bb27147-0d89-448f-bd34-cec2432d55b6",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"dropoff_notes\": \"<string>\",\n  \"manifest_reference\": \"<string>\",\n  \"pickup_notes\": \"<string>\",\n  \"requires_dropoff_signature\": \"<boolean>\",\n  \"requires_id\": \"<boolean>\",\n  \"tip_by_customer\": \"<integer>\",\n  \"dropoff_latitude\": \"<number>\",\n  \"dropoff_longitude\": \"<number>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/customers/:customer_id/deliveries/:delivery_id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "customers",
+                            ":customer_id",
+                            "deliveries",
+                            ":delivery_id"
+                          ],
+                          "variable": [
+                            {
+                              "id": "d4a6100d-7bbd-4e33-9f69-897f86420b80",
+                              "key": "customer_id",
+                              "value": "<string>",
+                              "description": "(Required) "
+                            },
+                            {
+                              "id": "7e2a94b1-c110-4564-b36c-04ef58eaf8d4",
+                              "key": "delivery_id",
+                              "value": "<string>",
+                              "description": "(Required) "
+                            }
+                          ]
+                        },
+                        "description": "Modify an ongoing delivery's notes, verification requirements, or tip."
+                      },
+                      "response": [
+                        {
+                          "id": "f78c85e9-287c-43e3-82ba-efdecd97d29d",
+                          "name": "The updated delivery.",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: oauth2",
+                                "key": "Authorization",
+                                "value": "<token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"dropoff_notes\": \"<string>\",\n  \"manifest_reference\": \"<string>\",\n  \"pickup_notes\": \"<string>\",\n  \"requires_dropoff_signature\": \"<boolean>\",\n  \"requires_id\": \"<boolean>\",\n  \"tip_by_customer\": \"<integer>\",\n  \"dropoff_latitude\": \"<number>\",\n  \"dropoff_longitude\": \"<number>\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/customers/:customer_id/deliveries/:delivery_id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "customers",
+                                ":customer_id",
+                                "deliveries",
+                                ":delivery_id"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "customer_id"
+                                },
+                                {
+                                  "key": "delivery_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"id\": \"<string>\",\n  \"quote_id\": \"<string>\",\n  \"status\": \"delivered\",\n  \"complete\": \"<boolean>\",\n  \"kind\": \"<string>\",\n  \"fee\": \"<integer>\",\n  \"currency\": \"<string>\",\n  \"tracking_url\": \"<string>\",\n  \"tip\": \"<integer>\",\n  \"live_mode\": \"<boolean>\",\n  \"pickup_eta\": \"<dateTime>\",\n  \"pickup_deadline\": \"<dateTime>\",\n  \"dropoff_eta\": \"<dateTime>\",\n  \"dropoff_deadline\": \"<dateTime>\",\n  \"external_id\": \"<string>\",\n  \"created\": \"<dateTime>\",\n  \"updated\": \"<dateTime>\",\n  \"undeliverable_action\": \"\",\n  \"undeliverable_reason\": \"<string>\"\n}",
+                          "createdAt": "2026-10-21T20:37:30.000Z",
+                          "updatedAt": "2026-10-21T20:37:30.000Z",
+                          "uid": "35240-f78c85e9-287c-43e3-82ba-efdecd97d29d"
+                        }
+                      ],
+                      "createdAt": "2026-10-21T20:37:30.000Z",
+                      "updatedAt": "2026-10-21T20:37:30.000Z",
+                      "uid": "35240-2bb27147-0d89-448f-bd34-cec2432d55b6"
+                    }
+                  ],
+                  "id": "9052fea9-7421-4a2d-974a-7cfccb4cc385",
+                  "createdAt": "2026-10-21T20:37:30.000Z",
+                  "updatedAt": "2026-10-21T20:37:30.000Z",
+                  "uid": "35240-9052fea9-7421-4a2d-974a-7cfccb4cc385"
+                },
+                {
+                  "name": "Uber Direct Create Delivery",
+                  "id": "a75b28e7-7f77-4787-b42a-c16a360950f8",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"pickup_name\": \"<string>\",\n  \"pickup_address\": \"<string>\",\n  \"pickup_phone_number\": \"<string>\",\n  \"dropoff_name\": \"<string>\",\n  \"dropoff_address\": \"<string>\",\n  \"dropoff_phone_number\": \"<string>\",\n  \"manifest_items\": [\n    {\n      \"name\": \"<string>\",\n      \"quantity\": \"<integer>\",\n      \"size\": \"medium\",\n      \"price\": \"<integer>\",\n      \"must_be_upright\": \"<boolean>\",\n      \"weight\": \"<integer>\",\n      \"vat_percentage\": \"<integer>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"quantity\": \"<integer>\",\n      \"size\": \"small\",\n      \"price\": \"<integer>\",\n      \"must_be_upright\": \"<boolean>\",\n      \"weight\": \"<integer>\",\n      \"vat_percentage\": \"<integer>\"\n    }\n  ],\n  \"quote_id\": \"<string>\",\n  \"pickup_business_name\": \"<string>\",\n  \"pickup_latitude\": \"<number>\",\n  \"pickup_longitude\": \"<number>\",\n  \"pickup_notes\": \"<string>\",\n  \"dropoff_business_name\": \"<string>\",\n  \"dropoff_latitude\": \"<number>\",\n  \"dropoff_longitude\": \"<number>\",\n  \"dropoff_notes\": \"<string>\",\n  \"tip\": \"<integer>\",\n  \"external_id\": \"<string>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/customers/:customer_id/deliveries",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "customers",
+                        ":customer_id",
+                        "deliveries"
+                      ],
+                      "variable": [
+                        {
+                          "id": "0639632a-1095-45b4-af03-b6f8153eda90",
+                          "key": "customer_id",
+                          "value": "<string>",
+                          "description": "(Required) "
+                        }
+                      ]
+                    },
+                    "description": "Create a delivery between two addresses, optionally using a previously generated quote_id."
+                  },
+                  "response": [
+                    {
+                      "id": "25c8793e-78d1-4470-967d-a225e3cd54e7",
+                      "name": "The created delivery.",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: oauth2",
+                            "key": "Authorization",
+                            "value": "<token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"pickup_name\": \"<string>\",\n  \"pickup_address\": \"<string>\",\n  \"pickup_phone_number\": \"<string>\",\n  \"dropoff_name\": \"<string>\",\n  \"dropoff_address\": \"<string>\",\n  \"dropoff_phone_number\": \"<string>\",\n  \"manifest_items\": [\n    {\n      \"name\": \"<string>\",\n      \"quantity\": \"<integer>\",\n      \"size\": \"medium\",\n      \"price\": \"<integer>\",\n      \"must_be_upright\": \"<boolean>\",\n      \"weight\": \"<integer>\",\n      \"vat_percentage\": \"<integer>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"quantity\": \"<integer>\",\n      \"size\": \"small\",\n      \"price\": \"<integer>\",\n      \"must_be_upright\": \"<boolean>\",\n      \"weight\": \"<integer>\",\n      \"vat_percentage\": \"<integer>\"\n    }\n  ],\n  \"quote_id\": \"<string>\",\n  \"pickup_business_name\": \"<string>\",\n  \"pickup_latitude\": \"<number>\",\n  \"pickup_longitude\": \"<number>\",\n  \"pickup_notes\": \"<string>\",\n  \"dropoff_business_name\": \"<string>\",\n  \"dropoff_latitude\": \"<number>\",\n  \"dropoff_longitude\": \"<number>\",\n  \"dropoff_notes\": \"<string>\",\n  \"tip\": \"<integer>\",\n  \"external_id\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/customers/:customer_id/deliveries",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "customers",
+                            ":customer_id",
+                            "deliveries"
+                          ],
+                          "variable": [
+                            {
+                              "key": "customer_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"id\": \"<string>\",\n  \"quote_id\": \"<string>\",\n  \"status\": \"delivered\",\n  \"complete\": \"<boolean>\",\n  \"kind\": \"<string>\",\n  \"fee\": \"<integer>\",\n  \"currency\": \"<string>\",\n  \"tracking_url\": \"<string>\",\n  \"tip\": \"<integer>\",\n  \"live_mode\": \"<boolean>\",\n  \"pickup_eta\": \"<dateTime>\",\n  \"pickup_deadline\": \"<dateTime>\",\n  \"dropoff_eta\": \"<dateTime>\",\n  \"dropoff_deadline\": \"<dateTime>\",\n  \"external_id\": \"<string>\",\n  \"created\": \"<dateTime>\",\n  \"updated\": \"<dateTime>\",\n  \"undeliverable_action\": \"\",\n  \"undeliverable_reason\": \"<string>\"\n}",
+                      "createdAt": "2026-10-21T20:37:30.000Z",
+                      "updatedAt": "2026-10-21T20:37:30.000Z",
+                      "uid": "35240-25c8793e-78d1-4470-967d-a225e3cd54e7"
+                    }
+                  ],
+                  "createdAt": "2026-10-21T20:37:30.000Z",
+                  "updatedAt": "2026-10-21T20:37:30.000Z",
+                  "uid": "35240-a75b28e7-7f77-4787-b42a-c16a360950f8"
+                },
+                {
+                  "name": "Uber Direct List Deliveries",
+                  "id": "b1ca7ed3-43da-4d5c-abdd-aa9b5ebb1544",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/customers/:customer_id/deliveries?filter=<string>&limit=<integer>&offset=<integer>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "customers",
+                        ":customer_id",
+                        "deliveries"
+                      ],
+                      "query": [
+                        {
+                          "description": "Filter deliveries by status (e.g. ongoing).",
+                          "key": "filter",
+                          "value": "<string>"
+                        },
+                        {
+                          "key": "limit",
+                          "value": "<integer>"
+                        },
+                        {
+                          "key": "offset",
+                          "value": "<integer>"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "id": "8020ada7-23cf-4719-bbd7-4f4394981f55",
+                          "key": "customer_id",
+                          "value": "<string>",
+                          "description": "(Required) "
+                        }
+                      ]
+                    },
+                    "description": "List deliveries for a customer."
+                  },
+                  "response": [
+                    {
+                      "id": "a8a4da23-f224-4087-b38e-161fee5e904b",
+                      "name": "A list of deliveries.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: oauth2",
+                            "key": "Authorization",
+                            "value": "<token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/customers/:customer_id/deliveries?filter=<string>&limit=<integer>&offset=<integer>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "customers",
+                            ":customer_id",
+                            "deliveries"
+                          ],
+                          "query": [
+                            {
+                              "description": "Filter deliveries by status (e.g. ongoing).",
+                              "key": "filter",
+                              "value": "<string>"
+                            },
+                            {
+                              "key": "limit",
+                              "value": "<integer>"
+                            },
+                            {
+                              "key": "offset",
+                              "value": "<integer>"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "customer_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "[\n  {\n    \"id\": \"<string>\",\n    \"quote_id\": \"<string>\",\n    \"status\": \"canceled\",\n    \"complete\": \"<boolean>\",\n    \"kind\": \"<string>\",\n    \"fee\": \"<integer>\",\n    \"currency\": \"<string>\",\n    \"tracking_url\": \"<string>\",\n    \"tip\": \"<integer>\",\n    \"live_mode\": \"<boolean>\",\n    \"pickup_eta\": \"<dateTime>\",\n    \"pickup_deadline\": \"<dateTime>\",\n    \"dropoff_eta\": \"<dateTime>\",\n    \"dropoff_deadline\": \"<dateTime>\",\n    \"external_id\": \"<string>\",\n    \"created\": \"<dateTime>\",\n    \"updated\": \"<dateTime>\",\n    \"undeliverable_action\": \"returned\",\n    \"undeliverable_reason\": \"<string>\"\n  },\n  {\n    \"id\": \"<string>\",\n    \"quote_id\": \"<string>\",\n    \"status\": \"canceled\",\n    \"complete\": \"<boolean>\",\n    \"kind\": \"<string>\",\n    \"fee\": \"<integer>\",\n    \"currency\": \"<string>\",\n    \"tracking_url\": \"<string>\",\n    \"tip\": \"<integer>\",\n    \"live_mode\": \"<boolean>\",\n    \"pickup_eta\": \"<dateTime>\",\n    \"pickup_deadline\": \"<dateTime>\",\n    \"dropoff_eta\": \"<dateTime>\",\n    \"dropoff_deadline\": \"<dateTime>\",\n    \"external_id\": \"<string>\",\n    \"created\": \"<dateTime>\",\n    \"updated\": \"<dateTime>\",\n    \"undeliverable_action\": \"returned\",\n    \"undeliverable_reason\": \"<string>\"\n  }\n]",
+                      "createdAt": "2026-10-21T20:37:30.000Z",
+                      "updatedAt": "2026-10-21T20:37:30.000Z",
+                      "uid": "35240-a8a4da23-f224-4087-b38e-161fee5e904b"
+                    }
+                  ],
+                  "createdAt": "2026-10-21T20:37:30.000Z",
+                  "updatedAt": "2026-10-21T20:37:30.000Z",
+                  "uid": "35240-b1ca7ed3-43da-4d5c-abdd-aa9b5ebb1544"
+                }
+              ],
+              "id": "d5ce4a60-2392-42ff-a221-4fbb4d160672",
+              "createdAt": "2026-10-21T20:37:30.000Z",
+              "updatedAt": "2026-10-21T20:37:30.000Z",
+              "uid": "35240-d5ce4a60-2392-42ff-a221-4fbb4d160672"
             }
           ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "78d1cce1-42ee-40ac-9c23-81276755eac7",
-          "name": "Uber Direct Create Delivery",
-          "request": {
-            "name": "Uber Direct Create Delivery",
-            "description": {
-              "content": "Create a delivery between two addresses, optionally using a previously generated quote_id.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "customers",
-                ":customer_id",
-                "deliveries"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<string>",
-                  "key": "customer_id",
-                  "description": "(Required) "
-                }
-              ]
-            },
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/json"
-              },
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "POST",
-            "auth": null,
-            "body": {
-              "mode": "raw",
-              "raw": "{\n  \"pickup_name\": \"<string>\",\n  \"pickup_address\": \"<string>\",\n  \"pickup_phone_number\": \"<string>\",\n  \"dropoff_name\": \"<string>\",\n  \"dropoff_address\": \"<string>\",\n  \"dropoff_phone_number\": \"<string>\",\n  \"manifest_items\": [\n    {\n      \"name\": \"<string>\",\n      \"quantity\": \"<integer>\",\n      \"size\": \"<string>\",\n      \"price\": \"<integer>\",\n      \"must_be_upright\": \"<boolean>\",\n      \"weight\": \"<integer>\",\n      \"vat_percentage\": \"<integer>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"quantity\": \"<integer>\",\n      \"size\": \"<string>\",\n      \"price\": \"<integer>\",\n      \"must_be_upright\": \"<boolean>\",\n      \"weight\": \"<integer>\",\n      \"vat_percentage\": \"<integer>\"\n    }\n  ],\n  \"quote_id\": \"<string>\",\n  \"pickup_business_name\": \"<string>\",\n  \"pickup_latitude\": \"<number>\",\n  \"pickup_longitude\": \"<number>\",\n  \"pickup_notes\": \"<string>\",\n  \"dropoff_business_name\": \"<string>\",\n  \"dropoff_latitude\": \"<number>\",\n  \"dropoff_longitude\": \"<number>\",\n  \"dropoff_notes\": \"<string>\",\n  \"tip\": \"<integer>\",\n  \"external_id\": \"<string>\"\n}",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
-            }
-          },
-          "response": [
-            {
-              "id": "5e3e0d2b-7ed9-4733-bbe0-88610156ab76",
-              "name": "The created delivery.",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "customers",
-                    ":customer_id",
-                    "deliveries"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "customer_id",
-                      "description": "(Required) "
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: oauth2",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "<token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "POST",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"quote_id\": \"del_aBc123XyZ\",\n  \"pickup_name\": \"Example Store\",\n  \"pickup_address\": \"{\\\"street_address\\\":[\\\"100 Maiden Ln\\\"],\\\"city\\\":\\\"New York\\\",\\\"state\\\":\\\"NY\\\",\\\"zip_code\\\":\\\"10023\\\",\\\"country\\\":\\\"US\\\"}\",\n  \"pickup_phone_number\": \"+15555555555\",\n  \"dropoff_name\": \"Example Store\",\n  \"dropoff_address\": \"{\\\"street_address\\\":[\\\"100 Maiden Ln\\\"],\\\"city\\\":\\\"New York\\\",\\\"state\\\":\\\"NY\\\",\\\"zip_code\\\":\\\"10023\\\",\\\"country\\\":\\\"US\\\"}\",\n  \"dropoff_phone_number\": \"+15555555555\",\n  \"manifest_items\": [\n    {\n      \"name\": {},\n      \"quantity\": {},\n      \"size\": {},\n      \"price\": {},\n      \"must_be_upright\": {},\n      \"weight\": {},\n      \"vat_percentage\": {}\n    }\n  ],\n  \"pickup_business_name\": \"Example Store\",\n  \"pickup_latitude\": 40.7066581,\n  \"pickup_longitude\": -74.0071868,\n  \"pickup_notes\": \"Leave at the front desk.\",\n  \"dropoff_business_name\": \"Example Store\",\n  \"dropoff_latitude\": 40.7066581,\n  \"dropoff_longitude\": -74.0071868,\n  \"dropoff_notes\": \"Leave at the front desk.\",\n  \"tip\": 600,\n  \"external_id\": \"del_aBc123XyZ\"\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"id\": \"del_aBc123XyZ\",\n  \"quote_id\": \"del_aBc123XyZ\",\n  \"status\": \"pending\",\n  \"complete\": false,\n  \"kind\": \"example\",\n  \"fee\": 600,\n  \"currency\": \"USD\",\n  \"tracking_url\": \"https://www.ubereats.com/orders/del_aBc123XyZ\",\n  \"tip\": 600,\n  \"live_mode\": false,\n  \"pickup_eta\": \"2026-06-01T19:00:00.000Z\",\n  \"pickup_deadline\": \"2026-06-01T19:00:00.000Z\",\n  \"dropoff_eta\": \"2026-06-01T19:00:00.000Z\",\n  \"dropoff_deadline\": \"2026-06-01T19:00:00.000Z\",\n  \"external_id\": \"del_aBc123XyZ\",\n  \"created\": \"2026-06-01T19:00:00.000Z\",\n  \"updated\": \"2026-06-01T19:00:00.000Z\",\n  \"undeliverable_action\": \"value\",\n  \"undeliverable_reason\": \"STORE_CLOSED\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "7151d812-7954-42dd-b5be-7fabefb70142",
-          "name": "Uber Direct List Deliveries",
-          "request": {
-            "name": "Uber Direct List Deliveries",
-            "description": {
-              "content": "List deliveries for a customer.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "customers",
-                ":customer_id",
-                "deliveries"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [
-                {
-                  "disabled": false,
-                  "key": "filter",
-                  "value": "<string>",
-                  "description": "Filter deliveries by status (e.g. ongoing)."
-                },
-                {
-                  "disabled": false,
-                  "key": "limit",
-                  "value": "<integer>"
-                },
-                {
-                  "disabled": false,
-                  "key": "offset",
-                  "value": "<integer>"
-                }
-              ],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<string>",
-                  "key": "customer_id",
-                  "description": "(Required) "
-                }
-              ]
-            },
-            "header": [
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "GET",
-            "auth": null
-          },
-          "response": [
-            {
-              "id": "426f063d-200d-4ac2-9c73-284f8e9a1fd2",
-              "name": "A list of deliveries.",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "customers",
-                    ":customer_id",
-                    "deliveries"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "filter",
-                      "value": "<string>"
-                    },
-                    {
-                      "key": "limit",
-                      "value": "<integer>"
-                    },
-                    {
-                      "key": "offset",
-                      "value": "<integer>"
-                    }
-                  ],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "customer_id",
-                      "description": "(Required) "
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: oauth2",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "<token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "[\n  {\n    \"id\": \"del_aBc123XyZ\",\n    \"quote_id\": \"del_aBc123XyZ\",\n    \"status\": \"pending\",\n    \"complete\": false,\n    \"kind\": \"example\",\n    \"fee\": 600,\n    \"currency\": \"USD\",\n    \"tracking_url\": \"https://www.ubereats.com/orders/del_aBc123XyZ\",\n    \"tip\": 600,\n    \"live_mode\": false,\n    \"pickup_eta\": \"2026-06-01T19:00:00.000Z\",\n    \"pickup_deadline\": \"2026-06-01T19:00:00.000Z\",\n    \"dropoff_eta\": \"2026-06-01T19:00:00.000Z\",\n    \"dropoff_deadline\": \"2026-06-01T19:00:00.000Z\",\n    \"external_id\": \"del_aBc123XyZ\",\n    \"created\": \"2026-06-01T19:00:00.000Z\",\n    \"updated\": \"2026-06-01T19:00:00.000Z\",\n    \"undeliverable_action\": \"value\",\n    \"undeliverable_reason\": \"STORE_CLOSED\"\n  }\n]",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "a447e46c-200a-4b0e-8e73-3e4c8a22542b",
-          "name": "Uber Direct Get Delivery",
-          "request": {
-            "name": "Uber Direct Get Delivery",
-            "description": {
-              "content": "Retrieve the current status and details of a delivery.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "customers",
-                ":customer_id",
-                "deliveries",
-                ":delivery_id"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<string>",
-                  "key": "customer_id",
-                  "description": "(Required) "
-                },
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<string>",
-                  "key": "delivery_id",
-                  "description": "(Required) "
-                }
-              ]
-            },
-            "header": [
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "GET",
-            "auth": null
-          },
-          "response": [
-            {
-              "id": "e9f12f1f-d6df-4381-af12-d9c5ba62af8e",
-              "name": "The delivery.",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "customers",
-                    ":customer_id",
-                    "deliveries",
-                    ":delivery_id"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "customer_id",
-                      "description": "(Required) "
-                    },
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "delivery_id",
-                      "description": "(Required) "
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: oauth2",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "<token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"id\": \"del_aBc123XyZ\",\n  \"quote_id\": \"del_aBc123XyZ\",\n  \"status\": \"pending\",\n  \"complete\": false,\n  \"kind\": \"example\",\n  \"fee\": 600,\n  \"currency\": \"USD\",\n  \"tracking_url\": \"https://www.ubereats.com/orders/del_aBc123XyZ\",\n  \"tip\": 600,\n  \"live_mode\": false,\n  \"pickup_eta\": \"2026-06-01T19:00:00.000Z\",\n  \"pickup_deadline\": \"2026-06-01T19:00:00.000Z\",\n  \"dropoff_eta\": \"2026-06-01T19:00:00.000Z\",\n  \"dropoff_deadline\": \"2026-06-01T19:00:00.000Z\",\n  \"external_id\": \"del_aBc123XyZ\",\n  \"created\": \"2026-06-01T19:00:00.000Z\",\n  \"updated\": \"2026-06-01T19:00:00.000Z\",\n  \"undeliverable_action\": \"value\",\n  \"undeliverable_reason\": \"STORE_CLOSED\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "1169f9c9-ff7c-4fd3-b247-9d9d2d913162",
-          "name": "Uber Direct Update Delivery",
-          "request": {
-            "name": "Uber Direct Update Delivery",
-            "description": {
-              "content": "Modify an ongoing delivery's notes, verification requirements, or tip.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "customers",
-                ":customer_id",
-                "deliveries",
-                ":delivery_id"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<string>",
-                  "key": "customer_id",
-                  "description": "(Required) "
-                },
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<string>",
-                  "key": "delivery_id",
-                  "description": "(Required) "
-                }
-              ]
-            },
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/json"
-              },
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "POST",
-            "auth": null,
-            "body": {
-              "mode": "raw",
-              "raw": "{\n  \"dropoff_notes\": \"<string>\",\n  \"manifest_reference\": \"<string>\",\n  \"pickup_notes\": \"<string>\",\n  \"requires_dropoff_signature\": \"<boolean>\",\n  \"requires_id\": \"<boolean>\",\n  \"tip_by_customer\": \"<integer>\",\n  \"dropoff_latitude\": \"<number>\",\n  \"dropoff_longitude\": \"<number>\"\n}",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
-            }
-          },
-          "response": [
-            {
-              "id": "88761cbc-d841-41e7-b569-3363403af422",
-              "name": "The updated delivery.",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "customers",
-                    ":customer_id",
-                    "deliveries",
-                    ":delivery_id"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "customer_id",
-                      "description": "(Required) "
-                    },
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "delivery_id",
-                      "description": "(Required) "
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: oauth2",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "<token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "POST",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"dropoff_notes\": \"Leave at the front desk.\",\n  \"manifest_reference\": \"example\",\n  \"pickup_notes\": \"Leave at the front desk.\",\n  \"requires_dropoff_signature\": false,\n  \"requires_id\": false,\n  \"tip_by_customer\": 600,\n  \"dropoff_latitude\": 40.7066581,\n  \"dropoff_longitude\": -74.0071868\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"id\": \"del_aBc123XyZ\",\n  \"quote_id\": \"del_aBc123XyZ\",\n  \"status\": \"pending\",\n  \"complete\": false,\n  \"kind\": \"example\",\n  \"fee\": 600,\n  \"currency\": \"USD\",\n  \"tracking_url\": \"https://www.ubereats.com/orders/del_aBc123XyZ\",\n  \"tip\": 600,\n  \"live_mode\": false,\n  \"pickup_eta\": \"2026-06-01T19:00:00.000Z\",\n  \"pickup_deadline\": \"2026-06-01T19:00:00.000Z\",\n  \"dropoff_eta\": \"2026-06-01T19:00:00.000Z\",\n  \"dropoff_deadline\": \"2026-06-01T19:00:00.000Z\",\n  \"external_id\": \"del_aBc123XyZ\",\n  \"created\": \"2026-06-01T19:00:00.000Z\",\n  \"updated\": \"2026-06-01T19:00:00.000Z\",\n  \"undeliverable_action\": \"value\",\n  \"undeliverable_reason\": \"STORE_CLOSED\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "adb11709-8050-4d97-9671-177de4d28ab8",
-          "name": "Uber Direct Cancel Delivery",
-          "request": {
-            "name": "Uber Direct Cancel Delivery",
-            "description": {
-              "content": "Cancel an ongoing or previously scheduled delivery.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "customers",
-                ":customer_id",
-                "deliveries",
-                ":delivery_id",
-                "cancel"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<string>",
-                  "key": "customer_id",
-                  "description": "(Required) "
-                },
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<string>",
-                  "key": "delivery_id",
-                  "description": "(Required) "
-                }
-              ]
-            },
-            "header": [
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "POST",
-            "auth": null
-          },
-          "response": [
-            {
-              "id": "a3d62ed6-a31a-4bb9-92e9-17bd07bed67c",
-              "name": "The canceled delivery.",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "customers",
-                    ":customer_id",
-                    "deliveries",
-                    ":delivery_id",
-                    "cancel"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "customer_id",
-                      "description": "(Required) "
-                    },
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "delivery_id",
-                      "description": "(Required) "
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: oauth2",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "<token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "POST",
-                "body": {}
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"id\": \"del_aBc123XyZ\",\n  \"quote_id\": \"del_aBc123XyZ\",\n  \"status\": \"pending\",\n  \"complete\": false,\n  \"kind\": \"example\",\n  \"fee\": 600,\n  \"currency\": \"USD\",\n  \"tracking_url\": \"https://www.ubereats.com/orders/del_aBc123XyZ\",\n  \"tip\": 600,\n  \"live_mode\": false,\n  \"pickup_eta\": \"2026-06-01T19:00:00.000Z\",\n  \"pickup_deadline\": \"2026-06-01T19:00:00.000Z\",\n  \"dropoff_eta\": \"2026-06-01T19:00:00.000Z\",\n  \"dropoff_deadline\": \"2026-06-01T19:00:00.000Z\",\n  \"external_id\": \"del_aBc123XyZ\",\n  \"created\": \"2026-06-01T19:00:00.000Z\",\n  \"updated\": \"2026-06-01T19:00:00.000Z\",\n  \"undeliverable_action\": \"value\",\n  \"undeliverable_reason\": \"STORE_CLOSED\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "75cda3c9-4f6a-4a89-97da-601556788969",
-          "name": "Uber Direct Get Proof of Delivery",
-          "request": {
-            "name": "Uber Direct Get Proof of Delivery",
-            "description": {
-              "content": "Retrieve the proof-of-delivery image (picture, signature, or pincode) for a completed delivery.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "customers",
-                ":customer_id",
-                "deliveries",
-                ":delivery_id",
-                "proof-of-delivery"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<string>",
-                  "key": "customer_id",
-                  "description": "(Required) "
-                },
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<string>",
-                  "key": "delivery_id",
-                  "description": "(Required) "
-                }
-              ]
-            },
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/json"
-              },
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "POST",
-            "auth": null,
-            "body": {
-              "mode": "raw",
-              "raw": "{\n  \"waypoint\": \"<string>\",\n  \"type\": \"<string>\"\n}",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
-            }
-          },
-          "response": [
-            {
-              "id": "2a41b3dd-22fe-4724-9795-c30099978d24",
-              "name": "The proof of delivery document.",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "customers",
-                    ":customer_id",
-                    "deliveries",
-                    ":delivery_id",
-                    "proof-of-delivery"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "customer_id",
-                      "description": "(Required) "
-                    },
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "delivery_id",
-                      "description": "(Required) "
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: oauth2",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "<token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "POST",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"waypoint\": \"pickup\",\n  \"type\": \"picture\"\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"document\": \"example\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
+          "id": "a379ac39-609a-4561-8919-b3beda85c947",
+          "createdAt": "2026-10-21T20:37:30.000Z",
+          "updatedAt": "2026-10-21T20:37:30.000Z",
+          "uid": "35240-a379ac39-609a-4561-8919-b3beda85c947"
         }
       ],
-      "event": []
-    }
-  ],
-  "event": [],
-  "variable": [
-    {
-      "type": "string",
-      "value": "https://api.uber.com/v1",
-      "key": "baseUrl"
+      "id": "ce25c902-3583-4ebd-9b73-53fba6612946",
+      "createdAt": "2026-10-21T20:37:30.000Z",
+      "updatedAt": "2026-10-21T20:37:30.000Z",
+      "uid": "35240-ce25c902-3583-4ebd-9b73-53fba6612946"
     }
   ],
   "auth": {
@@ -893,25 +899,25 @@
     "oauth2": [
       {
         "key": "scope",
-        "value": "eats.deliveries"
+        "value": "eats.deliveries",
+        "type": "string"
       },
       {
         "key": "accessTokenUrl",
-        "value": "https://auth.uber.com/oauth/v2/token"
+        "value": "https://auth.uber.com/oauth/v2/token",
+        "type": "string"
       },
       {
         "key": "grant_type",
-        "value": "client_credentials"
+        "value": "client_credentials",
+        "type": "string"
       }
     ]
   },
-  "info": {
-    "_postman_id": "04a751a6-c0ee-4618-864d-db962c469000",
-    "name": "Uber Direct (DaaS) Customers API",
-    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-    "description": {
-      "content": "Uber Direct exposes Uber's courier network as a delivery-as-a-service (DaaS) API. Merchants request a delivery quote between two addresses, create a delivery from that quote, track courier progress, cancel, and retrieve proof of delivery. Authentication is via OAuth 2.0 client credentials issued from the Uber Developer Portal. Schemas and paths in this spec are derived from the official `uber/uber-direct-sdk` TypeScript SDK (npm package `uber-direct`).\n\nContact Support:\n Name: Uber Direct Developer Portal",
-      "type": "text/plain"
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.uber.com/v1"
     }
-  }
+  ]
 }
